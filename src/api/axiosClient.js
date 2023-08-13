@@ -1,0 +1,39 @@
+import axios from "axios"
+import queryString from 'query-string'
+import { BASE_URL } from "config"
+
+
+const getToken = () => localStorage.getItem('token')
+
+const axiosClient = axios.create({
+    baseURL: BASE_URL,
+    paramsSerializer: params => queryString.stringify({params})
+})
+
+axiosClient.interceptors.request.use(async (config) => {
+    return {
+        ...config,
+        // withCredentials: true,
+        // crossdomain: true, 
+         credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            //  'Access-Control-Allow-Origin': 'https://vaccine-passport-app-backend.vercel.app',
+           
+            // 'crossDomain': 'true',
+            'Authorization': `Bearer ${getToken()}`,
+        }
+    }
+})
+
+axiosClient.interceptors.response.use((response) => {
+    if (response && response.data) return response.data
+    return response
+}, (err) => {
+    if (!err.response) {
+        alert('Err! Netword err!')
+    }
+    throw err
+})
+
+export default axiosClient

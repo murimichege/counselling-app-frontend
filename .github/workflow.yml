@@ -1,0 +1,34 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build app
+        run: npm run build
+      - name: Deploy to preview environment
+        uses: vercel/action-deploy@v21
+        with:
+          args: "--prod false"
+          token: ${{ secrets.VERCEL_TOKEN }}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production environment
+        uses: vercel/action-deploy@v21
+        with:
+          args: "--prod"
+          token: ${{ secrets.VERCEL_TOKEN }}
