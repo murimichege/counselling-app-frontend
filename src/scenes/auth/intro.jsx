@@ -1,120 +1,161 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 // import { isAuthenticated } from "handlers/authHandler"
-import { useNavigate } from 'react-router-dom'
-
-import { Box, Card, FormControl, TextField, Typography, InputAdornment,
-    IconButton,Select,MenuItem, InputLabel } from '@mui/material'
-import LoadingButton from '@mui/lab/LoadingButton';
-  
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import {
+  Box,
+  Card,
+  FormControl,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const IntroPage = () => {
-    const navigate = useNavigate()
-    const [loginErr, setLoginErr] = useState()
-    const [Email, setEmail] = useState('')
-    const [emailErr, setEmailErr] = useState(false)
-    const [password, setPassword] = useState('')
-    const [passwordErr, setPasswordErr] = useState(false)
-    const [onSubmit, setOnSubmit] = useState(false)
-    const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-    const [age, setAge] = useState('');
+  const [role, setRole] = useState("");
+  const [service, setService] = useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setRole(event.target.value);
   };
-    // useEffect(() => {
-    //     const checkToken = async () => {
-    //         const res = await isAuthenticated()
-    //         // check whether the user is already onboarded.
-    //         if (res) return navigate('/')
-    //         console.log("+++++++++++++++++++++" + res)
-    //     }
-    //     checkToken()
-    // }, [])
+  const handleServiceChange = (event) => {
+    setService(event.target.value);
+  };
 
-    const loginSubmit =  async() => {
-        if (onSubmit) return
-        setLoginErr(undefined)
+  // useEffect(() => {
+  //     const checkToken = async () => {
+  //         const res = await isAuthenticated()
+  //         // check whether the user is already onboarded.
+  //         if (res) return navigate('/')
+  //         console.log("+++++++++++++++++++++" + res)
+  //     }
+  //     checkToken()
+  // }, [])
 
-        const checkErr = {
-            Email: Email.trim().length === 0,
-            password: password.trim().length === 0
-        }
-        setEmailErr(checkErr.Email)
-        setPasswordErr(checkErr.password)
-        if (checkErr.Email || checkErr.password) return
+  // const loginSubmit = async () => {
+  //   if (onSubmit) return;
+  //   setLoginErr(undefined);
 
-        const params = {
-            Email,
-            password
-        }
-        setOnSubmit(true)
-        // try {
-        //     const res = await authApi.login(params)
-        //     localStorage.setItem('token', res.token)
-        //     // const isOnBoarded = await authApi.onBoarding()
+  //   const checkErr = {
+  //     Email: Email.trim().length === 0,
+  //     password: password.trim().length === 0,
+  //   };
+  //   setEmailErr(checkErr.Email);
+  //   setPasswordErr(checkErr.password);
+  //   if (checkErr.Email || checkErr.password) return;
 
-        //     setOnSubmit(false)
-        //     navigate('/')
-        // } catch(err) {
-        //     if (err.response.status === 401) {
-        //         setLoginErr(err.response.data)
-        //     }
-        //     setOnSubmit(false)
-        // }
-    }
+  //   const params = {
+  //     Email,
+  //     password,
+  //   };
+  //   setOnSubmit(true);
+  //   // try {
+  //   //     const res = await authApi.login(params)
+  //   //     localStorage.setItem('token', res.token)
+  //   //     // const isOnBoarded = await authApi.onBoarding()
 
-    return (
-          <Box
-               sx={{
-                height: '100%',
-                width: '50%',
-                '& .MuiTextField-root': { mb: 5 },
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                padding: '5rem 1rem',
-              }}
-          >
-              <Typography
-                  variant='h5'
-                  textAlign='center'
-                  mb='4rem'
-                  fontWeight='700'
-              >
-                 
-              </Typography>
-              <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Choose Role</InputLabel>
+  //   //     setOnSubmit(false)
+  //   //     navigate('/')
+  //   // } catch(err) {
+  //   //     if (err.response.status === 401) {
+  //   //         setLoginErr(err.response.data)
+  //   //     }
+  //   //     setOnSubmit(false)
+  //   // }
+  // };
 
-              <Select
+  const clickNext = () => {
+    navigate("/Login");
+  };
+  return (
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        "& .MuiTextField-root": { mb: 5 },
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        padding: "5rem 1rem",
+      }}
+    >
+      <img
+        src={logo}
+        alt="Logo"
+        sm={{
+          width: "18%",
+          height: "auto",
+        }}
+      />
+      <Typography variant="h3" textAlign="center" mb="4rem" fontWeight="700">
+        Welcome to the Counselling Centre
+      </Typography>
+      <FormControl
+        sx={{
+          width: "40%",
+        }}
+      >
+        <InputLabel id="demo-simple-select-label">Choose Role</InputLabel>
+
+        <Select
+          required
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={role}
           label="Age"
           onChange={handleChange}
         >
           <MenuItem value={10}>Student</MenuItem>
           <MenuItem value={20}>Staff</MenuItem>
-          <MenuItem value={30}>Visitor</MenuItem>
+          <MenuItem value={20}>Receptionist</MenuItem>
+          <MenuItem value={20}>Counselor</MenuItem>
         </Select>
-              </FormControl>
-          
-              <LoadingButton
-                  variant='contained'
-                  fullWidth
-                  size='large'
-                  sx={{ marginTop: '1rem',backgroundColor:"#673ab7" }}
-                  onClick={loginSubmit}
-              >
-                  Sign in
-              </LoadingButton>
-          </Box>
-    
+      </FormControl>
+      <FormControl
+        sx={{
+          width: "40%",
+          marginTop: "30px",
+        }}
+      >
+        <InputLabel id="demo-simple-select-label">Choose service</InputLabel>
 
-  
-    )
-}
+        <Select
+          required
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={service}
+          label="Service"
+          onChange={handleServiceChange}
+        >
+          <MenuItem value={10}>VCT services</MenuItem>
+          <MenuItem value={20}>Psychological counseling</MenuItem>
+          <MenuItem value={20}>Consultation services </MenuItem>
+        </Select>
+      </FormControl>
+      <Button
+        variant="outlined"
+        size="large"
+        sx={{
+          marginTop: "1rem",
+          backgroundColor: "#673ab7",
+          width: "40%",
+          color: "white",
+        }}
+        onClick={clickNext}
+      >
+        Proceed
+      </Button>
+    </Box>
+  );
+};
 
-export default IntroPage
+export default IntroPage;

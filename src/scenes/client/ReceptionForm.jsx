@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import userApi from "../../api/users";
-const UserCreationForm = () => {
+const IntakeForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ const UserCreationForm = () => {
     navigate("/users");
 
     // try {
-
     // 	const res = await userApi.create(initialValues);
     // 	res.status(201);
     // } catch (error) {
@@ -27,10 +26,18 @@ const UserCreationForm = () => {
   };
 
   return (
-    <Box m="20px">
+    <Box
+  sx={{
+    height: "100vh", // Center vertically
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }}
+>
+<Box m="20px" >
       <Toaster />
 
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="COUNSELLING CENTER INTAKE FORM " subtitle="Summer Semester 2023" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -58,20 +65,33 @@ const UserCreationForm = () => {
                 fullWidth
                 // variant="filled"
                 type="text"
-                label="First Name"
+                label="Student Id Number"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
+                value={values.StudentID}
+                name="StudentID"
+                error={!!touched.StudentID && !!errors.StudentID}
+                helperText={touched.StudentID && errors.StudentID}
+                sx={{ gridColumn: "span 2" }}
+              />
+               <TextField
+                fullWidth
+                // variant="filled"
+                type="text"
+                label="Counsellor Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.CounsellorName}
+                name="CounsellorName"
+                error={!!touched.CounsellorName && !!errors.CounsellorName}
+                helperText={touched.CounsellorName && errors.CounsellorName}
                 sx={{ gridColumn: "span 2" }}
               />
               <TextField
                 fullWidth
                 // variant="filled"
                 type="text"
-                label="Last Name"
+                label="Current Date"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.lastName}
@@ -84,7 +104,7 @@ const UserCreationForm = () => {
                 fullWidth
                 // variant="filled"
                 type="text"
-                label="National Identity"
+                label="Current Time"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.nationalidentity}
@@ -98,7 +118,28 @@ const UserCreationForm = () => {
                 select
                 // variant="filled"
                 type="text"
-                label="Access Level"
+                label="Gender"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.Gender}
+                name="Gender"
+                error={!!touched.Gender && !!errors.Gender}
+                helperText={touched.Gender && errors.Gender}
+                sx={{ gridColumn: "span 2" }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Male</MenuItem>
+                <MenuItem value={20}>Female</MenuItem>
+               
+              </TextField>
+              <TextField
+                fullWidth
+                select
+                // variant="filled"
+                type="text"
+                label="Role"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.role}
@@ -110,61 +151,72 @@ const UserCreationForm = () => {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Admin</MenuItem>
-                <MenuItem value={20}>Client</MenuItem>
-                <MenuItem value={30}>Super Admin</MenuItem>
-                <MenuItem value={30}>Developer</MenuItem>
+                <MenuItem value={10}>Staff</MenuItem>
+                <MenuItem value={20}>Student</MenuItem>
+              
               </TextField>
               <TextField
                 fullWidth
+                select
                 // variant="filled"
                 type="text"
-                label="Phone Number"
+                label="Student Category"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.phone}
-                name="phone"
-                error={!!touched.phone && !!errors.phone}
-                helperText={touched.phone && errors.phone}
+                value={values.StudentCategory}
+                name="role"
+                error={!!touched.StudentCategory && !!errors.StudentCategory}
+                helperText={touched.StudentCategory && errors.StudentCategory}
                 sx={{ gridColumn: "span 2" }}
-              />
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>None</MenuItem>
+                <MenuItem value={20}>Undergraduate</MenuItem>
+                <MenuItem value={30}>Graduate</MenuItem>
+                <MenuItem value={40}>Alumni</MenuItem>
+                <MenuItem value={50}>Scholarship</MenuItem>
+              </TextField>
               <TextField
                 fullWidth
+                select
                 // variant="filled"
                 type="text"
-                label="Email"
+                label="Service Sought Form"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.email}
-                name="email"
-                error={!!touched.phone && !!errors.phone}
-                helperText={touched.phone && errors.phone}
+                value={values.Service}
+                name="Service"
+                error={!!touched.Service && !!errors.Service}
+                helperText={touched.Service && errors.Service}
                 sx={{ gridColumn: "span 2" }}
-              />
-
-              <TextField
-                fullWidth
-                // variant="filled"
-                type="text"
-                label="Address"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address}
-                name="address"
-                error={!!touched.address && !!errors.address}
-                helperText={touched.address && errors.address}
-                sx={{ gridColumn: "span 4" }}
-              />
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Personal Counselling</MenuItem>
+                <MenuItem value={20}>VCT</MenuItem>
+                <MenuItem value={30}>Consultation Services</MenuItem>
+            
+              </TextField>
+              
+              
+             
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New User
+                Forward to Receptionist
               </Button>
             </Box>
           </form>
         )}
       </Formik>
     </Box>
+
+
+</Box>
+   
   );
 };
 
@@ -172,8 +224,8 @@ const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
+  CounsellorName: yup.string().required("required"),
+  StudentID: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
   phone: yup
     .string()
@@ -184,13 +236,13 @@ const checkoutSchema = yup.object().shape({
   nationalidentity: yup.string().required("required"),
 });
 const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  nationalidentity: "",
-  address: "",
+  CounsellorName: "",
+  StudentID: "",
+  CurrentDate: "",
+  CurrentTime: "",
   role: "",
+  StudentCategory: "",
+  Service:"",
 };
 
-export default UserCreationForm;
+export default IntakeForm;

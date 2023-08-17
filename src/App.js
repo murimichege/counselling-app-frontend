@@ -21,6 +21,8 @@ import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./scenes/auth/Login";
 import IntroPage from './scenes/auth/intro'
+import IntakeForm from "./scenes/client/ReceptionForm";
+import ClientIntakeForm from "./scenes/client/clientIntakeForm"
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -36,8 +38,11 @@ function App() {
 			<Routes>
 			<Route path="/Login" element={<Login />} />
 			<Route path="/IntroPage" element={<IntroPage />} />
+			<Route path="/IntakeForm" element={<IntakeForm />} />
+      
+      <Route path="/ClientIntakeForm" element={<ClientIntakeForm />} />
 
-			
+
 			</Routes>
             </>
           ) : (
@@ -73,8 +78,9 @@ path="/accounts/account/:id/documents/verification"
 element={<VerificationDoc />}
 />
 <Route path="/contacts" element={<Contacts />} />
-{/* <Route path="/Sales" element={<Invoices />} /> */}
+<Route path="/IntakeForm" element={<IntakeForm />} />
 <Route path="/form" element={<Form />} />
+
 <Route path="/bar" element={<Bar />} />
 <Route path="/pie" element={<Pie />} />
 <Route path="/line" element={<Line />} />
