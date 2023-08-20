@@ -10,7 +10,7 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import PersonIcon from '@mui/icons-material/Person';
 
-const Team = () => {
+const Clients = () => {
   const theme = useTheme();
   const navigate = useNavigate()
   const colors = tokens(theme.palette.mode);
@@ -81,20 +81,8 @@ const Team = () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
 
-      <Header title="USERS" subtitle="Managing the Users" />
-      <Button
-            sx={{
-              backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-            onClick={createUser}
-          >
-            <PersonIcon sx={{ mr: "10px" }} />
-            Create User
-          </Button>
+      <Header title="Clients" subtitle="List of Clients Served in the Counselling Centre" />
+   
           </Box>
       <Box
         m="40px 0 0 0"
@@ -131,4 +119,4 @@ const Team = () => {
   );
 };
 
-export default Team;
+export default Clients;

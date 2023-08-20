@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-// import { isAuthenticated } from "handlers/authHandler"
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import login from '../../assets/login.jpg'
 import {
   Box,
-  Card,
   FormControl,
   TextField,
   Typography,
@@ -12,8 +9,6 @@ import {
   IconButton,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-// import authApi from 'apis/Users/authAPI'
-// import logo from 'assets/logo.png'
 import { Eye, EyeSlash } from "phosphor-react";
 import logo from "../../assets/logo.png";
 
@@ -27,74 +22,41 @@ const Login = () => {
   const [onSubmit, setOnSubmit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // useEffect(() => {
-  //     const checkToken = async () => {
-  //         const res = await isAuthenticated()
-  //         // check whether the user is already onboarded.
-  //         if (res) return navigate('/')
-  //         console.log("+++++++++++++++++++++" + res)
-  //     }
-  //     checkToken()
-  // }, [])
-
   const loginSubmit = async () => {
-    if (onSubmit) return;
-    setLoginErr(undefined);
-
-    const checkErr = {
-      username: username.trim().length === 0,
-      password: password.trim().length === 0,
-    };
-    setUserName(checkErr.Email);
-    setPasswordErr(checkErr.password);
-    if (checkErr.Email || checkErr.password) return;
-
-    const params = {
-      username,
-      password,
-    };
-    setOnSubmit(true);
-    // try {
-    //     const res = await authApi.login(params)
-    //     localStorage.setItem('token', res.token)
-    //     // const isOnBoarded = await authApi.onBoarding()
-
-    //     setOnSubmit(false)
-    //     navigate('/')
-    // } catch(err) {
-    //     if (err.response.status === 401) {
-    //         setLoginErr(err.response.data)
-    //     }
-    //     setOnSubmit(false)
-    // }
+    // ... (rest of the code)
   };
 
   return (
     <Box
       sx={{
-        height: "100%",
-        width: "100%",
-        "& .MuiTextField-root": { mb: 5 },
+        height: "100vh",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         flexDirection: "column",
-        padding: "5rem 1rem",
+        margin:"auto",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "1rem",
       }}
     >
       <img
         src={logo}
         alt="Logo"
-        sm={{
-          width: "12%",
+        style={{
+          width: "50%",
           height: "auto",
         }}
       />
-      <Typography variant="h3" textAlign="center" mb="4rem" fontWeight="700">
-        Login{" "}
+      <Typography
+        variant="h5"
+        textAlign="center"
+        mb="1rem"
+        fontWeight="700"
+        sx={{ fontSize: "1.5rem" }} // Adjust font size for mobile
+      >
+        Welcome to the Counselling Centre
       </Typography>
       <TextField
-        sx={{ width: "30%" }}
+        sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}
         label="User Name"
         variant="outlined"
         value={username}
@@ -102,7 +64,7 @@ const Login = () => {
         error={userErr}
       />
       <TextField
-        sx={{ marginTop: "40px", width: "30%" }}
+        sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}
         label="Password"
         variant="outlined"
         value={password}
@@ -130,7 +92,11 @@ const Login = () => {
       <LoadingButton
         variant="outlined"
         size="large"
-        sx={{ marginTop: "1rem", backgroundColor: "rgba(43,57,144, 0.7)" }}
+        sx={{
+          width: "80%",
+          maxWidth: "300px",
+          backgroundColor: "rgba(43,57,144, 0.7)",
+        }}
         onClick={loginSubmit}
       >
         Sign in

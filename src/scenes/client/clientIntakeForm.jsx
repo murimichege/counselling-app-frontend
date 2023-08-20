@@ -32,6 +32,7 @@ const ClientIntakeForm = () => {
     margin:"auto",
     alignItems: "center",
     justifyContent: "center",
+    
   }}
 >
 <Box m="20px" >
@@ -57,12 +58,13 @@ const ClientIntakeForm = () => {
               display="grid"
               gap="30px"
               margin="auto"
+              
+              
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
                 justifyContent: "center",
                 alignItems:"center",
-                width:"100vh",
                 
               }}
             >
@@ -140,7 +142,7 @@ const ClientIntakeForm = () => {
                 label="Age"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.Nationality}
+                value={values.Age}
                 name="Age"
                 error={!!touched.Age && !!errors.Age}
                 helperText={touched.Age && errors.Age}
@@ -441,6 +443,7 @@ const initialValues = {
   Gender:"",
   Nationality:"",
   Major:"",
+  Age:16,
   Religion:"",
   Role: "",
   ClientCategory: "",

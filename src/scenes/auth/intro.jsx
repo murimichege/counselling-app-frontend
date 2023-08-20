@@ -80,6 +80,7 @@ const IntroPage = () => {
       sx={{
         height: "100%",
         width: "100%",
+        margin:"auto",
         "& .MuiTextField-root": { mb: 5 },
         display: "flex",
         alignItems: "center",
@@ -99,27 +100,7 @@ const IntroPage = () => {
       <Typography variant="h3" textAlign="center" mb="4rem" fontWeight="700">
         Welcome to the Counselling Centre
       </Typography>
-      <FormControl
-        sx={{
-          width: "40%",
-        }}
-      >
-        <InputLabel id="demo-simple-select-label">Choose Role</InputLabel>
-
-        <Select
-          required
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={role}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Student</MenuItem>
-          <MenuItem value={20}>Staff</MenuItem>
-          <MenuItem value={20}>Receptionist</MenuItem>
-          <MenuItem value={20}>Counselor</MenuItem>
-        </Select>
-      </FormControl>
+ 
       <FormControl
         sx={{
           width: "40%",
@@ -146,7 +127,7 @@ const IntroPage = () => {
         size="large"
         sx={{
           marginTop: "1rem",
-          backgroundColor: "#673ab7",
+          backgroundColor: "rgba(43,57,144, 0.7)",
           width: "40%",
           color: "white",
         }}
