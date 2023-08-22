@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Formik } from "formik";
 import { mockDataTeam } from "../../data/mockData";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Documentlist from './DocumentList'
 
 
 const AccountDetail = () => {
@@ -34,7 +35,7 @@ const AccountDetail = () => {
   return (
     <Box m="20px">
       <Typography variant="h4" component="h1">
-        ACCOUNT
+        Session
       </Typography>
       {/* {user && <AccountInfo user={user} handleFormSubmit={handleFormSubmit} />} */}
               <AccountInfo user={user} handleFormSubmit={handleFormSubmit} isNonMobile={isNonMobile}/>
@@ -131,14 +132,14 @@ const AccountInfo = ({ user, handleFormSubmit,isNonMobile }) => {
           </Box>
           <Box>
             <Typography variant="h3">
-              Verification Documents
-            </Typography>
+Session Documents</Typography>
             </Box>
-          <Box display="flex" justifyContent="flex-end" mt={4}>
+            <Documentlist/>
+          {/* <Box display="flex" justifyContent="flex-end" mt={4}>
             <Button type="submit" variant="contained" color="primary">
              Verify User
             </Button>
-          </Box>
+          </Box> */}
         </form>
       )}
     </Formik>

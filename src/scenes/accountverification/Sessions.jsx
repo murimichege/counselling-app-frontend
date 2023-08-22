@@ -12,18 +12,18 @@ import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined"
 import Header from "../../components/Header";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import userApi from "../../api/users";
-const AccountVerification = () => {
-	const [VerificationAccounts, setVerificationAccounts] = useState([]);
+const Accountstatus = () => {
+	const [statusAccounts, setstatusAccounts] = useState([]);
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const colors = tokens(theme.palette.mode);
 
 	// useEffect(() => {
-	// 	const getVerificationAccounts = async () => {
+	// 	const getstatusAccounts = async () => {
 	// 		const accounts = await userApi.getAll();
-	// 		setVerificationAccounts(accounts);
+	// 		setstatusAccounts(accounts);
 	// 	};
-	// 	getVerificationAccounts();
+	// 	getstatusAccounts();
 	// }, []);
 
 	const columns = [
@@ -47,21 +47,21 @@ const AccountVerification = () => {
 			flex: 1,
 		},
 		{
-			field: "email",
-			headerName: "Email",
+			field: "mode",
+			headerName: "Mode",
 			flex: 1,
 		},
 		{
-			field: "verification",
-			headerName: "Verification",
+			field: "Status",
+			headerName: "Status",
 			flex: 1,
-			renderCell: ({ row: { verification } }) => {
+			renderCell: ({ row: { status } }) => {
 				return (
-					<Box width="90%" m="0 auto" p="5px" display="flex"  backgroundColor={verification === "verified" ? colors.greenAccent[600] : verification === "unverified" ? colors.greenAccent[700] : colors.greenAccent[700]} borderRadius="4px">
-						{verification === "verified" && <AdminPanelSettingsOutlinedIcon />}
-						{verification === "unverified" && <SecurityOutlinedIcon />}
+					<Box width="90%" m="0 auto" p="5px" display="flex"  backgroundColor={status === "verified" ? colors.greenAccent[600] : status === "unverified" ? colors.greenAccent[700] : colors.greenAccent[700]} borderRadius="4px">
+						{status === "verified" && <AdminPanelSettingsOutlinedIcon />}
+						{status === "unverified" && <SecurityOutlinedIcon />}
 						<Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-							{verification}
+							{status}
 						</Typography>
 					</Box>
 				);
@@ -73,7 +73,7 @@ const AccountVerification = () => {
 			headerName: "Actions",
 			width: 170,
 			renderCell: (params) => (
-				<Button variant="text" component={Link} to={`/accounts/account/${params.id}`} startIcon={<OpenInNewOutlinedIcon />}>
+				<Button variant="text" component={Link} to={`/session/${params.id}`} startIcon={<OpenInNewOutlinedIcon />}>
 					Open
 				</Button>
 			),
@@ -116,11 +116,11 @@ const AccountVerification = () => {
 					},
 				}}
 			>
-				{/* <DataGrid checkboxSelection rows={VerificationAccounts} columns={columns} /> */}
+				{/* <DataGrid checkboxSelection rows={statusAccounts} columns={columns} /> */}
 				<DataGrid checkboxSelection rows={mockDataTeam} columns={columns} /> 
 			</Box>
 		</Box>
 	);
 };
 
-export default AccountVerification;
+export default Accountstatus;

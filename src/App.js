@@ -12,8 +12,8 @@ import Form from "./scenes/form";
 // import Pie from "./scenes/pie";
 // import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
-import AccountDetail from "./scenes/accountverification/account";
-import AccountVerification from "./scenes/accountverification";
+import AccountDetail from "./scenes/accountverification/Session";
+import AccountVerification from "./scenes/accountverification/Sessions";
 import DocumentList from "./scenes/accountverification/DocumentList";
 import VerificationDoc from "./scenes/accountverification/verificationdocs";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -61,11 +61,11 @@ function App() {
                   <Route path="/login" element={<Login />} />
 
                   <Route
-                    path="/AccountVerification"
+                    path="/sessions"
                     element={<AccountVerification />}
                   />
                   <Route
-                    path="/accounts/account/:id"
+                    path="/session/:id"
                     element={<AccountDetail />}
                   />
                   <Route

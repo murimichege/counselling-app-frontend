@@ -4,70 +4,70 @@ export const mockDataTeam = [
   {
     id: 1,
     name: "Sheillah ",
-    email: "Sheillah@gmail.com",
+    mode: "Virtual",
     age: 35,
     phone: "(665)121-5454",
     access: "Admin",
-    verification:"verified"
+    status:"Ongoing"
   },
   {
     id: 2,
     name: "Eddie",
-    email: "eddiee@gmail.com",
+    mode: "Virtual",
     age: 42,
     phone: "(421)314-2288",
     access: "Developer",
-    verification:"verified"
+    status:"Scheduled"
 
   },
   {
     id: 3,
     name: "Jaime Lannister",
-    email: "jaimelannister@gmail.com",
+    mode: "In-Person",
     age: 45,
     phone: "(422)982-6739",
     access: "User",
-    verification:"unverified"
+    status:"Ongoing"
 
   },
   {
     id: 4,
     name: "Anya Stark",
-    email: "anyastark@gmail.com",
+    mode: "In-Person",
     age: 16,
     phone: "(921)425-6742",
     access: "User",
-    verification:"verified"
+    status:"Closed"
 
   },
   {
     id: 5,
     name: "Daenerys Targaryen",
-    email: "daenerystargaryen@gmail.com",
+    mode: "In-Person",
     age: 31,
     phone: "(421)445-1189",
     access: "User",
-    verification:"verified"
+    status:"Closed"
 
   },
   {
     id: 6,
     name: "Ever Melisandre",
-    email: "evermelisandre@gmail.com",
+    mode: "Virtual",
     age: 150,
     phone: "(232)545-6483",
     access: "User",
-    verification:"verified"
+    status:"Scheduled"
 
   },
   {
     id: 7,
     name: "Ferrara Clifford",
-    email: "ferraraclifford@gmail.com",
+    mode: "In-Person",
     age: 44,
     phone: "(543)124-0123",
     access: "User",
-    verification:"verified"
+    status:"Closed"
 
   },
   {
@@ -77,7 +77,7 @@ export const mockDataTeam = [
     age: 36,
     phone: "(222)444-5555",
     access: "User",
-    verification:"verified"
+    verification:"Student"
 
   },
   {
@@ -87,7 +87,7 @@ export const mockDataTeam = [
     age: 65,
     phone: "(444)555-6239",
     access: "User",
-    verification:"unverified"
+    verification:"Staff"
 
   },
 ];
