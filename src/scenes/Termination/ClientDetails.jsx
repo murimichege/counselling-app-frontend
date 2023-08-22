@@ -84,31 +84,19 @@ const ClientDetails = ({ onButtonClick }) => {
                         helperText="SessionsHeld"
                         sx={{ marginRight: "20px", width: "240px", height: "auto" }}
                     />
-    {/* <TextField
-                        id="outlined-select-currency"
-                        label="StudentID"
-                        name="StudentID"
-                        value={formData.StudentID}
-                        inputProps={{
-                            style: { height: "auto" }
-                        }}
-                        onChange={handleInputChange}
-                        helperText="StudentID"
-                        sx={{ marginRight: "20px", width: "240px", height: "auto" }}
-                    /> */}
+   
 
-<Demo>
-            <List dense={dense}>
-              {generate(
-                <ListItem>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                </ListItem>,
-              )}
-            </List>
-          </Demo>
+   <Demo>
+    <List dense={dense}>
+        <ListItem>
+            <ListItemText
+                primary="Single-line item"
+                secondary={secondary ? 'Secondary text' : null}
+            />
+        </ListItem>
+    </List>
+</Demo>
+
                 </Box>
                 <p style={{ color: "#C0C0C0" }}>Delivery Dates.</p>
                 <Box
@@ -195,7 +183,7 @@ const ClientDetails = ({ onButtonClick }) => {
                 variant="contained"
                 onClick={() => onButtonClick("pagefour")}
             >
-                Save Product Details
+                Save Client Details. 
             </Button>
         </main>
     );
