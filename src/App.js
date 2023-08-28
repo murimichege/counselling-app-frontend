@@ -26,7 +26,7 @@ import ClientIntakeForm from "./scenes/client/clientIntakeForm";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(false);
+  const [isPrivate, setisPrivate] = useState(true);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -76,8 +76,9 @@ function App() {
                     path="/accounts/account/:id/documents/verification"
                     element={<VerificationDoc />}
                   />
+                  
                   <Route path="/reports" element={<Reports />} />
-                  <Route path="/IntakeForm" element={<IntakeForm />} />
+                  <Route path="/ClientIntakeForm" element={<ClientIntakeForm />} />
                   <Route path="/form" element={<Form />} />
 
                   <Route path="/bar" element={<Bar />} />

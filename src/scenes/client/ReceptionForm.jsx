@@ -37,7 +37,7 @@ const IntakeForm = () => {
 <Box m="20px" >
       <Toaster />
 
-      <Header title="COUNSELLING CENTER INTAKE FORM " subtitle="Summer Semester 2023" />
+      <Header title="COUNSELING CENTER INTAKE FORM " subtitle="Summer Semester 2023" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -139,13 +139,13 @@ const IntakeForm = () => {
                 select
                 // variant="filled"
                 type="text"
-                label="Role"
+                label="Position"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.role}
-                name="role"
-                error={!!touched.role && !!errors.role}
-                helperText={touched.role && errors.role}
+                value={values.Position}
+                name="Position"
+                error={!!touched.Position && !!errors.Position}
+                helperText={touched.Position && errors.Position}
                 sx={{ gridColumn: "span 2" }}
               >
                 <MenuItem value="">
@@ -153,6 +153,9 @@ const IntakeForm = () => {
                 </MenuItem>
                 <MenuItem value={10}>Staff</MenuItem>
                 <MenuItem value={20}>Student</MenuItem>
+                <MenuItem value={20}>Faculty</MenuItem>
+                <MenuItem value={20}>Other</MenuItem>
+
               
               </TextField>
               <TextField
@@ -164,7 +167,7 @@ const IntakeForm = () => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.StudentCategory}
-                name="role"
+                name="Position"
                 error={!!touched.StudentCategory && !!errors.StudentCategory}
                 helperText={touched.StudentCategory && errors.StudentCategory}
                 sx={{ gridColumn: "span 2" }}
@@ -198,7 +201,8 @@ const IntakeForm = () => {
                 <MenuItem value={10}>Personal Counselling</MenuItem>
                 <MenuItem value={20}>VCT</MenuItem>
                 <MenuItem value={30}>Consultation Services</MenuItem>
-            
+                <MenuItem value={30}>Other</MenuItem>
+
               </TextField>
               
               
@@ -206,7 +210,7 @@ const IntakeForm = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="outlined">
-                Forward to Receptionist
+                Save and Schedule Session
               </Button>
             </Box>
           </form>
@@ -232,7 +236,7 @@ const checkoutSchema = yup.object().shape({
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
   address: yup.string().required("required"),
-  role: yup.string().required("required"),
+  Position: yup.string().required("required"),
   nationalidentity: yup.string().required("required"),
 });
 const initialValues = {
@@ -240,7 +244,7 @@ const initialValues = {
   StudentID: "",
   CurrentDate: "",
   CurrentTime: "",
-  role: "",
+  Position: "",
   StudentCategory: "",
   Service:"",
 };

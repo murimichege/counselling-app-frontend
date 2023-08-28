@@ -134,7 +134,7 @@ const AccountInfo = ({ user, handleFormSubmit,isNonMobile }) => {
             <Typography variant="h3">
 Session Documents</Typography>
             </Box>
-            <Documentlist/>
+            {/* <Documentlist/> */}
           {/* <Box display="flex" justifyContent="flex-end" mt={4}>
             <Button type="submit" variant="contained" color="primary">
              Verify User

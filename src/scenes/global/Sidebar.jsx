@@ -105,7 +105,7 @@ const Sidebar = () => {
 
 					
 						{/* <Item title="User Management" to="/Clients" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} /> */}
-						<Item title=" Sessions Management" to="/AccountVerification" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} />
+						<Item title=" Sessions Management" to="/sessions" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} />
 						{/* <Item title="" to="/Users" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} /> */}
 						
 						<Item title="Client Management" to="/Clients" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} />

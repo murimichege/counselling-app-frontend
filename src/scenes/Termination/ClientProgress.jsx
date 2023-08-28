@@ -4,20 +4,18 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import {
   Box,
-  TextField,
-  MenuItem,
   Button,
   ListItem,
   Checkbox,
   List,
   ListItemButton,
-  ListItemText,
+  ListItemText, 
 } from "@mui/material";
 import { ProductContext } from "../ProductOnBoarding/Product";
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import Collapse from '@mui/material/Collapse';
-import Recommendation from  './Recommendation'
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Collapse from "@mui/material/Collapse";
+import Recommendation from "./Recommendation";
 const ClientProgress = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(ProductContext);
   const [open, setOpen] = React.useState(true);
@@ -73,44 +71,41 @@ const ClientProgress = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-            <ListItemButton>
-             <ListItemText primary="Goals met" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-           </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-
-          <List
-            dense
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          >
-            {[0, 1, 2, 3].map((value) => {
-              const labelId = `checkbox-list-secondary-label-${value}`;
-              return (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText
-                      id={labelId}
-                      primary={`Line item ${value + 1}`}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-        
+          <ListItemButton>
+            <ListItemText primary="Goals met" />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List
+              dense
+              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            >
+              {[0, 1, 2, 3].map((value) => {
+                const labelId = `checkbox-list-secondary-label-${value}`;
+                return (
+                  <ListItem
+                    key={value}
+                    secondaryAction={
+                      <Checkbox
+                        edge="end"
+                        onChange={handleToggle(value)}
+                        checked={checked.indexOf(value) !== -1}
+                        inputProps={{ "aria-labelledby": labelId }}
+                      />
+                    }
+                    disablePadding
+                  >
+                    <ListItemButton>
+                      <ListItemText
+                        id={labelId}
+                        primary={`Line item ${value + 1}`}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
           </Collapse>
-        
         </Box>
 
         <Box
@@ -120,44 +115,41 @@ const ClientProgress = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-            <ListItemButton>
-             <ListItemText primary="Goals Being Worked On:" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-           </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-
-          <List
-            dense
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          >
-            {[0, 1, 2, 3].map((value) => {
-              const labelId = `checkbox-list-secondary-label-${value}`;
-              return (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText
-                      id={labelId}
-                      primary={`Line item ${value + 1}`}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-        
+          <ListItemButton>
+            <ListItemText primary="Goals Being Worked On:" />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List
+              dense
+              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            >
+              {[0, 1, 2, 3].map((value) => {
+                const labelId = `checkbox-list-secondary-label-${value}`;
+                return (
+                  <ListItem
+                    key={value}
+                    secondaryAction={
+                      <Checkbox
+                        edge="end"
+                        onChange={handleToggle(value)}
+                        checked={checked.indexOf(value) !== -1}
+                        inputProps={{ "aria-labelledby": labelId }}
+                      />
+                    }
+                    disablePadding
+                  >
+                    <ListItemButton>
+                      <ListItemText
+                        id={labelId}
+                        primary={`Line item ${value + 1}`}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
           </Collapse>
-        
         </Box>
 
         <Box
@@ -167,51 +159,46 @@ const ClientProgress = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-            <ListItemButton>
-             <ListItemText primary="Goals Not Met (Reasons):" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-           </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-
-          <List
-            dense
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          >
-            {[0, 1, 2, 3].map((value) => {
-              const labelId = `checkbox-list-secondary-label-${value}`;
-              return (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText
-                      id={labelId}
-                      primary={`Line item ${value + 1}`}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-        
+          <ListItemButton>
+            <ListItemText primary="Goals Not Met (Reasons):" />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List
+              dense
+              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            >
+              {[0, 1, 2, 3].map((value) => {
+                const labelId = `checkbox-list-secondary-label-${value}`;
+                return (
+                  <ListItem
+                    key={value}
+                    secondaryAction={
+                      <Checkbox
+                        edge="end"
+                        onChange={handleToggle(value)}
+                        checked={checked.indexOf(value) !== -1}
+                        inputProps={{ "aria-labelledby": labelId }}
+                      />
+                    }
+                    disablePadding
+                  >
+                    <ListItemButton>
+                      <ListItemText
+                        id={labelId}
+                        primary={`Line item ${value + 1}`}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
           </Collapse>
-        
         </Box>
 
-        <Box>
+        <Box></Box>
 
-        </Box>
-
-        <Recommendation/>
+        <Recommendation />
       </div>
 
       <Button

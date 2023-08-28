@@ -22,6 +22,9 @@ const Calendar = () => {
 
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
+    const cousellor = prompt("Please the counsellor for this session");
+    
+
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
 
@@ -29,6 +32,7 @@ const Calendar = () => {
       calendarApi.addEvent({
         id: `${selected.dateStr}-${title}`,
         title,
+        cousellor,
         start: selected.startStr,
         end: selected.endStr,
         allDay: selected.allDay,
@@ -112,13 +116,13 @@ const Calendar = () => {
             initialEvents={[
               {
                 id: "12315",
-                title: "All-day event",
-                date: "2022-09-14",
+                title: "Session with Eddie",
+                date: "2023-08-22  15:00",
               },
               {
                 id: "5123",
-                title: "Timed event",
-                date: "2022-09-28",
+                title: "Session with Staff",
+                date: "2023-08-22  14:00",
               },
             ]}
           />
