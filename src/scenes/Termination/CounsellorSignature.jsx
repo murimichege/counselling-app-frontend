@@ -3,10 +3,10 @@ import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Box, TextField, MenuItem, Button } from "@mui/material";
-import { ProductContext } from "../ProductOnBoarding/Product";
+import {TerminationContext} from './Termination'
 
 const CounsellorSignature = ({ onButtonClick }) => {
-  const { formData, setFormData } = useContext(ProductContext);
+  const { formData, setFormData } = useContext(TerminationContext);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DeploymentSuccess from "./CreationSuccess";
+// import DeploymentSuccess from "./CreationSuccess";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import{Button} from '@mui/material'
 import {useNavigate} from 'react-router-dom'
@@ -30,7 +30,7 @@ function FinalStep() {
                     <h3 className="" style={{ display: "flex", justifyContent: "center" }}>
                         Congratulations!
                     </h3>
-                    <p style={{ color: "#C0C0C0" }}>You have completed your product onboarding, you will receive purchase requests!</p>
+                    <p style={{ color: "#C0C0C0" }}>You have completed your termination step!</p>
                     <Button />
                     <Button
                         className="f6 grow br2 ph3 pv2 mb2 dib white"
@@ -43,7 +43,7 @@ function FinalStep() {
                       </Button>
                       
                 </div>
-                <DeploymentSuccess />
+                {/* <DeploymentSuccess /> */}
             </main>
         </div>
     );

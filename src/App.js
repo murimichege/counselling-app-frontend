@@ -24,6 +24,7 @@ import IntroPage from "./scenes/auth/intro";
 import IntakeForm from "./scenes/client/ReceptionForm";
 import ClientIntakeForm from "./scenes/client/clientIntakeForm";
 import StudentBookingForm from './scenes/student/index'
+import Termination from './scenes/Termination/Termination'
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/IntroPage" element={<IntroPage />} />
                 <Route path="/IntakeForm" element={<IntakeForm />} />
                  <Route path="/StudentBookingForm" element={<StudentBookingForm/>}/>
+                 <Route path="/Termination" element= {<Termination/>}/>
  
                 <Route
                   path="/ClientIntakeForm"

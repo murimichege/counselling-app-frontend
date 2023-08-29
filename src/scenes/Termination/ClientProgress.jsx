@@ -9,15 +9,16 @@ import {
   Checkbox,
   List,
   ListItemButton,
-  ListItemText, 
+  ListItemText,
 } from "@mui/material";
-import { ProductContext } from "../ProductOnBoarding/Product";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import Recommendation from "./Recommendation";
+import {TerminationContext} from './Termination'
+
 const ClientProgress = ({ onButtonClick }) => {
-  const { formData, setFormData } = useContext(ProductContext);
+  const { formData, setFormData } = useContext(TerminationContext);
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {

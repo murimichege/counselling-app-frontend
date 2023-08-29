@@ -12,13 +12,10 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { ProductContext } from "../ProductOnBoarding/Product";
-
-const currencies = [{ name: "KSHS" }, { name: "EURO" }, { name: "USD" }];
-const metrics = [{ name: "KGS" }, { name: "TONNES" }];
+import {TerminationContext} from './Termination'
 
 const ClientDetails = ({ onButtonClick }) => {
-  const { formData, setFormData } = useContext(ProductContext);
+  const { formData, setFormData } = useContext(TerminationContext);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -101,7 +98,7 @@ const ClientDetails = ({ onButtonClick }) => {
             helperText="SessionsHeld"
             sx={{ marginRight: "20px", width: "240px", height: "auto" }}
           />
-
+{/* 
           <Demo>
             <List dense={dense}>
               <ListItem>
@@ -111,7 +108,7 @@ const ClientDetails = ({ onButtonClick }) => {
                 />
               </ListItem>
             </List>
-          </Demo>
+          </Demo> */}
         </Box>
         <p style={{ color: "#C0C0C0" }}>Delivery Dates.</p>
         <Box
@@ -172,22 +169,6 @@ const ClientDetails = ({ onButtonClick }) => {
             sx={{ marginRight: "20px", width: "240px", height: "auto" }}
           />
 
-          <TextField
-            id="outlined-select-currency"
-            select
-            name="currency"
-            label="Currency"
-            value={formData.currency}
-            onChange={handleInputChange}
-            sx={{ width: "240px" }}
-            helperText="Currency"
-          >
-            {currencies.map((option) => (
-              <MenuItem key={option.name} value={option.name}>
-                {option.name}
-              </MenuItem>
-            ))}
-          </TextField>
         </Box>
       </div>
 
