@@ -65,7 +65,6 @@ function Termination() {
         {
           {
             pageone: <ClientDetails onButtonClick={nextPage} />,
-
             pagetwo: <ClientProgress onButtonClick={nextPage} />,
             pagethree: <Recommendation onButtonClick={nextPage} />,
             pagefour: <CounsellorSignature onButtonClick={nextPage} />,

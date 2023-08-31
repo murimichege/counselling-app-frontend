@@ -1,34 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import "./index.css";
+import { experimentalStyled as styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 import {
   Box,
-  List,
+  Button,
   ListItem,
+  Checkbox,
+  List,
   ListItemButton,
   ListItemText,
-  ListItemSecondaryAction,
-  Checkbox,
-  IconButton,
-  TextField,
-  MenuItem,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import AddIcon from "@mui/icons-material/Add";
-import {TerminationContext} from './Termination'
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Collapse from "@mui/material/Collapse";
+import { TerminationContext } from './Termination';
 
-const Recommendation = () => {
-  const [selectedListItem, setSelectedListItem] = useState(-1);
-  const [recommendation, setRecommendation] = useState("");
-  const [checked, setChecked] = useState([]);
-  const [listItems, setListItems] = useState([]);
-
-  const handleListItemChange = (event) => {
-    setSelectedListItem(event.target.value);
-  };
-
-  const handleRecommendationChange = (event) => {
-    setRecommendation(event.target.value);
-  };
+const Recommendation = ({ onButtonClick }) => {
+  const { formData, setFormData } = useContext(TerminationContext);
+  const [goalsMetOpen, setGoalsMetOpen] = useState(true);
+  const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
+  const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
+  const [checked, setChecked] = useState([1]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -43,105 +36,64 @@ const Recommendation = () => {
     setChecked(newChecked);
   };
 
-  const handleAddRecommendation = () => {
-    if (recommendation.trim() !== "") {
-      const newListItems = [...listItems, recommendation];
-      setListItems(newListItems);
-      setRecommendation("");
-    }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleDeleteItem = (index) => {
-    const newListItems = listItems.filter((item, i) => i !== index);
-    setListItems(newListItems);
-  };
-
-  const handleEditItem = (index) => {
-    setSelectedListItem(index);
-    setRecommendation(listItems[index]);
-  };
-
-  const handleUpdateItem = () => {
-    if (selectedListItem !== -1 && recommendation.trim() !== "") {
-      const newListItems = [...listItems];
-      newListItems[selectedListItem] = recommendation;
-      setListItems(newListItems);
-      setSelectedListItem(-1);
-      setRecommendation("");
-    }
-  };
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
+    <main
+      className="pt5 black-80"
+      style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <TextField
-        id="outlined-select-list"
-        select
-        label="Select List Item"
-        value={selectedListItem}
-        onChange={handleListItemChange}
-        sx={{ width: "240px", marginBottom: "10px" }}
-        helperText="Select an item from the list"
+      <h2>Recommendation</h2>
+      <p style={{ color: "#C0C0C0" }}>Goals met</p>
+      <div
+        className="center ph4 selectionDiv"
+        style={{ height: "46%", display: "inline-block" }}
       >
-        {listItems.map((item, index) => (
-          <MenuItem key={index} value={index}>
-            {item}
-          </MenuItem>
-        ))}
-      </TextField>
+     <Box>
+      </Box>
 
-      {selectedListItem !== -1 && (
-        <TextField
-          id="outlined-recommendation"
-          label="Recommendation"
-          value={recommendation}
-          onChange={handleRecommendationChange}
-          sx={{ width: "240px", marginBottom: "10px" }}
-          placeholder="Add a recommendation"
-        />
-      )}
-
-      <div>
-        <IconButton
-          color="primary"
-          onClick={handleAddRecommendation}
-          disabled={selectedListItem !== -1}
-        >
-          <AddIcon />
-        </IconButton>
-        <IconButton
-          color="primary"
-          onClick={handleUpdateItem}
-          disabled={selectedListItem === -1 || recommendation.trim() === ""}
-        >
-          <EditIcon />
-        </IconButton>
+        {/* Recommendation component */}
+        {/* ... (your Recommendation component) */}
       </div>
 
-      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {listItems.map((item, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => handleEditItem(index)}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-            <ListItemSecondaryAction>
-              <IconButton
-                edge="end"
-                aria-label="delete"
-                onClick={() => handleDeleteItem(index)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+      {/* Buttons */}
+      <Box 
+sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
+>
+<Button
+        className="f6 grow br2 ph3 pv2 mb2 dib white"
+       
+        type="submit"
+        variant="contained"
+        onClick={() => onButtonClick("pagetwo")}
+      >
+       Cancel
+      </Button>
+
+<Button
+        className="f6 grow br2 ph3 pv2 mb2 dib white"
+       
+        type="submit"
+        variant="contained"
+        onClick={() => onButtonClick("pagefour")}
+      >
+        Save Recommendation.
+      </Button>
+
+</Box>
+     
+    </main>
   );
 };
 

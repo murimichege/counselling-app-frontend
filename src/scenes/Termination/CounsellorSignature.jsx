@@ -2,7 +2,16 @@ import React, { useState, useContext } from "react";
 import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Box, TextField, MenuItem, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  MenuItem,
+  Button,
+  List,
+  Demo,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import {TerminationContext} from './Termination'
 
 const CounsellorSignature = ({ onButtonClick }) => {
@@ -28,8 +37,8 @@ const CounsellorSignature = ({ onButtonClick }) => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      {/* <h2>Let's get further details of your product</h2>
-            <p style={{ color: "#C0C0C0" }}>We'll streamline your marketing experience accordingly.</p> */}
+      <h2>Practioner Signature</h2>
+    
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -43,55 +52,77 @@ const CounsellorSignature = ({ onButtonClick }) => {
           }}
         >
           <TextField
-            label="Quantity"
-            name="quantity"
-            value={formData.quantity}
+            id="outlined-select-currency"
+            label="CounsellorName"
+            name="CounsellorName"
+            value={formData.CounsellorName}
             inputProps={{
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            helperText="Product Quantity"
-            sx={{ marginRight: "20px", width: "240px", height: "auto" }}
+            sx={{ marginRight: "20px", width: "240px", height: "auto", gridColumn: "span 2" }}
           />
-
           <TextField
-            label="Quantity"
-            name="quantity"
-            value={formData.quantity}
-            inputProps={{
-              style: { height: "auto" },
-            }}
+            id="date"
+            name="CurrentDate"
+            label="CurrentDate"
+            type="date"
+            value={formData.CurrentDate}
             onChange={handleInputChange}
-            helperText="Product Quantity"
-            sx={{ marginRight: "20px", width: "240px", height: "auto" }}
+            // defaultValue=now()
+            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2" }}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
-        <TextField
-          label="Quantity"
-          name="quantity"
-          value={formData.quantity}
-          inputProps={{
-            style: { height: "auto" },
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            // justifyContent: space-evenly
           }}
-          onChange={handleInputChange}
-          helperText="Product Quantity"
-          sx={{ marginRight: "20px", width: "240px", height: "auto" }}
-        />
-      </div>
+        >
+          <TextField
+            label="Signature"
+            name="CounsellorSignature"
+            value={formData.CounsellorSignature}
+            inputProps={{
+              style: { height: "auto" },
+            }}
+            onChange={handleInputChange}
+            sx={{ marginRight: "20px", height: "auto",gridColumn: "span 4",marginTop:"30px" }}
+          />
 
-      <Button
+        </Box>
+    
+      </div>
+<Box 
+sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
+>
+<Button
         className="f6 grow br2 ph3 pv2 mb2 dib white"
-        style={{
-          borderStyle: "none",
-          width: "100%",
-          backgroundColor: "#664DE5",
-        }}
+       
         type="submit"
         variant="contained"
-        onClick={() => onButtonClick("pagefour")}
+        onClick={() => onButtonClick("pagetwo")}
       >
-        Save Progress
+       Cancel
       </Button>
+
+<Button
+        className="f6 grow br2 ph3 pv2 mb2 dib white"
+       
+        type="submit"
+        variant="contained"
+        onClick={() => onButtonClick("pagefive")}
+      >
+        Save Counsellor Details.
+      </Button>
+
+</Box>
+     
     </main>
   );
 };

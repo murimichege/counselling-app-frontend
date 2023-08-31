@@ -165,8 +165,20 @@ const ClientDetails = ({ onButtonClick }) => {
 
         </Box>
       </div>
+<Box 
+sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
+>
+<Button
+        className="f6 grow br2 ph3 pv2 mb2 dib white"
+       
+        type="submit"
+        variant="contained"
+        onClick={() => onButtonClick("pagetwo")}
+      >
+       Cancel
+      </Button>
 
-      <Button
+<Button
         className="f6 grow br2 ph3 pv2 mb2 dib white"
        
         type="submit"
@@ -175,6 +187,9 @@ const ClientDetails = ({ onButtonClick }) => {
       >
         Save Client Details.
       </Button>
+
+</Box>
+     
     </main>
   );
 };

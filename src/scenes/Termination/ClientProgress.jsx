@@ -14,32 +14,14 @@ import {
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
-import Recommendation from "./Recommendation";
-import {TerminationContext} from './Termination'
+import { TerminationContext } from './Termination';
 
 const ClientProgress = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(TerminationContext);
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  console.log("formdata", formData);
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-
-  const [checked, setChecked] = React.useState([1]);
+  const [goalsMetOpen, setGoalsMetOpen] = useState(true);
+  const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
+  const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
+  const [checked, setChecked] = useState([1]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -54,6 +36,19 @@ const ClientProgress = ({ onButtonClick }) => {
     setChecked(newChecked);
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
+
   return (
     <main
       className="pt5 black-80"
@@ -65,6 +60,7 @@ const ClientProgress = ({ onButtonClick }) => {
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
       >
+        {/* Goals Met section */}
         <Box
           sx={{
             display: "flex",
@@ -72,43 +68,34 @@ const ClientProgress = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-          <ListItemButton>
+          <ListItemButton onClick={() => setGoalsMetOpen(!goalsMetOpen)}>
             <ListItemText primary="Goals met" />
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {goalsMetOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List
-              dense
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              {[0, 1, 2, 3].map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
-                return (
-                  <ListItem
-                    key={value}
-                    secondaryAction={
-                      <Checkbox
-                        edge="end"
-                        onChange={handleToggle(value)}
-                        checked={checked.indexOf(value) !== -1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    }
-                    disablePadding
-                  >
-                    <ListItemButton>
-                      <ListItemText
-                        id={labelId}
-                        primary={`Line item ${value + 1}`}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
+          <Collapse in={goalsMetOpen} timeout="auto" unmountOnExit>
+            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
+              {[0, 1, 2, 3].map((value) => (
+                <ListItem
+                  key={value}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(value)}
+                      checked={checked.indexOf(value) !== -1}
+                    />
+                  }
+                  disablePadding
+                >
+                  <ListItemButton>
+                    <ListItemText primary={`Line item ${value + 1}`} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
             </List>
           </Collapse>
         </Box>
 
+        {/* Goals Being Worked On section */}
         <Box
           sx={{
             display: "flex",
@@ -116,43 +103,34 @@ const ClientProgress = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-          <ListItemButton>
-            <ListItemText primary="Goals Being Worked On:" />
-            {open ? <ExpandLess /> : <ExpandMore />}
+         <ListItemButton onClick={() => setGoalsBeingWorkedOnOpen(!goalsBeingWorkedOnOpen)}>
+            <ListItemText primary="Goals Being Worked" />
+            {goalsBeingWorkedOnOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List
-              dense
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              {[0, 1, 2, 3].map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
-                return (
-                  <ListItem
-                    key={value}
-                    secondaryAction={
-                      <Checkbox
-                        edge="end"
-                        onChange={handleToggle(value)}
-                        checked={checked.indexOf(value) !== -1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    }
-                    disablePadding
-                  >
-                    <ListItemButton>
-                      <ListItemText
-                        id={labelId}
-                        primary={`Line item ${value + 1}`}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
+          <Collapse in={goalsBeingWorkedOnOpen} timeout="auto" unmountOnExit>
+            <List dense sx={{ width: "100%",  minWidth: 400, bgcolor: "background.paper" }}>
+              {[0, 1, 2, 3].map((value) => (
+                <ListItem
+                  key={value}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(value)}
+                      checked={checked.indexOf(value) !== -1}
+                    />
+                  }
+                  disablePadding
+                >
+                  <ListItemButton>
+                    <ListItemText primary={`Goal ${value + 1}`} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
             </List>
           </Collapse>
         </Box>
 
+        {/* Goals Not Met section */}
         <Box
           sx={{
             display: "flex",
@@ -160,61 +138,63 @@ const ClientProgress = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-          <ListItemButton>
-            <ListItemText primary="Goals Not Met (Reasons):" />
-            {open ? <ExpandLess /> : <ExpandMore />}
+              <ListItemButton onClick={() => setGoalsNotMetOpen(!goalsNotMetOpen)}>
+            <ListItemText primary="Goals Not Met " />
+            {goalsNotMetOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List
-              dense
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              {[0, 1, 2, 3].map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
-                return (
-                  <ListItem
-                    key={value}
-                    secondaryAction={
-                      <Checkbox
-                        edge="end"
-                        onChange={handleToggle(value)}
-                        checked={checked.indexOf(value) !== -1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    }
-                    disablePadding
-                  >
-                    <ListItemButton>
-                      <ListItemText
-                        id={labelId}
-                        primary={`Line item ${value + 1}`}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
+          <Collapse in={goalsNotMetOpen} timeout="auto" unmountOnExit>
+            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
+              {[0, 1, 2, 3].map((value) => (
+                <ListItem
+                  key={value}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(value)}
+                      checked={checked.indexOf(value) !== -1}
+                    />
+                  }
+                  disablePadding
+                >
+                  <ListItemButton>
+                    <ListItemText primary={`Line item ${value + 1}`} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
             </List>
           </Collapse>
         </Box>
 
-        <Box></Box>
-
-        <Recommendation />
+        {/* Recommendation component */}
+        {/* ... (your Recommendation component) */}
       </div>
 
-      <Button
+      {/* Buttons */}
+      <Box 
+sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
+>
+<Button
         className="f6 grow br2 ph3 pv2 mb2 dib white"
-        style={{
-          borderStyle: "none",
-          width: "100%",
-          backgroundColor: "#664DE5",
-        }}
+       
         type="submit"
         variant="contained"
-        onClick={() => onButtonClick("pagefour")}
+        onClick={() => onButtonClick("pagetwo")}
       >
-        Save Progress
+       Cancel
       </Button>
+
+<Button
+        className="f6 grow br2 ph3 pv2 mb2 dib white"
+       
+        type="submit"
+        variant="contained"
+        onClick={() => onButtonClick("pagethree")}
+      >
+        Save Client Details.
+      </Button>
+
+</Box>
+     
     </main>
   );
 };
