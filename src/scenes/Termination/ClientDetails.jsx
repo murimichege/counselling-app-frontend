@@ -37,10 +37,8 @@ const ClientDetails = ({ onButtonClick }) => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Let's get further details of your product</h2>
-      <p style={{ color: "#C0C0C0" }}>
-        We'll streamline your marketing experience accordingly.
-      </p>
+      <h2>Client Details</h2>
+    
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -62,8 +60,7 @@ const ClientDetails = ({ onButtonClick }) => {
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            helperText="ClientName"
-            sx={{ marginRight: "20px", width: "240px", height: "auto" }}
+            sx={{ marginRight: "20px", width: "240px", height: "auto", gridColumn: "span 2" }}
           />
           <TextField
             id="outlined-select-currency"
@@ -74,8 +71,7 @@ const ClientDetails = ({ onButtonClick }) => {
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            helperText="StudentID"
-            sx={{ marginRight: "20px", width: "240px", height: "auto" }}
+            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2" }}
           />
         </Box>
         <Box
@@ -95,8 +91,7 @@ const ClientDetails = ({ onButtonClick }) => {
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            helperText="SessionsHeld"
-            sx={{ marginRight: "20px", width: "240px", height: "auto" }}
+            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2",marginTop:"30px" }}
           />
 {/* 
           <Demo>
@@ -110,7 +105,7 @@ const ClientDetails = ({ onButtonClick }) => {
             </List>
           </Demo> */}
         </Box>
-        <p style={{ color: "#C0C0C0" }}>Delivery Dates.</p>
+        {/* <p style={{ color: "#C0C0C0" }}>Delivery Dates.</p> */}
         <Box
           sx={{
             display: "flex",
@@ -130,7 +125,7 @@ const ClientDetails = ({ onButtonClick }) => {
             value={formData.dateFrom}
             onChange={handleInputChange}
             // defaultValue=now()
-            sx={{ width: 220 }}
+            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -142,7 +137,7 @@ const ClientDetails = ({ onButtonClick }) => {
             type="date"
             value={formData.dateTo}
             onChange={handleInputChange}
-            sx={{ width: 220 }}
+            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -158,14 +153,13 @@ const ClientDetails = ({ onButtonClick }) => {
         >
           <TextField
             id="outlined-select-currency"
-            label="Price"
+            label="Counseling Goals Set"
             name="price"
-            value={formData.price}
+            value={formData.GoalsSet}
             inputProps={{
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            helperText="Price"
             sx={{ marginRight: "20px", width: "240px", height: "auto" }}
           />
 
@@ -174,14 +168,10 @@ const ClientDetails = ({ onButtonClick }) => {
 
       <Button
         className="f6 grow br2 ph3 pv2 mb2 dib white"
-        style={{
-          borderStyle: "none",
-          width: "100%",
-          backgroundColor: "#664DE5",
-        }}
+       
         type="submit"
         variant="contained"
-        onClick={() => onButtonClick("pagefour")}
+        onClick={() => onButtonClick("pagetwo")}
       >
         Save Client Details.
       </Button>
