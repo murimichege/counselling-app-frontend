@@ -8,37 +8,28 @@ import {
   ListItem,
   Checkbox,
   List,
+  Typography,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import FolderIcon from "@mui/icons-material/Folder";
 
+import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { CounsellingRecordContext } from "./OnGoingCounselling";
+import { CounsellingRecordContext } from "./Ongoing";
 
-const Explore = ({ onButtonClick }) => {
+function StepFive({ onButtonClick }) {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
-  const [goalsMetOpen, setGoalsMetOpen] = useState(true);
-  const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
-  const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
-  const [checked, setChecked] = useState([1]);
+  const [secondary, setSecondary] = React.useState(false);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  const [editorContent, setEditorContent] = useState([]); // State to store editor content
+  const [dense, setDense] = React.useState(false);
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  // Handler to update the state when editor content changes
+  const handleEditorChange = (content) => {
+    setEditorContent(content);
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -79,13 +70,20 @@ const Explore = ({ onButtonClick }) => {
       }
   `
   );
+  function generate(element) {
+    return [0, 1, 2].map((value) =>
+      React.cloneElement(element, {
+        key: value,
+      })
+    );
+  }
 
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Why client is seeking counseling?</h2>
+      <h2>Assessment and Diagnosis</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -102,8 +100,27 @@ const Explore = ({ onButtonClick }) => {
           md={9}
         >
           <EditorWrapper>
-            <ReactQuill />
+            <ReactQuill value={editorContent} onChange={handleEditorChange} />
           </EditorWrapper>
+        </Box>
+
+        <Box>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+            Assessment
+          </Typography>
+          <List dense={dense}>
+            {formData.CounsellingReasons.map((item) => {
+              <ListItem>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Single-line item"
+                  secondary={secondary ? "Secondary text" : null}
+                />
+              </ListItem>;
+            })}
+          </List>
         </Box>
       </div>
 
@@ -119,7 +136,7 @@ const Explore = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagetwo")}
+          onClick={() => onButtonClick("pageone")}
         >
           Cancel
         </Button>
@@ -130,11 +147,11 @@ const Explore = ({ onButtonClick }) => {
           variant="contained"
           onClick={() => onButtonClick("pagethree")}
         >
-          Save Client Details.
+          Save Assessment Details.
         </Button>
       </Box>
     </main>
   );
 };
 
-export default Explore;
+export default StepFive;

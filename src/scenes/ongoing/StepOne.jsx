@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import { Box, TextField, Button } from "@mui/material";
 import {CounsellingRecordContext} from "./Ongoing";
 
-const StepOne = ({ onButtonClick }) => {
+function StepOne ({ onButtonClick }){
   const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleInputChange = (event) => {

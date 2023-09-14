@@ -52,7 +52,7 @@ function OnGoingCounsellingRecord() {
       case "8":
         setPage("pageeight");
         break;
-      case "6":
+      case "9":
         alert("Ooops! Seems like you did not fill the form.");
         break;
       default:

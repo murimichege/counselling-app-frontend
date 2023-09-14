@@ -18,9 +18,9 @@ import FolderIcon from "@mui/icons-material/Folder";
 import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { CounsellingRecordContext } from "./Ongoing";
+import {CounsellingRecordContext} from "./Ongoing";
 
-const StepFive = ({ onButtonClick }) => {
+function StepTwo ({ onButtonClick }) {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [secondary, setSecondary] = React.useState(false);
 
@@ -83,7 +83,7 @@ const StepFive = ({ onButtonClick }) => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Assessment and Diagnosis</h2>
+      <h2>Why client is seeking counseling?</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -103,10 +103,9 @@ const StepFive = ({ onButtonClick }) => {
             <ReactQuill value={editorContent} onChange={handleEditorChange} />
           </EditorWrapper>
         </Box>
-
         <Box>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Assessment
+            Reasons
           </Typography>
           <List dense={dense}>
             {formData.CounsellingReasons.map((item) => {
@@ -147,11 +146,11 @@ const StepFive = ({ onButtonClick }) => {
           variant="contained"
           onClick={() => onButtonClick("pagethree")}
         >
-          Save Assessment Details.
+          Save Client Details.
         </Button>
       </Box>
     </main>
   );
 };
 
-export default StepFive;
+export default StepTwo;

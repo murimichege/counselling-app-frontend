@@ -29,7 +29,7 @@ import ClientIntakeForm from "./scenes/client/clientIntakeForm";
 import StudentBookingForm from "./scenes/student/index";
 import Termination from "./scenes/Termination/Termination";
 import CounsellingRecord from "./scenes/InitialCounsellingRecord/CounsellingRecord";
-import OnGoingCounsellingRecord from "./scenes/ongoing /Ongoing";
+import OnGoingCounsellingRecord from "./scenes/ongoing/Ongoing";
 import SafetyContractForm from "./scenes/safetycontract";
 function App() {
   const [theme, colorMode] = useMode();
@@ -37,7 +37,7 @@ function App() {
   const [isPrivate, setisPrivate] = useState(true);
 
   return (
-    <ErrorBoundary>
+    // <ErrorBoundary>
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -55,11 +55,11 @@ function App() {
                   <Route path="/ConsentForm" element={<ConsentForm />} />
                   <Route
                     path="/CounsellingRecord"
-                    element={<CounsellingRecord />}
+                    element={<CounsellingRecord/>}
                   />
                   <Route
                     path="/ongoingrecord"
-                    element={<OnGoingCounsellingRecord />}
+                    element={<OnGoingCounsellingRecord/>}
                   />
 
                   <Route
@@ -114,7 +114,7 @@ function App() {
           </div>
         </ThemeProvider>
       </ColorModeContext.Provider>
-    </ErrorBoundary>
+    // </ErrorBoundary>
   );
 }
 
