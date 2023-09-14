@@ -2,20 +2,11 @@ import React, { useState, useContext } from "react";
 import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import {
-  Box,
-  TextField,
-  MenuItem,
-  Button,
-  List,
-  Demo,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
-import { TerminationContext } from "./Termination";
+import { Box, TextField, Button } from "@mui/material";
+import {CounsellingRecordContext} from "./Ongoing";
 
-const CounsellorSignature = ({ onButtonClick }) => {
-  const { formData, setFormData } = useContext(TerminationContext);
+const StepOne = ({ onButtonClick }) => {
+  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -37,7 +28,7 @@ const CounsellorSignature = ({ onButtonClick }) => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Counselor Signature</h2>
+      <h2>Client Details</h2>
 
       <div
         className="center ph4 selectionDiv"
@@ -52,9 +43,10 @@ const CounsellorSignature = ({ onButtonClick }) => {
           }}
         >
           <TextField
-            label="Counselor Name"
-            name="CounsellorName"
-            value={formData.CounsellorName}
+            id="outlined-select-currency"
+            label="Client Code"
+            name="ClientCode"
+            value={formData.ClientCode}
             inputProps={{
               style: { height: "auto" },
             }}
@@ -63,50 +55,37 @@ const CounsellorSignature = ({ onButtonClick }) => {
               marginRight: "20px",
               width: "240px",
               height: "auto",
-              gridColumn: "span 2",
+              // gridColumn: "span 4",
             }}
           />
           <TextField
-            id="date"
-            name="CurrentDate"
-            label="CurrentDate"
-            type="date"
-            value={formData.CurrentDate}
-            onChange={handleInputChange}
-            // defaultValue=now()
-            sx={{
-              marginRight: "20px",
-              width: "240px",
-              height: "auto",
-              gridColumn: "span 2",
-            }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            // justifyContent: space-evenly
-          }}
-        >
-          <TextField
-            label="Signature"
-            variant="standard"
-            name="CounsellorSignature"
-            value={formData.CounsellorSignature}
+            label="Client Initials"
+            name="ClientInitials"
+            value={formData.ClientInitials}
             inputProps={{
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
             sx={{
               marginRight: "20px",
+              width: "240px",
               height: "auto",
-              gridColumn: "span 4",
-              marginTop: "30px",
+              // gridColumn: "span 4",
+            }}
+          />
+          <TextField
+            label="Date"
+            name="Date"
+            value={formData.Date}
+            inputProps={{
+              style: { height: "auto" },
+            }}
+            onChange={handleInputChange}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              // gridColumn: "span 4",
             }}
           />
         </Box>
@@ -131,13 +110,13 @@ const CounsellorSignature = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pageone")}
+          onClick={() => onButtonClick("pagetwo")}
         >
-          Save Counselor Details and Close Session.
+          Save Client Details.
         </Button>
       </Box>
     </main>
   );
 };
 
-export default CounsellorSignature;
+export default StepOne;

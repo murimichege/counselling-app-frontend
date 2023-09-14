@@ -46,9 +46,6 @@ function Termination() {
       case "4":
         setPage("pagefour");
         break;
-      case "5":
-        setPage("pagefive");
-        break;
       case "6":
         alert("Ooops! Seems like you did not fill the form.");
         break;
@@ -68,7 +65,7 @@ function Termination() {
             pagetwo: <ClientProgress onButtonClick={nextPage} />,
             pagethree: <Recommendation onButtonClick={nextPage} />,
             pagefour: <CounsellorSignature onButtonClick={nextPage} />,
-            pagefive: <FinalStep />,
+            // pagefive: <FinalStep />,
           }[page]
         }
       </div>

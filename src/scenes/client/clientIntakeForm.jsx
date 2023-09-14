@@ -6,6 +6,7 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Typography,
 } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -74,6 +75,7 @@ const ClientIntakeForm = () => {
                   alignItems: "center",
                 }}
               >
+                
                 <TextField
                   fullWidth
                   // variant="filled"
@@ -100,33 +102,7 @@ const ClientIntakeForm = () => {
                   helperText={touched.ClientNo && errors.ClientNo}
                   sx={{ gridColumn: "span 2" }}
                 />
-                <TextField
-                  fullWidth
-                  // variant="filled"
-                  type="text"
-                  label="Date"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.Date}
-                  name="Date"
-                  error={!!touched.Date && !!errors.Date}
-                  helperText={touched.Date && errors.Date}
-                  sx={{ gridColumn: "span 2" }}
-                />
-                <TextField
-                  fullWidth
-                  // variant="filled"
-                  type="text"
-                  label="Time"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.Time}
-                  name="Time"
-                  error={!!touched.Time && !!errors.Time}
-                  helperText={touched.Time && errors.Time}
-                  sx={{ gridColumn: "span 2" }}
-                />
-
+               
                 <TextField
                   fullWidth
                   // variant="filled"
@@ -203,7 +179,7 @@ const ClientIntakeForm = () => {
                   select
                   // variant="filled"
                   type="text"
-                  label="Under Graduate Year of Study"
+                  label="Undergraduate Year of Study"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Referee}
@@ -255,7 +231,7 @@ const ClientIntakeForm = () => {
                   select
                   // variant="filled"
                   type="text"
-                  label="Referee"
+                  label="Refered By"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Referee}
@@ -273,9 +249,24 @@ const ClientIntakeForm = () => {
                   <MenuItem value={20}>Lecturer</MenuItem>
                   <MenuItem value={10}>Academic Advisor</MenuItem>
                   <MenuItem value={10}>Registrar</MenuItem>
-                  <MenuItem value={20}>Dean of your school</MenuItem>
+                  <MenuItem value={20}>Dean of School</MenuItem>
                   <MenuItem value={20}>Dean of Students</MenuItem>
+                  <MenuItem value={20}>Other</MenuItem>
+
                 </TextField>
+                <TextField
+                  fullWidth
+                  // variant="filled"
+                  type="text"
+                  label="Specify"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.Email}
+                  name="Phone Number"
+                  error={!!touched.Email && !!errors.Email}
+                  helperText={touched.Email && errors.Email}
+                  sx={{ gridColumn: "span 2" }}
+                />
                 <TextField
                   fullWidth
                   select
@@ -293,10 +284,10 @@ const ClientIntakeForm = () => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Other</MenuItem>
                   <MenuItem value={20}>On Campus</MenuItem>
                   <MenuItem value={30}>Nearby hostels</MenuItem>
                   <MenuItem value={40}>Off Campus</MenuItem>
+
                 </TextField>
                 <TextField
                   fullWidth
@@ -330,7 +321,7 @@ const ClientIntakeForm = () => {
                     label="First Visit"
                   />
                   <FormControlLabel
-                    required
+                    // required
                     control={<Checkbox />}
                     label="Return Visit"
                   />
@@ -347,7 +338,7 @@ const ClientIntakeForm = () => {
                   name="Marital Status"
                   error={!!touched.MaritalStatus && !!errors.MaritalStatus}
                   helperText={touched.MaritalStatus && errors.MaritalStatus}
-                  sx={{ gridColumn: "span 2" }}
+                  sx={{ gridColumn: "span 4" }}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -363,9 +354,11 @@ const ClientIntakeForm = () => {
 
                   <MenuItem value={70}>Widowed</MenuItem>
 
-                  <MenuItem value={80}>Consultation Services</MenuItem>
                 </TextField>
-                <TextField
+                <div>
+                <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+        Kin Details
+          </Typography></div>                <TextField
                   fullWidth
                   // variant="filled"
                   type="text"
@@ -382,7 +375,7 @@ const ClientIntakeForm = () => {
                   fullWidth
                   // variant="filled"
                   type="text"
-                  label="Kin Relation"
+                  label=" Relation"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.KinRelation}
@@ -395,7 +388,7 @@ const ClientIntakeForm = () => {
                   fullWidth
                   // variant="filled"
                   type="text"
-                  label="KinEmail"
+                  label="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.KinEmail}
@@ -409,7 +402,7 @@ const ClientIntakeForm = () => {
                   fullWidth
                   // variant="filled"
                   type="text"
-                  label="Kin Telephone Number"
+                  label=" Telephone Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.KinTelephoneNumber}
@@ -425,7 +418,7 @@ const ClientIntakeForm = () => {
               </Box>
               <Box display="flex" justifyContent="end" mt="20px">
                 <Button type="submit" color="secondary" variant="contained">
-                  Forward to Counsellor
+                  Save
                 </Button>
               </Box>
             </form>

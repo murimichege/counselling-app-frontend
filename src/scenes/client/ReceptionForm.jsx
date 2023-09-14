@@ -60,7 +60,7 @@ const IntakeForm = () => {
   return (
     <Box
       sx={{
-        height: "100vh", // Center vertically
+        // height: "100vh", // Center vertically
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -70,8 +70,8 @@ const IntakeForm = () => {
         <Toaster />
 
         <Header
-          title="COUNSELING CENTER INTAKE FORM "
-          subtitle="Summer Semester 2023"
+          title="COUNSELING CENTER INTAKE FORM - RECEPTION "
+          // subtitle="Summer Semester 2023"
         />
 
         <Formik
@@ -100,32 +100,6 @@ const IntakeForm = () => {
                   fullWidth
                   // variant="filled"
                   type="text"
-                  label="Student Id Number"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.StudentID}
-                  name="StudentID"
-                  error={!!touched.StudentID && !!errors.StudentID}
-                  helperText={touched.StudentID && errors.StudentID}
-                  sx={{ gridColumn: "span 2" }}
-                />
-                <TextField
-                  fullWidth
-                  // variant="filled"
-                  type="text"
-                  label="Counsellor Name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.CounsellorName}
-                  name="CounsellorName"
-                  error={!!touched.CounsellorName && !!errors.CounsellorName}
-                  helperText={touched.CounsellorName && errors.CounsellorName}
-                  sx={{ gridColumn: "span 2" }}
-                />
-                <TextField
-                  fullWidth
-                  // variant="filled"
-                  type="text"
                   label="Current Date"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -150,6 +124,34 @@ const IntakeForm = () => {
                 />
                 <TextField
                   fullWidth
+                  // variant="filled"
+                  type="text"
+                  label="Student Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.CounsellorName}
+                  name="Student Name"
+                  error={!!touched.CounsellorName && !!errors.CounsellorName}
+                  helperText={touched.CounsellorName && errors.CounsellorName}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  fullWidth
+                  // variant="filled"
+                  type="text"
+                  label="Student ID Number"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.StudentID}
+                  name="StudentID"
+                  error={!!touched.StudentID && !!errors.StudentID}
+                  helperText={touched.StudentID && errors.StudentID}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                  
+              
+                <TextField
+                  fullWidth
                   select
                   // variant="filled"
                   type="text"
@@ -160,7 +162,7 @@ const IntakeForm = () => {
                   name="Gender"
                   error={!!touched.Gender && !!errors.Gender}
                   helperText={touched.Gender && errors.Gender}
-                  sx={{ gridColumn: "span 2" }}
+                  sx={{ gridColumn: "span 4" }}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -173,7 +175,7 @@ const IntakeForm = () => {
                   select
                   // variant="filled"
                   type="text"
-                  label="Position"
+                  label="Client Category"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Position}
@@ -185,18 +187,45 @@ const IntakeForm = () => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Staff</MenuItem>
                   <MenuItem value={20}>Student</MenuItem>
+                  <MenuItem value={10}>Staff</MenuItem>
                   <MenuItem value={20}>Faculty</MenuItem>
+                  <MenuItem value={40}>Alumni</MenuItem>
+
                   <MenuItem value={20}>Other</MenuItem>
                 </TextField>
+                <TextField
+                  fullWidth
+                  select
+                  // variant="filled"
+                  type="text"
+                  label="Degree"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.StudentCategory}
+                  name="Position"
+                  error={!!touched.StudentCategory && !!errors.StudentCategory}
+                  helperText={touched.StudentCategory && errors.StudentCategory}
+                  sx={{ gridColumn: "span 2" }}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {/* <MenuItem value={10}>None</MenuItem> */}
+                  <MenuItem value={20}>Undergraduate</MenuItem>
+                  <MenuItem value={30}>Graduate</MenuItem>
+                </TextField>
+               
+                
+              
                 <Typography>On Scholarship?</Typography>
                 <FormGroup sx={{ gridColumn: "span 2" }}>
+                 
+                  <FormControlLabel control={<Checkbox />} label="No" />
                   <FormControlLabel
                     control={<Checkbox defaultChecked />}
                     label="Yes"
                   />
-                  <FormControlLabel control={<Checkbox />} label="No" />
                 </FormGroup>
                 <TextField
                   fullWidth
@@ -211,35 +240,12 @@ const IntakeForm = () => {
                   helperText={touched.ScholarshipSpecification && errors.ScholarshipSpecification}
                   sx={{ gridColumn: "span 4" }}
                 />
-                <TextField
+                  <TextField
                   fullWidth
                   select
                   // variant="filled"
                   type="text"
-                  label="Student Category"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.StudentCategory}
-                  name="Position"
-                  error={!!touched.StudentCategory && !!errors.StudentCategory}
-                  helperText={touched.StudentCategory && errors.StudentCategory}
-                  sx={{ gridColumn: "span 2" }}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>None</MenuItem>
-                  <MenuItem value={20}>Undergraduate</MenuItem>
-                  <MenuItem value={30}>Graduate</MenuItem>
-                  <MenuItem value={40}>Alumni</MenuItem>
-                  <MenuItem value={50}>Scholarship</MenuItem>
-                </TextField>
-                <TextField
-                  fullWidth
-                  select
-                  // variant="filled"
-                  type="text"
-                  label="Service Sought Form"
+                  label="Service Sought "
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Service}
@@ -251,11 +257,26 @@ const IntakeForm = () => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Personal Counselling</MenuItem>
+                  <MenuItem value={10}>Personal Counseling</MenuItem>
                   <MenuItem value={20}>VCT</MenuItem>
                   <MenuItem value={30}>Consultation Services</MenuItem>
                   <MenuItem value={30}>Other</MenuItem>
                 </TextField>
+                   <TextField
+                  fullWidth
+                  // variant="filled"
+                  type="text"
+                  label="Counselor Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.CounsellorName}
+                  name="CounselorName"
+                  error={!!touched.CounsellorName && !!errors.CounsellorName}
+                  helperText={touched.CounsellorName && errors.CounsellorName}
+                  sx={{ gridColumn: "span 2" }}
+                />
+              
+              
               </Box>
               <Box display="flex" justifyContent="end" mt="20px">
                 <Button type="submit" color="secondary" variant="outlined">

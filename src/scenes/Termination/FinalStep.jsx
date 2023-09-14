@@ -36,7 +36,7 @@ function FinalStep({ onButtonClick }) {
   const navigate = useNavigate();
 
   const CloseSession = () => {
-    navigate("/products");
+    navigate("/");
   };
 
   return (
@@ -45,25 +45,8 @@ function FinalStep({ onButtonClick }) {
         className="pt5 black-80 flex justify-center items-center"
         style={{ maxWidth: "100%", maxHeight: "25%", margin: "auto" }}
       >
-        <div
-          className="mw5 bg-white pa2-ns mt5 dib center"
-          style={{
-            justifyContent: "center",
-            display: "grid",
-          }}
-        >
-          {/* <img src={tick} className="h3 w3" title="success icon" alt="tick-icon" /> */}
-          <CheckCircleOutlineIcon />
-          <h3
-            className=""
-            style={{ display: "flex", justifyContent: "center" }}
-          >
-            Congratulations!
-          </h3>
-          <p style={{ color: "#C0C0C0" }}>
-            You have completed your termination step!
-          </p>
-          <Button />
+        
+         
           <Box
             sx={{
               marginTop: "40px",
@@ -91,7 +74,6 @@ function FinalStep({ onButtonClick }) {
               Close Session.
             </Button>
           </Box>
-        </div>
         {/* <DeploymentSuccess /> */}
       </main>
     </div>

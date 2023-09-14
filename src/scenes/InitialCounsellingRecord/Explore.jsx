@@ -4,16 +4,20 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import {
   Box,
-  Button
-
+  Button,
+  ListItem,
+  Checkbox,
+  List,
+  ListItemButton,
+  ListItemText,
 } from "@mui/material";
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { TerminationContext } from './Termination';
+import { CounsellingRecordContext } from "./InitialCounsellingRecord";
 
-const Recommendation = ({ onButtonClick }) => {
-  const { formData, setFormData } = useContext(TerminationContext);
+const Explore = ({ onButtonClick }) => {
+  const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [goalsMetOpen, setGoalsMetOpen] = useState(true);
   const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
   const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
@@ -44,7 +48,6 @@ const Recommendation = ({ onButtonClick }) => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
-
   const EditorWrapper = styled(Box)(
     ({ theme }) => `
   
@@ -77,13 +80,12 @@ const Recommendation = ({ onButtonClick }) => {
   `
   );
   
-
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Recommendation</h2>
+      <h2>Why client is seeking counseling?</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -105,33 +107,33 @@ const Recommendation = ({ onButtonClick }) => {
       </div>
 
       {/* Buttons */}
-      <Box 
-sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
->
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagetwo")}
+      <Box
+        sx={{
+          marginTop: "40px",
+          justifyContent: "space-between",
+          display: "flex",
+        }}
       >
-       Cancel
-      </Button>
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pagetwo")}
+        >
+          Cancel
+        </Button>
 
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagefour")}
-      >
-        Save Recommendation.
-      </Button>
-
-</Box>
-     
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pagethree")}
+        >
+          Save Client Details.
+        </Button>
+      </Box>
     </main>
   );
 };
 
-export default Recommendation;
+export default Explore;

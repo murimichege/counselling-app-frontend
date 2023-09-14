@@ -42,7 +42,7 @@ const Login = () => {
         src={logo}
         alt="Logo"
         style={{
-          width: "50%",
+          width: "40%",
           height: "auto",
         }}
       />
@@ -53,7 +53,7 @@ const Login = () => {
         fontWeight="700"
         sx={{ fontSize: "1.5rem" }} // Adjust font size for mobile
       >
-        Welcome to the Counselling Centre
+        Welcome to the Counseling Center
       </Typography>
       <TextField
         sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}

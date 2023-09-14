@@ -83,7 +83,7 @@ const ClientDetails = ({ onButtonClick }) => {
           }}
         >
           <TextField
-            id="outlined-select-currency"
+             select
             label="Sessions Held"
             name="Sessions Held"
             value={formData.SessionsHeld}
@@ -92,7 +92,18 @@ const ClientDetails = ({ onButtonClick }) => {
             }}
             onChange={handleInputChange}
             sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2",marginTop:"30px" }}
-          />
+          >
+              <MenuItem value="">
+                  </MenuItem>
+                  <MenuItem value={10}>1</MenuItem>
+                  <MenuItem value={20}>2</MenuItem>
+                  <MenuItem value={30}>3</MenuItem>
+                  <MenuItem value={40}>4</MenuItem>
+                  <MenuItem value={50}>5</MenuItem>
+                  <MenuItem value={60}>6</MenuItem>
+                  <MenuItem value={70}>7</MenuItem>
+                  <MenuItem value={80}>8</MenuItem>
+            </TextField>
 {/* 
           <Demo>
             <List dense={dense}>
