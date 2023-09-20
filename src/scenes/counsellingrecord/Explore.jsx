@@ -18,9 +18,9 @@ import FolderIcon from "@mui/icons-material/Folder";
 import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { CounsellingRecordContext } from "./Ongoing";
+import { CounsellingRecordContext } from "./CounselingRecord";
 
-function StepFour({ onButtonClick }) {
+const Explore = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [secondary, setSecondary] = React.useState(false);
 
@@ -70,71 +70,29 @@ function StepFour({ onButtonClick }) {
       }
   `
   );
-  // function generate(element) {
-  //   return [0, 1, 2].map((value) =>
-  //     React.cloneElement(element, {
-  //       key: value,
-  //     })
-  //   );
-  // }
+  function generate(element) {
+    return [0, 1, 2].map((value) =>
+      React.cloneElement(element, {
+        key: value,
+      })
+    );
+  }
 
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2></h2>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div">
-        History{" "}
-      </Typography>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
-        History of past counseling or other psychological services sought /how
-        client has been coping:{" "}
-      </Typography>{" "}
+      <h2>
+        Explore for how long this has been going on and how this has affected
+        the client’s?
+      </h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
       >
-        <Box
-          sx={
-            {
-              // mb: `${theme.spacing(3)}`
-            }
-          }
-          item
-          xs={12}
-          sm={8}
-          md={9}
-        >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
-        </Box>
-        <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Reasons
-          </Typography>
-          <List dense={dense}>
-            {formData.CounsellingReasons.map((item) => {
-              <ListItem>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>;
-            })}
-          </List>
-        </Box>
         <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Background Information:{" "}
-        </Typography>{" "}
-        <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div">
-          Family, its structure and quality of relationships etc. ; significant
-          childhood experiences, history of education and quality of school life
-          experiences, current school and social life;
+          i. Current functioning
         </Typography>
         <Box
           sx={
@@ -151,70 +109,9 @@ function StepFour({ onButtonClick }) {
             <ReactQuill value={editorContent} onChange={handleEditorChange} />
           </EditorWrapper>
         </Box>
-        <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Reasons
-          </Typography>
-          <List dense={dense}>
-            {formData.CounsellingReasons.map((item) => {
-              <ListItem>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>;
-            })}
-          </List>
-        </Box>
         <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Medical and Psychiatric history
+          ii. Past Functioning
         </Typography>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Current or past medical condition, medication being taken{" "}
-        </Typography>{" "}
-        <Box
-          sx={
-            {
-              // mb: `${theme.spacing(3)}`
-            }
-          }
-          item
-          xs={12}
-          sm={8}
-          md={9}
-        >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
-        </Box>
-        <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Reasons
-          </Typography>
-          <List dense={dense}>
-            {formData.CounsellingReasons.map((item) => {
-              <ListItem>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>;
-            })}
-          </List>
-        </Box>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Substance Abuse History;
-        </Typography>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Use of illegal substances, Use of legal substances; Duration,
-          Frequency, Level of use, Use of substance in the family:{" "}
-        </Typography>{" "}
         <Box
           sx={
             {
@@ -249,6 +146,7 @@ function StepFour({ onButtonClick }) {
           </List>
         </Box>
       </div>
+
       {/* Buttons */}
       <Box
         sx={{
@@ -270,13 +168,13 @@ function StepFour({ onButtonClick }) {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagethree")}
+          onClick={() => onButtonClick("pagefour")}
         >
-          Save Client History.
+          Save Client Details.
         </Button>
       </Box>
     </main>
   );
 };
 
-export default StepFour;
+export default Explore;

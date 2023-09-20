@@ -18,9 +18,9 @@ import FolderIcon from "@mui/icons-material/Folder";
 import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { CounsellingRecordContext } from "./Ongoing";
+import { CounsellingRecordContext } from "./CounselingRecord";
 
-function StepThree ({ onButtonClick }) {
+const ClientReason = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [secondary, setSecondary] = React.useState(false);
 
@@ -70,48 +70,24 @@ function StepThree ({ onButtonClick }) {
       }
   `
   );
-  // function generate(element) {
-  //   return [0, 1, 2].map((value) =>
-  //     React.cloneElement(element, {
-  //       key: value,
-  //     })
-  //   );
-  // }
+  function generate(element) {
+    return [0, 1, 2].map((value) =>
+      React.cloneElement(element, {
+        key: value,
+      })
+    );
+  }
 
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>
-        Explore for how long this has been going on and how this has affected
-        the client’s?
-      </h2>
+      <h2>Why client is seeking counseling?</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
       >
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          i. Current functioning
-        </Typography>
-        <Box
-          sx={
-            {
-              // mb: `${theme.spacing(3)}`
-            }
-          }
-          item
-          xs={12}
-          sm={8}
-          md={9}
-        >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
-        </Box>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          ii. Past Functioning
-        </Typography>
         <Box
           sx={
             {
@@ -170,11 +146,11 @@ function StepThree ({ onButtonClick }) {
           variant="contained"
           onClick={() => onButtonClick("pagethree")}
         >
-          Save Client Details.
+          Save.
         </Button>
       </Box>
     </main>
   );
 };
 
-export default StepThree;
+export default ClientReason;

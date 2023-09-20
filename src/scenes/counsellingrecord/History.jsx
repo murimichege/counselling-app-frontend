@@ -18,9 +18,9 @@ import FolderIcon from "@mui/icons-material/Folder";
 import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { CounsellingRecordContext } from "./Ongoing";
+import { CounsellingRecordContext } from "./CounselingRecord";
 
-function StepFour({ onButtonClick }) {
+const History = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [secondary, setSecondary] = React.useState(false);
 
@@ -70,13 +70,13 @@ function StepFour({ onButtonClick }) {
       }
   `
   );
-  // function generate(element) {
-  //   return [0, 1, 2].map((value) =>
-  //     React.cloneElement(element, {
-  //       key: value,
-  //     })
-  //   );
-  // }
+  function generate(element) {
+    return [0, 1, 2].map((value) =>
+      React.cloneElement(element, {
+        key: value,
+      })
+    );
+  }
 
   return (
     <main
@@ -261,7 +261,7 @@ function StepFour({ onButtonClick }) {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pageone")}
+          onClick={() => onButtonClick("pagefive")}
         >
           Cancel
         </Button>
@@ -270,7 +270,7 @@ function StepFour({ onButtonClick }) {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagethree")}
+          onClick={() => onButtonClick("pagefive")}
         >
           Save Client History.
         </Button>
@@ -279,4 +279,4 @@ function StepFour({ onButtonClick }) {
   );
 };
 
-export default StepFour;
+export default History;

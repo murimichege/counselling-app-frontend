@@ -10,7 +10,6 @@ import Team from "./scenes/team";
 import Reports from "./scenes/reports";
 import Bar from "./scenes/bar";
 import Form from "./scenes/form";
-import ErrorBoundary from "./ErrorBoundary";
 // import Line from "./scenes/line";
 // import Pie from "./scenes/pie";
 // import FAQ from "./scenes/faq";
@@ -31,6 +30,7 @@ import Termination from "./scenes/Termination/Termination";
 import CounsellingRecord from "./scenes/InitialCounsellingRecord/CounsellingRecord";
 import OnGoingCounsellingRecord from "./scenes/ongoing/Ongoing";
 import SafetyContractForm from "./scenes/safetycontract";
+import CounselingRecord from "./scenes/counsellingrecord/CounselingRecord"
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -55,7 +55,7 @@ function App() {
                   <Route path="/ConsentForm" element={<ConsentForm />} />
                   <Route
                     path="/CounsellingRecord"
-                    element={<CounsellingRecord/>}
+                    element={<CounselingRecord/>}
                   />
                   <Route
                     path="/ongoingrecord"

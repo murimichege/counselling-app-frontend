@@ -2,10 +2,19 @@ import React, { useState, useContext } from "react";
 import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Box, TextField, Button } from "@mui/material";
-import {CounsellingRecordContext} from "./Ongoing";
+import {
+  Box,
+  TextField,
+  MenuItem,
+  Button,
+  List,
+  Demo,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
+import { CounsellingRecordContext } from "./CounselingRecord";
 
-function StepOne ({ onButtonClick }){
+const ClientDetails = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleInputChange = (event) => {
@@ -15,7 +24,13 @@ function StepOne ({ onButtonClick }){
 
   console.log("formdata", formData);
 
-
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
 
   return (
     <main
@@ -113,4 +128,4 @@ function StepOne ({ onButtonClick }){
   );
 };
 
-export default StepOne;
+export default ClientDetails;

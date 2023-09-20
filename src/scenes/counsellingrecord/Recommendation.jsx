@@ -2,35 +2,35 @@ import React, { useState, useContext } from "react";
 import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import {
-  Box,
-  Button,
-  ListItem,
-  Checkbox,
-  List,
-  Typography,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import FolderIcon from "@mui/icons-material/Folder";
-import "./index.css";
+import { Box, Button } from "@mui/material";
 
-import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import {CounsellingRecordContext} from "./Ongoing";
+import { CounsellingRecordContext } from "./CounselingRecord";
 
-function StepTwo ({ onButtonClick }) {
+const Recommendation = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
-  const [secondary, setSecondary] = React.useState(false);
+  const [goalsMetOpen, setGoalsMetOpen] = useState(true);
+  const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
+  const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
+  const [checked, setChecked] = useState([1]);
 
-  const [editorContent, setEditorContent] = useState([]); // State to store editor content
-  const [dense, setDense] = React.useState(false);
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
 
-  // Handler to update the state when editor content changes
-  const handleEditorChange = (content) => {
-    setEditorContent(content);
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -40,6 +40,7 @@ function StepTwo ({ onButtonClick }) {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+
   const EditorWrapper = styled(Box)(
     ({ theme }) => `
   
@@ -71,20 +72,13 @@ function StepTwo ({ onButtonClick }) {
       }
   `
   );
-  // function generate(element) {
-  //   return [0, 1, 2].map((value) =>
-  //     React.cloneElement(element, {
-  //       key: value,
-  //     })
-  //   );
-  // }
 
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Why client is seeking counseling?</h2>
+      <h2>Recommendation</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -101,26 +95,8 @@ function StepTwo ({ onButtonClick }) {
           md={9}
         >
           <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
+            <ReactQuill />
           </EditorWrapper>
-        </Box>
-        <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Reasons
-          </Typography>
-          <List dense={dense}>
-            {formData.CounsellingReasons.map((item) => {
-              <ListItem>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>;
-            })}
-          </List>
         </Box>
       </div>
 
@@ -136,7 +112,7 @@ function StepTwo ({ onButtonClick }) {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pageone")}
+          onClick={() => onButtonClick("pagetwo")}
         >
           Cancel
         </Button>
@@ -145,13 +121,13 @@ function StepTwo ({ onButtonClick }) {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagethree")}
+          onClick={() => onButtonClick("pagefour")}
         >
-          Save Client Details.
+          Save Recommendation.
         </Button>
       </Box>
     </main>
   );
 };
 
-export default StepTwo;
+export default Recommendation;

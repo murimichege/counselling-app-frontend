@@ -13,11 +13,11 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { TerminationContext } from "./Termination";
+import { CounsellingRecordContext } from "./CounselingRecord";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 function FinalStep({ onButtonClick }) {
-  const { formData, setFormData } = useContext(TerminationContext);
+  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,33 +45,33 @@ function FinalStep({ onButtonClick }) {
         className="pt5 black-80 flex justify-center items-center"
         style={{ maxWidth: "100%", maxHeight: "25%", margin: "auto" }}
       >
-          <Box
-            sx={{
-              marginTop: "40px",
-              justifyContent: "space-between",
-              display: "flex",
+        <Box
+          sx={{
+            marginTop: "40px",
+            justifyContent: "space-between",
+            display: "flex",
+          }}
+        >
+          <Button
+            className="f6 grow br2 ph3 pv2 mb2 dib white"
+            type="submit"
+            variant="contained"
+            onClick={() => onButtonClick("pagetwo")}
+          >
+            Cancel
+          </Button>
+
+          <Button
+            className="f6 grow br2 ph3 pv2 mb2 dib white"
+            type="submit"
+            variant="contained"
+            onClick={() => {
+              onButtonClick("pagefive");
             }}
           >
-            <Button
-              className="f6 grow br2 ph3 pv2 mb2 dib white"
-              type="submit"
-              variant="contained"
-              onClick={() => onButtonClick("pagetwo")}
-            >
-              Cancel
-            </Button>
-
-            <Button
-              className="f6 grow br2 ph3 pv2 mb2 dib white"
-              type="submit"
-              variant="contained"
-              onClick={() => {
-                onButtonClick("pagefive");
-              }}
-            >
-              Close Session.
-            </Button>
-          </Box>
+            Close Session.
+          </Button>
+        </Box>
         {/* <DeploymentSuccess /> */}
       </main>
     </div>
