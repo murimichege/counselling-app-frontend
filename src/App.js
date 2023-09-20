@@ -27,93 +27,89 @@ import IntakeForm from "./scenes/client/ReceptionForm";
 import ClientIntakeForm from "./scenes/client/clientIntakeForm";
 import StudentBookingForm from "./scenes/student/index";
 import Termination from "./scenes/Termination/Termination";
-import CounsellingRecord from "./scenes/InitialCounsellingRecord/CounsellingRecord";
-import OnGoingCounsellingRecord from "./scenes/ongoing/Ongoing";
 import SafetyContractForm from "./scenes/safetycontract";
-import CounselingRecord from "./scenes/counsellingrecord/CounselingRecord"
+import CounselingRecord from "./scenes/counsellingrecord/CounselingRecord";
+import OnGoingCounseling from "./scenes/ongoingcounselling/OngoingCounselingRecord";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(true);
+  const [isPrivate, setisPrivate] = useState(false);
 
   return (
     // <ErrorBoundary>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <div className="app">
-            {isPrivate ? (
-              <Fragment>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          {isPrivate ? (
+            <Fragment>
+              <Routes>
+                <Route path="/Login" element={<Login />} />
+                <Route path="/IntakeForm" element={<IntakeForm />} />
+                <Route
+                  path="/StudentBookingForm"
+                  element={<StudentBookingForm />}
+                />
+                <Route path="/Termination" element={<Termination />} />
+                <Route path="/ConsentForm" element={<ConsentForm />} />
+                <Route
+                  path="/CounsellingRecord"
+                  element={<CounselingRecord />}
+                />
+                <Route path="/ongoingrecord" element={<OnGoingCounseling />} />
+
+                <Route
+                  path="/ClientIntakeForm"
+                  element={<ClientIntakeForm />}
+                />
+                <Route
+                  path="/safetycontract"
+                  element={<SafetyContractForm />}
+                />
+              </Routes>
+            </Fragment>
+          ) : (
+            <>
+              <Sidebar isSidebar={isSidebar} />
+
+              <main className="content">
+                <Topbar setIsSidebar={setIsSidebar} />
+
                 <Routes>
-                  <Route path="/Login" element={<Login />} />
-                  <Route path="/IntakeForm" element={<IntakeForm />} />
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/Clients" element={<Team />} />
+                  <Route path="/Documents" element={<Team />} />
+                  <Route path="/login" element={<Login />} />
+
+                  <Route path="/sessions" element={<AccountVerification />} />
+                  <Route path="/session/:id" element={<AccountDetail />} />
                   <Route
-                    path="/StudentBookingForm"
-                    element={<StudentBookingForm />}
+                    path="/accounts/account/:id/documents"
+                    element={<DocumentList />}
                   />
-                  <Route path="/Termination" element={<Termination />} />
-                  <Route path="/ConsentForm" element={<ConsentForm />} />
                   <Route
-                    path="/CounsellingRecord"
-                    element={<CounselingRecord/>}
-                  />
-                  <Route
-                    path="/ongoingrecord"
-                    element={<OnGoingCounsellingRecord/>}
+                    path="/accounts/account/:id/documents/verification"
+                    element={<VerificationDoc />}
                   />
 
+                  <Route path="/reports" element={<Reports />} />
                   <Route
                     path="/ClientIntakeForm"
                     element={<ClientIntakeForm />}
                   />
-                  <Route
-                    path="/safetycontract"
-                    element={<SafetyContractForm />}
-                  />
-                </Routes>
-              </Fragment>
-            ) : (
-              <>
-                <Sidebar isSidebar={isSidebar} />
+                  <Route path="/form" element={<Form />} />
 
-                <main className="content">
-                  <Topbar setIsSidebar={setIsSidebar} />
-
-                  <Routes>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/Clients" element={<Team />} />
-                    <Route path="/Documents" element={<Team />} />
-                    <Route path="/login" element={<Login />} />
-
-                    <Route path="/sessions" element={<AccountVerification />} />
-                    <Route path="/session/:id" element={<AccountDetail />} />
-                    <Route
-                      path="/accounts/account/:id/documents"
-                      element={<DocumentList />}
-                    />
-                    <Route
-                      path="/accounts/account/:id/documents/verification"
-                      element={<VerificationDoc />}
-                    />
-
-                    <Route path="/reports" element={<Reports />} />
-                    <Route
-                      path="/ClientIntakeForm"
-                      element={<ClientIntakeForm />}
-                    />
-                    <Route path="/form" element={<Form />} />
-
-                    <Route path="/bar" element={<Bar />} />
-                    {/* <Route path="/pie" element={<Pie />} />
+                  <Route path="/bar" element={<Bar />} />
+                  {/* <Route path="/pie" element={<Pie />} />
                   <Route path="/line" element={<Line />} /> */}
-                    <Route path="/calendar" element={<Calendar />} />
-                  </Routes>
-                </main>
-              </>
-            )}
-          </div>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
+                  <Route path="/calendar" element={<Calendar />} />
+                </Routes>
+              </main>
+            </>
+          )}
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
     // </ErrorBoundary>
   );
 }

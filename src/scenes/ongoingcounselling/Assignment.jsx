@@ -18,9 +18,9 @@ import FolderIcon from "@mui/icons-material/Folder";
 import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { CounsellingRecordContext } from "./Ongoing";
+import { CounsellingRecordContext } from "./OngoingCounselingRecord";
 
-function StepFive({ onButtonClick }) {
+const Assignment = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [secondary, setSecondary] = React.useState(false);
 
@@ -83,7 +83,7 @@ function StepFive({ onButtonClick }) {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Assessment and Diagnosis</h2>
+      <h2>Homework / Assignment given:</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -106,7 +106,7 @@ function StepFive({ onButtonClick }) {
 
         <Box>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Assessment
+            Goals
           </Typography>
           <List dense={dense}>
             {formData.CounsellingReasons.map((item) => {
@@ -145,13 +145,13 @@ function StepFive({ onButtonClick }) {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagethree")}
+          onClick={() => onButtonClick("pagefour")}
         >
-          Save Assessment Details.
+          Save Assignment.
         </Button>
       </Box>
     </main>
   );
 };
 
-export default StepFive;
+export default Assignment;

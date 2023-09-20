@@ -3,6 +3,7 @@ import { Box, Typography, MenuItem, TextField } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Formik } from "formik";
 import { mockDataTeam } from "../../data/mockData";
+import SessionDocuments from "./SessionDocuments";
 import useMediaQuery from "@mui/material/useMediaQuery";
 // import Documentlist from './DocumentList'
 
@@ -159,7 +160,7 @@ const AccountInfo = ({ user, handleFormSubmit, isNonMobile }) => {
           <Box>
             <Typography variant="h3">Session Attachments</Typography>
           </Box>
-          {/* <Documentlist/> */}
+          <SessionDocuments/>
           {/* <Box display="flex" justifyContent="flex-end" mt={4}>
             <Button type="submit" variant="contained" color="primary">
              Verify User

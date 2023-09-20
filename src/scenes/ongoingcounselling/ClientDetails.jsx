@@ -3,9 +3,9 @@ import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { Box, TextField, Button } from "@mui/material";
-import {CounsellingRecordContext} from "./Ongoing";
+import {CounsellingRecordContext} from "./OngoingCounselingRecord";
 
-function StepOne ({ onButtonClick }){
+function ClientDetails ({ onButtonClick }){
   const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleInputChange = (event) => {
@@ -113,4 +113,4 @@ function StepOne ({ onButtonClick }){
   );
 };
 
-export default StepOne;
+export default ClientDetails;
