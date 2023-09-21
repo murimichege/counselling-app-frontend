@@ -30,10 +30,11 @@ import Termination from "./scenes/Termination/Termination";
 import SafetyContractForm from "./scenes/safetycontract";
 import CounselingRecord from "./scenes/counsellingrecord/CounselingRecord";
 import OnGoingCounseling from "./scenes/ongoingcounselling/OngoingCounselingRecord";
+import ExaminationForm from "./scenes/examinationform/Examinationform";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(false);
+  const [isPrivate, setisPrivate] = useState(true);
 
   return (
     // <ErrorBoundary>
@@ -66,6 +67,7 @@ function App() {
                   path="/safetycontract"
                   element={<SafetyContractForm />}
                 />
+                <Route path="/examinationform" element={<ExaminationForm/>} />
               </Routes>
             </Fragment>
           ) : (
