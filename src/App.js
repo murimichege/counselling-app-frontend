@@ -5,7 +5,7 @@ import { ColorModeContext, useMode } from "./theme";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
-import Team from "./scenes/team";
+import Team from "./scenes/clientmanagement/Clients";
 // import Invoices from "./scenes/Payments";
 import Reports from "./scenes/reports";
 import Bar from "./scenes/bar";
@@ -15,10 +15,8 @@ import Form from "./scenes/form";
 // import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import ConsentForm from "./scenes/consentform";
-import AccountDetail from "./scenes/accountverification/Session";
-import AccountVerification from "./scenes/accountverification/Sessions";
-import DocumentList from "./scenes/accountverification/DocumentList";
-import VerificationDoc from "./scenes/accountverification/verificationdocs";
+import Sessions from "./scenes/sessionmanagement/SessionItem";
+import SessionItem from "./scenes/sessionmanagement/SessionItem";
 
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./scenes/auth/Login";
@@ -34,7 +32,7 @@ import ExaminationForm from "./scenes/examinationform/Examinationform";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(true);
+  const [isPrivate, setisPrivate] = useState(false);
 
   return (
     // <ErrorBoundary>
@@ -67,7 +65,7 @@ function App() {
                   path="/safetycontract"
                   element={<SafetyContractForm />}
                 />
-                <Route path="/examinationform" element={<ExaminationForm/>} />
+                <Route path="/examinationform" element={<ExaminationForm />} />
               </Routes>
             </Fragment>
           ) : (
@@ -83,16 +81,8 @@ function App() {
                   <Route path="/Documents" element={<Team />} />
                   <Route path="/login" element={<Login />} />
 
-                  <Route path="/sessions" element={<AccountVerification />} />
-                  <Route path="/session/:id" element={<AccountDetail />} />
-                  <Route
-                    path="/accounts/account/:id/documents"
-                    element={<DocumentList />}
-                  />
-                  <Route
-                    path="/accounts/account/:id/documents/verification"
-                    element={<VerificationDoc />}
-                  />
+                  <Route path="/sessions" element={<Sessions />} />
+                  <Route path="/session/:id" element={<SessionItem />} />
 
                   <Route path="/reports" element={<Reports />} />
                   <Route

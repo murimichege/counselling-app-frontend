@@ -4,13 +4,9 @@ import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
 import { useNavigate } from "react-router";
 
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import PersonIcon from '@mui/icons-material/Person';
 
-const Clients = () => {
+const ClientManagement= () => {
   const theme = useTheme();
   const navigate = useNavigate()
   const colors = tokens(theme.palette.mode);
@@ -119,4 +115,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default ClientManagement;

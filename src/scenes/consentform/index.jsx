@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 // import type { Invoice } from 'src/models/invoice';
 import {
@@ -27,6 +27,8 @@ import {
 // import { useTranslation } from 'react-i18next';
 import DownloadTwoToneIcon from "@mui/icons-material/DownloadTwoTone";
 import PictureAsPdfTwoToneIcon from "@mui/icons-material/PictureAsPdfTwoTone";
+// import Signature from "../../components/signature"; 
+
 
 const BoxWrapper = styled(Box)(
   ({ theme }) => `
@@ -90,18 +92,27 @@ const ConsentForm = ({ invoice }) => {
   const [CurrentDate, setCurrentDate] = useState("");
 
   const handleInputChange = () => {};
+    // Function to handle signature capture
+    const handleSignatureCapture = (capturedSignature) => {
+      setSignature(capturedSignature);
+    };
+  
+
+    useEffect(() => {
+
+    },[])
   return (
-    <Container maxWidth="lg">
+<Container maxWidth="lg" sx={{ margin: "auto" }}>
       <Card
         sx={{
           p: 3,
           mb: 3,
         }}
       >
-        <Box display="flex" alignItems="flex-start" justifyContent="center">
+        <Box display="flex"  justifyContent="center">
           <Box>
             <Typography variant="h1" gutterBottom>
-              {('Consent and Confidentiality Form')}
+              {"Consent and Confidentiality Form"}
             </Typography>
             <Typography variant="h3" gutterBottom>
               {/* {"Consent Form"} */}
@@ -124,26 +135,25 @@ const ConsentForm = ({ invoice }) => {
         >
           The Counseling Center maintains a strict level of client
           confidentiality. This means that individuals using any of the service
-          offered by the Center can <br />expect that their privacy will
-          be represented. They can trust that their information will not be
-          discussed or disclosed to anyone outside of the Counseling Center.
+          offered by the Center can <br />
+          expect that their privacy will be represented. They can trust that
+          their information will not be discussed or disclosed to anyone outside
+          of the Counseling Center.
           <br />
-          <br/>
+          <br />
           All Counseling Center staff members or those individuals working in
           the center are therefore required to acknowledge and commit to
           maintaining the highest standard of
           <br /> confidentiality. It is understood that continued employment
           with the Counseling Center is based on maintaining this standard.
-          Anyone who
-          breaks confidentiality will be immediately dismissed. <br/> <br/>I have read and
-          understand the above; I understand the requirements of continued
-          employment at the Counseling Center.{" "}
+          Anyone who breaks confidentiality will be immediately dismissed.{" "}
+          <br /> <br />I have read and understand the above; I understand the
+          requirements of continued employment at the Counseling Center.{" "}
         </Typography>
-       
+
         <Box
           sx={{ marginTop: "40px", justifyContent: "center", display: "flex" }}
         >
-        
           <TextField
             id="outlined-select-currency"
             label="Name"
@@ -161,7 +171,7 @@ const ConsentForm = ({ invoice }) => {
               gridColumn: "span 2",
             }}
           />
-           <TextField
+          <TextField
             label="Position"
             name="Position"
             variant="standard"
@@ -214,30 +224,34 @@ const ConsentForm = ({ invoice }) => {
               gridColumn: "span 2",
             }}
           />
-    
         </Box>
 
         <Typography
           variant="body4"
-          sx={{ justifyContent: "center", display: "flex", marginTop:"40px" }}
+          sx={{ justifyContent: "center", display: "flex", marginTop: "40px" }}
         >
-         I  _____________________(client) give consent for receiving counseling services. My Counselor
-has explained to me the counseling process and I understand that,<br/> therapeutic counseling requires my
-active involvement including my effort to change or undertake tasks given to me during and in between
-sessions. <br/>I also understand that the issues discussed in the counseling process will remain confidential
-and that the oath of confidentiality will be broken with my permission <br/>or if I plan to harm myself or
-another person. When counseling is mandated by a referral source I understand that the counselor will
-provide the required information on my attendance,<br/> progress in counseling and in case a psychological
-diagnosis is required the counselor will inform me and give the information with my full knowledge and
-permission.{" "}
+          I _____________________(client) give consent for receiving counseling
+          services. My Counselor has explained to me the counseling process and
+          I understand that,
+          <br /> therapeutic counseling requires my active involvement including
+          my effort to change or undertake tasks given to me during and in
+          between sessions. <br />I also understand that the issues discussed in
+          the counseling process will remain confidential and that the oath of
+          confidentiality will be broken with my permission <br />
+          or if I plan to harm myself or another person. When counseling is
+          mandated by a referral source I understand that the counselor will
+          provide the required information on my attendance,
+          <br /> progress in counseling and in case a psychological diagnosis is
+          required the counselor will inform me and give the information with my
+          full knowledge and permission.{" "}
         </Typography>
-
 
         <Typography
           variant="body4"
-          sx={{ justifyContent: "center", display: "flex", marginTop:"40px" }}
+          sx={{ justifyContent: "center", display: "flex", marginTop: "40px" }}
         >
-        If you have any questions please feel free to ask. Kindly sign and date this form.
+          If you have any questions please feel free to ask. Kindly sign and
+          date this form.
         </Typography>
 
         <Box
@@ -276,8 +290,25 @@ permission.{" "}
               gridColumn: "span 2",
             }}
           />
-    
         </Box>
+        {/* <Signature onSignatureCapture={handleSignatureCapture} />  */}
+        
+        {/* Display the captured signature */}
+        {/* <Box
+          sx={{
+            marginTop: "40px",
+            justifyContent: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="body4" gutterBottom>
+            Captured Signature:
+          </Typography>
+          <img src={signature} alt="Captured Signature" />
+        </Box> */}
+        
         <Tooltip
           placement="top"
           arrow

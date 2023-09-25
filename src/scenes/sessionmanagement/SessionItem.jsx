@@ -7,7 +7,7 @@ import SessionDocuments from "./SessionDocuments";
 import useMediaQuery from "@mui/material/useMediaQuery";
 // import Documentlist from './DocumentList'
 
-const AccountDetail = () => {
+const SessionItem = () => {
   const { id } = useParams();
   const [user, setUser] = useState(mockDataTeam);
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -37,7 +37,6 @@ const AccountDetail = () => {
       <Typography variant="h4" component="h1">
         Session
       </Typography>
-      {/* {user && <AccountInfo user={user} handleFormSubmit={handleFormSubmit} />} */}
       <AccountInfo
         user={user}
         handleFormSubmit={handleFormSubmit}
@@ -46,13 +45,7 @@ const AccountDetail = () => {
     </Box>
   );
 };
-// id: 2,
-//     name: "Eddie",
-//     email: "eddiee@gmail.com",
-//     age: 42,
-//     phone: "(421)314-2288",
-//     access: "Developer",
-//  verification:"verified"
+
 const AccountInfo = ({ user, handleFormSubmit, isNonMobile }) => {
   // const { name,  email, phone, age, access,verification } =
   //   user;
@@ -158,18 +151,12 @@ const AccountInfo = ({ user, handleFormSubmit, isNonMobile }) => {
             </TextField>
           </Box>
           <Box>
-            <Typography variant="h3">Session Attachments</Typography>
           </Box>
           <SessionDocuments/>
-          {/* <Box display="flex" justifyContent="flex-end" mt={4}>
-            <Button type="submit" variant="contained" color="primary">
-             Verify User
-            </Button>
-          </Box> */}
         </form>
       )}
     </Formik>
   );
 };
 
-export default AccountDetail;
+export default SessionItem;

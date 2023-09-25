@@ -12,7 +12,7 @@ import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined"
 import Header from "../../components/Header";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import userApi from "../../api/users";
-const Accountstatus = () => {
+const Sessions = () => {
 	const [statusAccounts, setstatusAccounts] = useState([]);
 	const theme = useTheme();
 	const navigate = useNavigate();
@@ -123,4 +123,4 @@ const Accountstatus = () => {
 	);
 };
 
-export default Accountstatus;
+export default Sessions;

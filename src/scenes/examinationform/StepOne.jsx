@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import "./index.css";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import {
   Box,
   Button,
@@ -14,12 +12,10 @@ import {
   AccordionSummary,
   AccordionDetails,
   TextField,
-  IconButton,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-
 import { ExaminationFormContext } from "./Examinationform";
 
 const StepOne = ({ onButtonClick }) => {
@@ -86,6 +82,12 @@ const StepOne = ({ onButtonClick }) => {
     "Grooming &amp; Hygiene",
     "Looking his or her age",
   ];
+  const appearanceSubItems = [
+    {option1:"Normal", option2:"Inappropriate"},
+    {option1:"Normal", option2:"Inappropriate"},
+    {option1:"Yes", option2:"No"},
+
+  ]
   const attitudeItems = [
     "Check client’s attitude towards the counsellor especially during the intake process",
   ];
@@ -148,23 +150,43 @@ const StepOne = ({ onButtonClick }) => {
                     bgcolor: "background.paper",
                   }}
                 >
-                  {[0, 1, 2].map((value) => (
+                  
                     <ListItem
-                      key={value}
+                     
                       secondaryAction={
                         <Checkbox
                           edge="end"
-                          onChange={handleToggle(value)}
-                          checked={checked.indexOf(value) !== -1}
+                          onChange={handleToggle()}
+                          checked={checked}
                         />
                       }
                       disablePadding
                     >
                       <ListItemButton>
-                        <ListItemText primary={`Line item ${value + 1}`} />
+                        <ListItemText primary={`Normal`} />
+
                       </ListItemButton>
+                     
+                      
                     </ListItem>
-                  ))}
+                    <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Inappropriate`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
                   {commentInputOpen[`appearance${index}`] && (
                     <ListItem disablePadding>
                       <ListItemButton>

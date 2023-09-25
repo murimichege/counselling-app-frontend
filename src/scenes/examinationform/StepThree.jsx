@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import "./index.css";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import {
   Box,
   Button,
@@ -10,18 +8,37 @@ import {
   List,
   ListItemButton,
   ListItemText,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  TextField,
 } from "@mui/material";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import Collapse from "@mui/material/Collapse";
-import { ExaminationFormContext } from './Examinationform';
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CommentIcon from "@mui/icons-material/Comment";
+import { ExaminationFormContext } from "./Examinationform";
 
 const StepThree = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(ExaminationFormContext);
-  const [goalsMetOpen, setGoalsMetOpen] = useState(true);
-  const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
-  const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
+  const [accordionStates, setAccordionStates] = useState({
+    Memory: true,
+    Concentration: true,
+    Insight: true,
+    Judgment: true,
+  });
   const [checked, setChecked] = useState([1]);
+  const [commentInputOpen, setCommentInputOpen] = useState({
+    Memory: true,
+    Concentration: true,
+    Insight: true,
+    Judgment: true,
+  });
+  const [comments, setComments] = useState({
+    Memory: "",
+    Concentration: "",
+    Insight: "",
+    Judgment: "",
+  });
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -36,165 +53,443 @@ const StepThree = ({ onButtonClick }) => {
     setChecked(newChecked);
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  const handleAccordionChange = (section) => () => {
+    setAccordionStates((prevState) => ({
+      ...prevState,
+      [section]: !prevState[section],
+    }));
   };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
+  const toggleCommentInput = (section) => () => {
+    setCommentInputOpen((prevState) => ({
+      ...prevState,
+      [section]: !prevState[section],
+    }));
+  };
+
+  const handleCommentChange = (section) => (event) => {
+    const { value } = event.target;
+    setComments((prevState) => ({
+      ...prevState,
+      [section]: value,
+    }));
+  };
+  const MemoryItems = [
+    
+    "Short Term Intact",
+    "Long Term Intact",
+  ];
+  const ConcentrationItems = [
+    "Inattentive",
+    "Easily Distracted."
+  ]
+
+  const InsightItems = [
+    "Does The Client Understand The Nature Of His Or Her Symptoms Or Functional Impairment (Judgment)"
+  ];
+
+  const PerceptualdisturbancesItems = [
+    "Does The Client Make Adaptive Decision For Himself Or others Despite The Symptoms Of Functional Impairment (Judgment )"];
 
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Client Progress</h2>
-      <p style={{ color: "#C0C0C0" }}>Goals met</p>
-      <div
-        className="center ph4 selectionDiv"
-        style={{ height: "46%", display: "inline-block" }}
+      <h2>Orientation and mental status examination (MSE) form</h2>
+
+      <Accordion
+        expanded={accordionStates.Memory}
+        onChange={handleAccordionChange("Memory")}
       >
-        {/* Goals Met section */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <AccordionSummary
+          expandIcon={
+            accordionStates.Memory ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
         >
-          <ListItemButton onClick={() => setGoalsMetOpen(!goalsMetOpen)}>
-            <ListItemText primary="Goals met" />
-            {goalsMetOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsMetOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
+          <ListItemText primary="Memory" />
+        </AccordionSummary>
+        <AccordionDetails>
+          {MemoryItems.map((item, index) => (
+            <Accordion
+              expanded={accordionStates[`Memory${index}`]}
+              onChange={handleAccordionChange(`Memory${index}`)}
+              key={index}
+            >
+              <AccordionSummary
+                expandIcon={
+                  accordionStates[`Memory${index}`] ? (
+                    <ExpandLessIcon />
+                  ) : (
+                    <ExpandMoreIcon />
+                  )
+                }
+              >
+                <ListItemText primary={item} />
+              </AccordionSummary>
+              <AccordionDetails>
+                <List
+                  dense
+                  sx={{
+                    width: "100%",
+                    minWidth: 400,
+                    bgcolor: "background.paper",
+                  }}
                 >
-                  <ListItemButton>
-                    <ListItemText primary={`Line item ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-
-        {/* Goals Being Worked On section */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+                  {[0, 1, 2].map((value) => (
+                    <ListItem
+                      key={value}
+                      secondaryAction={
+                        <Checkbox
+                          edge="end"
+                          onChange={handleToggle(value)}
+                          checked={checked.indexOf(value) !== -1}
+                        />
+                      }
+                      disablePadding
+                    >
+                      <ListItemButton>
+                        <ListItemText primary={`Line item ${value + 1}`} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                  {commentInputOpen[`Memory${index}`] && (
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <TextField
+                          fullWidth
+                          label="Add a comment"
+                          variant="outlined"
+                          value={comments[`Memory${index}`]}
+                          onChange={handleCommentChange(`Memory${index}`)}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      onClick={toggleCommentInput(`Memory${index}`)}
+                    >
+                      <CommentIcon
+                        color={
+                          commentInputOpen[`Memory${index}`]
+                            ? "primary"
+                            : "inherit"
+                        }
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={accordionStates.Concentration}
+        onChange={handleAccordionChange("Concentration")}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates.Concentration ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
         >
-         <ListItemButton onClick={() => setGoalsBeingWorkedOnOpen(!goalsBeingWorkedOnOpen)}>
-            <ListItemText primary="Goals Being Worked" />
-            {goalsBeingWorkedOnOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsBeingWorkedOnOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%",  minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
+          <ListItemText primary="Concentration" />
+        </AccordionSummary>
+        <AccordionDetails>
+          {ConcentrationItems.map((item, index) => (
+            <Accordion
+              expanded={accordionStates[`Concentration${index}`]}
+              onChange={handleAccordionChange(`Concentration${index}`)}
+              key={index}
+            >
+              <AccordionSummary
+                expandIcon={
+                  accordionStates[`Concentration${index}`] ? (
+                    <ExpandLessIcon />
+                  ) : (
+                    <ExpandMoreIcon />
+                  )
+                }
+              >
+                <ListItemText primary={item} />
+              </AccordionSummary>
+              <AccordionDetails>
+                <List
+                  dense
+                  sx={{
+                    width: "100%",
+                    minWidth: 400,
+                    bgcolor: "background.paper",
+                  }}
                 >
-                  <ListItemButton>
-                    <ListItemText primary={`Goal ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-
-        {/* Goals Not Met section */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+                  {[0, 1, 2].map((value) => (
+                    <ListItem
+                      key={value}
+                      secondaryAction={
+                        <Checkbox
+                          edge="end"
+                          onChange={handleToggle(value)}
+                          checked={checked.indexOf(value) !== -1}
+                        />
+                      }
+                      disablePadding
+                    >
+                      <ListItemButton>
+                        <ListItemText primary={`Line item ${value + 1}`} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                  {commentInputOpen[`Concentration${index}`] && (
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <TextField
+                          fullWidth
+                          label="Add a comment"
+                          variant="outlined"
+                          value={comments[`Concentration${index}`]}
+                          onChange={handleCommentChange(`Concentration${index}`)}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      onClick={toggleCommentInput(`Concentration${index}`)}
+                    >
+                      <CommentIcon
+                        color={
+                          commentInputOpen[`Concentration${index}`]
+                            ? "primary"
+                            : "inherit"
+                        }
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={accordionStates.Insight}
+        onChange={handleAccordionChange("Insight")}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates.Insight ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
         >
-              <ListItemButton onClick={() => setGoalsNotMetOpen(!goalsNotMetOpen)}>
-            <ListItemText primary="Goals Not Met " />
-            {goalsNotMetOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsNotMetOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
+          <ListItemText primary="Insight" />
+        </AccordionSummary>
+        <AccordionDetails>
+          {InsightItems.map((item, index) => (
+            <Accordion
+              expanded={accordionStates[`Insight${index}`]}
+              onChange={handleAccordionChange(`Insight${index}`)}
+              key={index}
+            >
+              <AccordionSummary
+                expandIcon={
+                  accordionStates[`Insight${index}`] ? (
+                    <ExpandLessIcon />
+                  ) : (
+                    <ExpandMoreIcon />
+                  )
+                }
+              >
+                <ListItemText primary={item} />
+              </AccordionSummary>
+              <AccordionDetails>
+                <List
+                  dense
+                  sx={{
+                    width: "100%",
+                    minWidth: 400,
+                    bgcolor: "background.paper",
+                  }}
                 >
-                  <ListItemButton>
-                    <ListItemText primary={`Line item ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-
-        {/* Recommendation component */}
-        {/* ... (your Recommendation component) */}
-      </div>
+                  {[0, 1, 2].map((value) => (
+                    <ListItem
+                      key={value}
+                      secondaryAction={
+                        <Checkbox
+                          edge="end"
+                          onChange={handleToggle(value)}
+                          checked={checked.indexOf(value) !== -1}
+                        />
+                      }
+                      disablePadding
+                    >
+                      <ListItemButton>
+                        <ListItemText primary={`Line item ${value + 1}`} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                  {commentInputOpen[`Insight${index}`] && (
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <TextField
+                          fullWidth
+                          label="Add a comment"
+                          variant="outlined"
+                          value={comments[`Insight${index}`]}
+                          onChange={handleCommentChange(`Insight${index}`)}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      onClick={toggleCommentInput(`Insight${index}`)}
+                    >
+                      <CommentIcon
+                        color={
+                          commentInputOpen[`Insight${index}`]
+                            ? "primary"
+                            : "inherit"
+                        }
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={accordionStates.Judgment}
+        onChange={handleAccordionChange("Judgment")}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates.Judgment ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
+        >
+          <ListItemText primary="Judgment" />
+        </AccordionSummary>
+        <AccordionDetails>
+          {PerceptualdisturbancesItems.map((item, index) => (
+            <Accordion
+              expanded={accordionStates[`Judgment${index}`]}
+              onChange={handleAccordionChange(`Judgment${index}`)}
+              key={index}
+            >
+              <AccordionSummary
+                expandIcon={
+                  accordionStates[`Judgment${index}`] ? (
+                    <ExpandLessIcon />
+                  ) : (
+                    <ExpandMoreIcon />
+                  )
+                }
+              >
+                <ListItemText primary={item} />
+              </AccordionSummary>
+              <AccordionDetails>
+                <List
+                  dense
+                  sx={{
+                    width: "100%",
+                    minWidth: 400,
+                    bgcolor: "background.paper",
+                  }}
+                >
+                  {[0, 1, 2].map((value) => (
+                    <ListItem
+                      key={value}
+                      secondaryAction={
+                        <Checkbox
+                          edge="end"
+                          onChange={handleToggle(value)}
+                          checked={checked.indexOf(value) !== -1}
+                        />
+                      }
+                      disablePadding
+                    >
+                      <ListItemButton>
+                        <ListItemText primary={`Line item ${value + 1}`} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                  {commentInputOpen[`Judgment${index}`] && (
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <TextField
+                          fullWidth
+                          label="Add a comment"
+                          variant="outlined"
+                          value={comments[`Judgment${index}`]}
+                          onChange={handleCommentChange(`Judgment${index}`)}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  )}
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      onClick={toggleCommentInput(`Judgment${index}`)}
+                    >
+                      <CommentIcon
+                        color={
+                          commentInputOpen[`Judgment${index}`]
+                            ? "primary"
+                            : "inherit"
+                        }
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </AccordionDetails>
+      </Accordion>
+     
 
       {/* Buttons */}
-      <Box 
-sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
->
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagetwo")}
+      <Box
+        sx={{
+          marginTop: "40px",
+          justifyContent: "space-between",
+          display: "flex",
+        }}
       >
-       Cancel
-      </Button>
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pagetwo")}
+        >
+          Cancel
+        </Button>
 
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagethree")}
-      >
-        Save Client Details.
-      </Button>
-
-</Box>
-     
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pagetwo")}
+        >
+          Save Client Details
+        </Button>
+      </Box>
     </main>
   );
 };
