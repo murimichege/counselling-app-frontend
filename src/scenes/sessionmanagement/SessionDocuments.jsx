@@ -1,58 +1,144 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Typography,
   Grid,
-  Pagination,
   Avatar,
-  Card,
-  CardActionArea,
   Accordion,
   AccordionSummary,
-} from '@mui/material';
-import FolderOpenTwoToneIcon from '@mui/icons-material/FolderOpenTwoTone';
-import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+  AccordionDetails,
+  List,
+  ListItemText,
+  ListItem,
+  
+} from "@mui/material";
+import {makeStyles} from '@mui/styles'
+import { useDropzone } from "react-dropzone";
+import FolderOpenTwoToneIcon from "@mui/icons-material/FolderOpenTwoTone";
+import ChevronRightTwoToneIcon from "@mui/icons-material/ChevronRightTwoTone";
+import InsertLinkIcon from "@mui/icons-material/InsertLink";
+import AddTwoToneIcon from "@mui/icons-material/AddTwoTone";
+import CloudUploadTwoToneIcon from "@mui/icons-material/CloudUploadTwoTone";
+import CloseTwoToneIcon from "@mui/icons-material/CloseTwoTone";
+import CheckTwoToneIcon from "@mui/icons-material/CheckTwoTone";
 
-// Define folder data
+  // Styling for the upload box
+  const boxUploadWrapper = {
+    borderRadius: "12px",
+    padding: "16px", // Use static padding value
+    border: "1px dashed #000", // Use static border value
+    outline: "none",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "border 0.3s, background 0.3s",
+  };
+  
+  const avatarWrapper = {
+    background: "#2196F3", // Use a static color
+    color: "#fff", // Use a static color
+    width: "56px", // Use static width
+    height: "56px", // Use static height
+  };
+  
+  const avatarSuccess = {
+    background: "#4CAF50", // Use a static color
+    width: "56px", // Use static width
+    height: "56px", // Use static height
+  };
+  
 const folders = [
   {
-    title: 'Client Intake 1',
-    fileCount: 1,
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
   },
   {
-    title: 'Consent Form',
-    fileCount: 1,
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "Session 1",
+    links: [
+      { label: "Link 1", url: "/link1" },
+      { label: "Link 2", url: "/link2" },
+    ],
+    uploadedFiles: [],
   },
-  {
-    title: '  MSE Form',
-    fileCount: 1,
-  },
-  {
-    title: 'Initial Counseling Record',
-    fileCount: 1,
-  },
-  {
-    title: 'On-going Form',
-    fileCount: 1,
-  },  
-  {
-    title: 'Safety Form',
-    fileCount: 1,
-  },
-  {
-    title: 'Termination Form',
-    fileCount: 1,
-  },
-  {
-    title: 'Additional Documents',
-    fileCount: 1,
-  },
+  // Add more folders here
 ];
 
-function FolderAccordion({ title, fileCount }) {
+function FolderAccordion({ title, fileCount, links, uploadedFiles }) {
+  const [files, setFiles] = useState([]);
+
+  const {
+    acceptedFiles,
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+    getRootProps,
+    getInputProps,
+  } = useDropzone({
+    accept: {
+      "image/png": [".png"],
+      "image/jpeg": [".jpg"],
+    },
+    onDrop: (acceptedFiles) => {
+      setFiles(acceptedFiles);
+    },
+  });
+
   return (
-    <Accordion variant="outlined" sx={{ borderRadius: '10px' }}>
+    <Accordion variant="outlined" sx={{ borderRadius: "10px" }}>
       <AccordionSummary expandIcon={<ChevronRightTwoToneIcon />}>
         <Box
           display="flex"
@@ -62,15 +148,7 @@ function FolderAccordion({ title, fileCount }) {
           width="100%"
         >
           <Box display="flex" alignItems="center">
-            <Avatar
-              sx={{
-                bgcolor: 'primary.lighter',
-                color: 'primary.main',
-                width: 48,
-                height: 48,
-                marginRight: 2,
-              }}
-            >
+            <Avatar className={avatarWrapper}>
               <FolderOpenTwoToneIcon />
             </Avatar>
             <Box>
@@ -82,15 +160,107 @@ function FolderAccordion({ title, fileCount }) {
               </Typography>
             </Box>
           </Box>
-          {/* <ChevronRightTwoToneIcon fontSize="large" /> */}
         </Box>
       </AccordionSummary>
+      <AccordionDetails>
+        <Box>
+          <Typography variant="subtitle1">Links:</Typography>
+          <Box mt={1} display="grid">
+            {links.map((link, index) => (
+              <a key={index} href={link.url}>
+                <InsertLinkIcon /> {link.label}
+              </a>
+            ))}
+          </Box>
+          <Box
+            {...getRootProps()}
+            className={boxUploadWrapper}
+          >
+            <input {...getInputProps()} />
+            {isDragAccept && (
+              <>
+                <Avatar
+                  className={avatarSuccess}
+                >
+                  <CheckTwoToneIcon />
+                </Avatar>
+                <Typography
+                  sx={{
+                    mt: 2,
+                  }}
+                >
+                  {"Drop the files to start uploading"}
+                </Typography>
+              </>
+            )}
+            {isDragReject && (
+              <>
+                <Avatar
+                  variant="rounded"
+                  sx={{
+                    bgcolor: "error.main",
+                  }}
+                >
+                  <CloseTwoToneIcon />
+                </Avatar>
+                <Typography
+                  sx={{
+                    mt: 2,
+                  }}
+                >
+                  {"You cannot upload these file types"}
+                </Typography>
+              </>
+            )}
+            {!isDragActive && (
+              <>
+                {/* <AvatarWrapper className={classes.avatarWrapper}> */}
+                  <CloudUploadTwoToneIcon />
+                {/* </AvatarWrapper> */}
+                <Typography
+                  sx={{
+                    mt: 2,
+                  }}
+                >
+                  {"Drag & drop files here"}
+                </Typography>
+              </>
+            )}
+          </Box>
+          {files.length > 0 && (
+            <>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  mt: 2,
+                }}
+              >
+                Uploaded Files:
+              </Typography>
+              <List disablePadding component="div">
+                {files.map((file, index) => (
+                  <ListItem
+                    disableGutters
+                    component="div"
+                    key={index}
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    <ListItemText primary={file.name} />
+                    <Typography variant="body2">
+                      <b>{file.size} bytes</b>
+                    </Typography>
+                  </ListItem>
+                ))}
+              </List>
+            </>
+          )}
+        </Box>
+      </AccordionDetails>
     </Accordion>
   );
 }
 
 function SessionDocuments() {
-
   return (
     <>
       <Box

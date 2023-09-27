@@ -2,7 +2,8 @@ import { Box, Typography,Button, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
+import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined"
 
 import Header from "../../components/Header";
 
@@ -19,8 +20,8 @@ const ClientManagement= () => {
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "Year",
+      headerName: "Year",
       type: "number",
       headerAlign: "left",
       align: "left",
@@ -35,6 +36,16 @@ const ClientManagement= () => {
       headerName: "Email",
       flex: 1,
     },
+    {
+			field: "Actions",
+			headerName: "Actions",
+			width: 170,
+			renderCell: (params) => (
+				<Button variant="text" component={Link} to={`/session/${params.id}`} startIcon={<OpenInNewOutlinedIcon />}>
+					Open
+				</Button>
+			),
+		},
     // {
     //   field: "accessLevel",
     //   headerName: "Access Level",
@@ -77,7 +88,7 @@ const ClientManagement= () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
 
-      <Header title="Clients" subtitle="List of Clients Served in the Counselling Centre" />
+      <Header title="Clients" subtitle="List of Clients Served in the Counseling Center" />
    
           </Box>
       <Box

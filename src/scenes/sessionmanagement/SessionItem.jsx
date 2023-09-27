@@ -34,7 +34,7 @@ const SessionItem = () => {
 
   return (
     <Box m="20px">
-      <Typography variant="h4" component="h1">
+      <Typography variant="h4" mb ={5}component="h1">
         Session
       </Typography>
       <AccountInfo
@@ -79,7 +79,6 @@ const AccountInfo = ({ user, handleFormSubmit, isNonMobile }) => {
           >
             <TextField
               fullWidth
-              disabled
               label="Name"
               value={values.name}
               sx={{ gridColumn: "span 2" }}
@@ -87,21 +86,18 @@ const AccountInfo = ({ user, handleFormSubmit, isNonMobile }) => {
 
             <TextField
               fullWidth
-              disabled
               label="Student ID"
               value={values.name}
               sx={{ gridColumn: "span 2" }}
             />
             <TextField
               fullWidth
-              disabled
               label="Phone Number"
               value={values.phone}
               sx={{ gridColumn: "span 2" }}
             />
             <TextField
               fullWidth
-              disabled
               label="Email address"
               value={values.email}
               sx={{ gridColumn: "span 2" }}

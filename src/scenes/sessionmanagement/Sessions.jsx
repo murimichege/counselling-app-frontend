@@ -17,15 +17,6 @@ const Sessions = () => {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const colors = tokens(theme.palette.mode);
-
-	// useEffect(() => {
-	// 	const getstatusAccounts = async () => {
-	// 		const accounts = await userApi.getAll();
-	// 		setstatusAccounts(accounts);
-	// 	};
-	// 	getstatusAccounts();
-	// }, []);
-
 	const columns = [
 		{ field: "id", headerName: "ID" },
 		{
@@ -35,11 +26,11 @@ const Sessions = () => {
 			cellClassName: "name-column--cell",
 		},
 		{
-			field: "age",
-			headerName: "Age",
-			type: "number",
-			headerAlign: "left",
-			align: "left",
+			field: "email",
+			headerName: "Email",
+			flex:1
+			// headerAlign: "left",
+			// align: "left",
 		},
 		{
 			field: "phone",

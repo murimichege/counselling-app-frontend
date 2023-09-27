@@ -15,7 +15,7 @@ import Form from "./scenes/form";
 // import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import ConsentForm from "./scenes/consentform";
-import Sessions from "./scenes/sessionmanagement/SessionItem";
+import Sessions from "./scenes/sessionmanagement/Sessions";
 import SessionItem from "./scenes/sessionmanagement/SessionItem";
 
 import Calendar from "./scenes/calendar/calendar";
@@ -77,7 +77,9 @@ function App() {
 
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/Clients" element={<Team />} />
+                  <Route path="/clients" element={<Team />} />
+                  <Route path="/clients/:id" element={<Team />} />
+
                   <Route path="/Documents" element={<Team />} />
                   <Route path="/login" element={<Login />} />
 
@@ -86,7 +88,7 @@ function App() {
 
                   <Route path="/reports" element={<Reports />} />
                   <Route
-                    path="/ClientIntakeForm"
+                    path="/clientIntakeForm"
                     element={<ClientIntakeForm />}
                   />
                   <Route path="/form" element={<Form />} />
