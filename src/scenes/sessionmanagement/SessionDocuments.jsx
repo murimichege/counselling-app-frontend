@@ -50,53 +50,50 @@ import CheckTwoToneIcon from "@mui/icons-material/CheckTwoTone";
   
 const folders = [
   {
-    title: "Session 1",
+    title: "Client Intake 1",
     links: [
-      { label: "Link 1", url: "/link1" },
-      { label: "Link 2", url: "/link2" },
+      { label: "Link 1", url: "/clientintakeForm" },
     ],
     uploadedFiles: [],
   },
   {
-    title: "Session 1",
+    title: "Consent Form",
     links: [
       { label: "Link 1", url: "/link1" },
       { label: "Link 2", url: "/link2" },
     ],
     uploadedFiles: [],
   },{
-    title: "Session 1",
+    title: "MSE Form",
     links: [
       { label: "Link 1", url: "/link1" },
       { label: "Link 2", url: "/link2" },
     ],
     uploadedFiles: [],
   },{
-    title: "Session 1",
+    title: "Initial Counseling Record",
+    links: [
+      { label: "Link 1", url: "/link1" },
+    ],
+    uploadedFiles: [],
+  },{
+    title: "On-going Form",
     links: [
       { label: "Link 1", url: "/link1" },
       { label: "Link 2", url: "/link2" },
     ],
     uploadedFiles: [],
   },{
-    title: "Session 1",
+    title: "Safety Form",
     links: [
       { label: "Link 1", url: "/link1" },
       { label: "Link 2", url: "/link2" },
     ],
     uploadedFiles: [],
   },{
-    title: "Session 1",
+    title: "Termination Form",
     links: [
       { label: "Link 1", url: "/link1" },
-      { label: "Link 2", url: "/link2" },
-    ],
-    uploadedFiles: [],
-  },{
-    title: "Session 1",
-    links: [
-      { label: "Link 1", url: "/link1" },
-      { label: "Link 2", url: "/link2" },
     ],
     uploadedFiles: [],
   },{

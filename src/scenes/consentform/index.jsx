@@ -68,24 +68,7 @@ const ConsentForm = ({ invoice }) => {
   //   const { t }  = useTranslation();
   //   const { user } = useAuth();
 
-  const itemsList = [
-    {
-      id: 1,
-      name: "Design services for March",
-      quantity: 1,
-      price: 8945,
-      currency: "$",
-    },
-    {
-      id: 2,
-      name: "Website migration services",
-      quantity: 3,
-      price: 2367,
-      currency: "$",
-    },
-  ];
 
-  const [items] = useState(itemsList);
   const [signature, setSignature] = useState("");
   const [Name, setName] = useState("");
   const [Position, setSPosition] = useState("");
@@ -109,7 +92,7 @@ const ConsentForm = ({ invoice }) => {
           mb: 3,
         }}
       >
-        <Box display="flex"  justifyContent="center">
+        <Box display="flex" textAlign="center">
           <Box>
             <Typography variant="h1" gutterBottom>
               {"Consent and Confidentiality Form"}
@@ -131,28 +114,26 @@ const ConsentForm = ({ invoice }) => {
         <Typography variant="subtitle1" gutterBottom></Typography>
         <Typography
           variant="body4"
-          sx={{ justifyContent: "center", display: "flex" }}
+          sx={{ justifyContent:"center",display: "flex" }}
         >
           The Counseling Center maintains a strict level of client
-          confidentiality. This means that individuals using any of the service
-          offered by the Center can <br />
-          expect that their privacy will be represented. They can trust that
+          confidentiality. This means that individuals using <br/> any of the service
+          offered by the Center can expect that their privacy will be represented. They can trust <br /> that
           their information will not be discussed or disclosed to anyone outside
-          of the Counseling Center.
+          of the Counseling Center.<br /> 
           <br />
           <br />
           All Counseling Center staff members or those individuals working in
-          the center are therefore required to acknowledge and commit to
-          maintaining the highest standard of
-          <br /> confidentiality. It is understood that continued employment
+          the center are therefore required to <br /> acknowledge and commit to
+          maintaining the highest standard of confidentiality. It is understood that<br />  continued employment
           with the Counseling Center is based on maintaining this standard.
-          Anyone who breaks confidentiality will be immediately dismissed.{" "}
+          Anyone who <br /> breaks confidentiality will be immediately dismissed.{" "}
           <br /> <br />I have read and understand the above; I understand the
-          requirements of continued employment at the Counseling Center.{" "}
+          requirements of continued employment <br /> at the Counseling Center.{" "}<br /> <br /> 
         </Typography>
 
         <Box
-          sx={{ marginTop: "40px", justifyContent: "center", display: "flex" }}
+          sx={{ marginTop: "40px", justifyContent:"center", display: "flex" }}
         >
           <TextField
             id="outlined-select-currency"
@@ -228,27 +209,25 @@ const ConsentForm = ({ invoice }) => {
 
         <Typography
           variant="body4"
-          sx={{ justifyContent: "center", display: "flex", marginTop: "40px" }}
+          sx={{ textAlign:"center", justifyContent:"center",display: "flex", marginTop:"40px" }}
         >
           I _____________________(client) give consent for receiving counseling
-          services. My Counselor has explained to me the counseling process and
-          I understand that,
-          <br /> therapeutic counseling requires my active involvement including
+          services. My Counselor <br />has explained to me the counseling process and
+          I understand that, therapeutic counseling requires my <br />active involvement including
           my effort to change or undertake tasks given to me during and in
-          between sessions. <br />I also understand that the issues discussed in
-          the counseling process will remain confidential and that the oath of
-          confidentiality will be broken with my permission <br />
-          or if I plan to harm myself or another person. When counseling is
-          mandated by a referral source I understand that the counselor will
-          provide the required information on my attendance,
-          <br /> progress in counseling and in case a psychological diagnosis is
+          between <br />sessions. I also understand that the issues discussed in
+          the counseling process will remain confidential <br />and that the oath of
+          confidentiality will be broken with my permission 
+          or if I plan to harm myself or<br /> another person. When counseling is
+          mandated by a referral source I understand that the counselor will<br />
+          provide the required information on my attendance,progress in counseling and in case a psychological<br /> diagnosis is
           required the counselor will inform me and give the information with my
-          full knowledge and permission.{" "}
+          full knowledge<br /> and permission.{" "}
         </Typography>
 
         <Typography
           variant="body4"
-          sx={{ justifyContent: "center", display: "flex", marginTop: "40px" }}
+          sx={{ textAlign:"center", display: "flex",justifyContent:"center", marginTop: "40px" }}
         >
           If you have any questions please feel free to ask. Kindly sign and
           date this form.

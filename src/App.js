@@ -32,7 +32,7 @@ import ExaminationForm from "./scenes/examinationform/Examinationform";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(false);
+  const [isPrivate, setisPrivate] = useState(true);
 
   return (
     // <ErrorBoundary>
@@ -58,7 +58,7 @@ function App() {
                 <Route path="/ongoingrecord" element={<OnGoingCounseling />} />
 
                 <Route
-                  path="/ClientIntakeForm"
+                  path="/clientintakeForm"
                   element={<ClientIntakeForm />}
                 />
                 <Route
