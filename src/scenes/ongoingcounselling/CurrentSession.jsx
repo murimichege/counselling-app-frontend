@@ -20,7 +20,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { CounsellingRecordContext } from "./OngoingCounselingRecord";
 
-const Prognosis = ({ onButtonClick }) => {
+const CurrentSession = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [secondary, setSecondary] = React.useState(false);
 
@@ -80,79 +80,78 @@ const Prognosis = ({ onButtonClick }) => {
 
   return (
     <main
-      className="pt5 black-80"
-      style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
+    className="pt5 black-80"
+    style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
+  >
+    <h2>CurrentSession</h2>
+    <div
+      className="center ph4 selectionDiv"
+      style={{ height: "46%", display: "inline-block" }}
     >
-      <h2>Prognosis:</h2>
-
-      <div
-        className="center ph4 selectionDiv"
-        style={{ height: "46%", display: "inline-block" }}
-      >
-        <Box
-          sx={
-            {
-              // mb: `${theme.spacing(3)}`
-            }
-          }
-          item
-          xs={12}
-          sm={8}
-          md={9}
-        >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
-        </Box>
-
-        <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Prognosis:
-          </Typography>
-          <List dense={dense}>
-            {formData.CounsellingReasons.map((item) => {
-              <ListItem>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>;
-            })}
-          </List>
-        </Box>
-      </div>
-
-      {/* Buttons */}
       <Box
-        sx={{
-          marginTop: "40px",
-          justifyContent: "space-between",
-          display: "flex",
-        }}
+        sx={
+          {
+            // mb: `${theme.spacing(3)}`
+          }
+        }
+        item
+        xs={12}
+        sm={8}
+        md={9}
       >
-        <Button
-          className="f6 grow br2 ph3 pv2 mb2 dib white"
-          type="submit"
-          variant="contained"
-          onClick={() => onButtonClick("pageone")}
-        >
-          Cancel
-        </Button>
-
-        <Button
-          className="f6 grow br2 ph3 pv2 mb2 dib white"
-          type="submit"
-          variant="contained"
-          onClick={() => onButtonClick("pageeight")}
-        >
-          Save Prognosis.
-        </Button>
+        <EditorWrapper>
+          <ReactQuill value={editorContent} onChange={handleEditorChange} />
+        </EditorWrapper>
       </Box>
-    </main>
+
+      <Box>
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+          Goals
+        </Typography>
+        <List dense={dense}>
+          {formData.CounsellingReasons.map((item) => {
+            <ListItem>
+              <ListItemIcon>
+                <CheckIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Single-line item"
+                secondary={secondary ? "Secondary text" : null}
+              />
+            </ListItem>;
+          })}
+        </List>
+      </Box>
+    </div>
+
+    {/* Buttons */}
+    <Box
+      sx={{
+        marginTop: "40px",
+        justifyContent: "space-between",
+        display: "flex",
+      }}
+    >
+      <Button
+        className="f6 grow br2 ph3 pv2 mb2 dib white"
+        type="submit"
+        variant="contained"
+        onClick={() => onButtonClick("pageone")}
+      >
+        Cancel
+      </Button>
+
+      <Button
+        className="f6 grow br2 ph3 pv2 mb2 dib white"
+        type="submit"
+        variant="contained"
+        onClick={() => onButtonClick("pagefour")}
+      >
+        Save Assignment.
+      </Button>
+    </Box>
+  </main>
   );
 };
 
-export default Prognosis;
+export default CurrentSession;

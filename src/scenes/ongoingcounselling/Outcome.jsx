@@ -107,7 +107,7 @@ const Outcome = ({ onButtonClick }) => {
 
         <Box>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Assessment
+          Expected Outcomes
           </Typography>
           <List dense={dense}>
             {formData.CounsellingReasons.map((item) => {
@@ -146,9 +146,9 @@ const Outcome = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pageeight")}
+          onClick={() => onButtonClick("pageseven")}
         >
-          Save Treatment plan.
+          Save Expected Outcomes.
         </Button>
       </Box>
     </main>

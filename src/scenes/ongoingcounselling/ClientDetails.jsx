@@ -38,7 +38,7 @@ function ClientDetails ({ onButtonClick }){
         >
           <TextField
             id="outlined-select-currency"
-            label="Client Code"
+            label="Client’s Code"
             name="ClientCode"
             value={formData.ClientCode}
             inputProps={{
@@ -49,13 +49,27 @@ function ClientDetails ({ onButtonClick }){
               marginRight: "20px",
               width: "240px",
               height: "auto",
-              // gridColumn: "span 4",
+              gridColumn: "span 2",
             }}
           />
           <TextField
-            label="Client Initials"
-            name="ClientInitials"
+            label="Session No"
+            name="SessionNo"
             value={formData.ClientInitials}
+            inputProps={{
+              style: { height: "auto" },
+            }}
+            onChange={handleInputChange}
+            sx={{
+              marginRight: "20px",
+              // width: "240px",
+              gridColumn: "span 2",
+            }}
+          />
+          <TextField
+            label="Date"
+            name="Date"
+            value={formData.Date}
             inputProps={{
               style: { height: "auto" },
             }}
@@ -64,12 +78,14 @@ function ClientDetails ({ onButtonClick }){
               marginRight: "20px",
               width: "240px",
               height: "auto",
-              // gridColumn: "span 4",
+              gridColumn: "span 2",
             }}
           />
-          <TextField
-            label="Date"
-            name="Date"
+           
+       
+            <TextField
+            label="Time"
+            name="Time"
             value={formData.Date}
             inputProps={{
               style: { height: "auto" },

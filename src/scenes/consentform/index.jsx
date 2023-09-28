@@ -94,15 +94,14 @@ const ConsentForm = ({ invoice }) => {
       >
         <Box display="flex" textAlign="center">
           <Box>
-            <Typography variant="h1" gutterBottom>
-              {"Consent and Confidentiality Form"}
+            <Typography variant="h1"  sx={{
+                justifyContent: "center",
+                display: "flex",
+              }}
+               gutterBottom>
+            Consent and Confidentiality Form
             </Typography>
-            <Typography variant="h3" gutterBottom>
-              {/* {"Consent Form"} */}
-            </Typography>
-            <Typography variant="h3" color="text.secondary">
-              {/* #{invoice.number} */}
-            </Typography>
+           
           </Box>
         </Box>
         <Divider

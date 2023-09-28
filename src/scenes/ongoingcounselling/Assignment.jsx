@@ -83,7 +83,7 @@ const Assignment = ({ onButtonClick }) => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Homework / Assignment given:</h2>
+      <h2>Assignment</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -106,7 +106,7 @@ const Assignment = ({ onButtonClick }) => {
 
         <Box>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Goals
+          Homework / Assignment given:
           </Typography>
           <List dense={dense}>
             {formData.CounsellingReasons.map((item) => {
@@ -145,7 +145,7 @@ const Assignment = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagefour")}
+          onClick={() => onButtonClick("pagesix")}
         >
           Save Assignment.
         </Button>
