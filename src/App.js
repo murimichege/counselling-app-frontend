@@ -33,7 +33,7 @@ import ClientItem from "./scenes/clientmanagement/ClientItem"
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(false);
+  const [isPrivate, setisPrivate] = useState(true);
 
   return (
     // <ErrorBoundary>
@@ -80,13 +80,10 @@ function App() {
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/clients" element={<Team />} />
                   <Route path="/clients/:id" element={<ClientItem />} />
-
                   <Route path="/Documents" element={<Team />} />
                   <Route path="/login" element={<Login />} />
-
                   <Route path="/sessions" element={<Sessions />} />
                   <Route path="/session/:id" element={<SessionItem />} />
-
                   <Route path="/reports" element={<Reports />} />
                   <Route
                     path="/clientIntakeForm"

@@ -77,6 +77,18 @@ const AccountInfo = ({ user, handleFormSubmit, isNonMobile }) => {
               "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
             }}
           >
+             <TextField
+              fullWidth
+              label="Session No"
+              value={values.name}
+              sx={{ gridColumn: "span 2" }}
+            />
+             <TextField
+              fullWidth
+              label="Client Number"
+              value={values.name}
+              sx={{ gridColumn: "span 2" }}
+            />
             <TextField
               fullWidth
               label="Name"

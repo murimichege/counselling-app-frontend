@@ -1,59 +1,44 @@
-import React, { useState, useRef } from 'react';
-import { SignatureComponent } from '@syncfusion/ej2-react-inputs';
-import { ButtonComponent } from '/ej2-react-buttons';
-import './default.css';
+import React, { useRef } from 'react';
+import SignatureCanvas from 'react-signature-canvas';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
-const Signature = () => {
-  const [disable, setDisable] = useState(true);
-  const [signatureText, setSignatureText] = useState(''); // State variable for signature text
-  const signatureObj = useRef(null);
+const SignatureCapture = ({ open, onClose, onSaveSignature }) => {
+  const signatureRef = useRef(null);
 
-  const saveBtnClick = () => {
-    if (disable) return;
-
-    // Capture the signature data URL and update the state variable
-    const signatureDataURL = signatureObj.current.toDataURL();
-    setSignatureText(signatureDataURL);
-
-    setDisable(true);
+  const handleSaveSignature = () => {
+    const capturedSignatureImage = signatureRef.current.getTrimmedCanvas().toDataURL('image/png'); // Get the trimmed canvas as an image
+    onSaveSignature(capturedSignatureImage);
+    onClose(); // Close the dialog after saving the signature
   };
 
-  const clrBtnClick = () => {
-    signatureObj.current.clear();
-    if (signatureObj.current.isEmpty()) {
-      setDisable(true);
-    }
-    setSignatureText(''); // Clear the signature text when clearing the signature
-  };
-
-  const change = () => {
-    if (!signatureObj.current.isEmpty()) {
-      setDisable(false);
-    }
+  const handleClearSignature = () => {
+    signatureRef.current.clear();
   };
 
   return (
-    <div className='control-pane'>
-      <div className="col-lg-12 control-section">
-        <div id="signature-control">
-          <div className='e-sign-heading'>
-            <span id="signdescription">Sign below</span>
-            <span className="e-btn-options">
-              <ButtonComponent id="signsave" cssClass='e-primary e-sign-save' onClick={saveBtnClick} disabled={disable}>SAVE</ButtonComponent>
-              <ButtonComponent id="signclear" cssClass='e-primary e-sign-clear' onClick={clrBtnClick} disabled={disable}>CLEAR</ButtonComponent>
-            </span>
-          </div>
-          <SignatureComponent id="signature" ref={signatureObj} change={change}></SignatureComponent>
-        </div>
-      </div>
-
-      {/* Display the signature text in a text field */}
-      <div>
-        <label>Signature Text:</label>
-        <textarea rows="4" cols="50" value={signatureText} readOnly />
-      </div>
-    </div>
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <DialogTitle>Draw Your Signature</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+        Click "Save" when done.
+        </DialogContentText>
+        <SignatureCanvas
+          ref={signatureRef}
+          penColor="black"
+          canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClearSignature}>Clear</Button>
+        <Button onClick={handleSaveSignature}>Save</Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
-export default Signature;
+export default SignatureCapture;

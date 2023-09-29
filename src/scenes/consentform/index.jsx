@@ -27,30 +27,16 @@ import {
 // import { useTranslation } from 'react-i18next';
 import DownloadTwoToneIcon from "@mui/icons-material/DownloadTwoTone";
 import PictureAsPdfTwoToneIcon from "@mui/icons-material/PictureAsPdfTwoTone";
-// import Signature from "../../components/signature"; 
+import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
+import SignatureTextField from "../../components/signature"; 
 
 
-const BoxWrapper = styled(Box)(
-  ({ theme }) => `
-  border-radius: 12px;
-};
-`
-);
 
-const TableWrapper = styled(Box)(
-  ({ theme }) => `
-  border: 1px solid ;
-  border-bottom: 0;
-  margin: 
-} 0;
-`
-);
+const SignatureImage = styled("img")({
+  width: "50%",
+  maxWidth: "150px", // Adjust the max width as needed
+});
 
-const LogoWrapper = styled(Box)(
-  () => `
-    width: '52px'
-`
-);
 
 // interface InvoiceBodyProps {
 //   invoice: Invoice;
@@ -68,22 +54,54 @@ const ConsentForm = ({ invoice }) => {
   //   const { t }  = useTranslation();
   //   const { user } = useAuth();
 
+  const [capturedSignatures, setCapturedSignatures] = useState([]);
+  const [signatureDialogOpen, setSignatureDialogOpen] = useState(false);
 
   const [signature, setSignature] = useState("");
   const [Name, setName] = useState("");
-  const [Position, setSPosition] = useState("");
+  const [Position, setPosition] = useState("");
   const [CurrentDate, setCurrentDate] = useState("");
 
-  const handleInputChange = () => {};
-    // Function to handle signature capture
-    const handleSignatureCapture = (capturedSignature) => {
-      setSignature(capturedSignature);
-    };
-  
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    
+    // Update the state based on the input field's name
+    switch (name) {
+      case "Name":
+        setName(value);
+        break;
+      case "Position":
+        setPosition(value);
+        break;
+      case "CurrentDate":
+        setCurrentDate(value);
+        break;
+      default:
+        // Handle other input fields if needed
+        break;
+    }
+  };
+  useEffect(() => {
+    const currentDate = new Date().toLocaleDateString(); // Get the current date
+    setCurrentDate(currentDate); // Update the state with the current date
+  }, []);
+  // Open the signature dialog
+  const openSignatureDialog = () => {
+    setSignatureDialogOpen(true);
+  };
 
-    useEffect(() => {
+  // Close the signature dialog
+  const closeSignatureDialog = () => {
+    setSignatureDialogOpen(false);
+  };
 
-    },[])
+  // Handle saving the captured signature and closing the dialog
+  const handleSignatureCapture = (capturedImage) => {
+    setCapturedSignatures([...capturedSignatures, capturedImage]);
+    closeSignatureDialog();
+  };
+
+
   return (
 <Container maxWidth="lg" sx={{ margin: "auto" }}>
       <Card
@@ -167,10 +185,6 @@ const ConsentForm = ({ invoice }) => {
               gridColumn: "span 2",
             }}
           />
-        </Box>
-        <Box
-          sx={{ marginTop: "40px", justifyContent: "center", display: "flex" }}
-        >
           <TextField
             label="Date"
             name="Date"
@@ -187,24 +201,32 @@ const ConsentForm = ({ invoice }) => {
               gridColumn: "span 2",
             }}
           />
-          <TextField
-            id="outlined-select-currency"
-            label="Signature"
-            name="Signature"
-            variant="standard"
-            value={signature}
-            inputProps={{
-              style: { height: "auto" },
-            }}
-            onChange={handleInputChange}
-            sx={{
-              marginRight: "20px",
-              width: "240px",
-              height: "auto",
-              gridColumn: "span 2",
-            }}
-          />
         </Box>
+        <Box
+          sx={{
+            marginTop: "40px",
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          <Box>
+            <Typography variant="body4" mt={4} gutterBottom>
+              Signature 1:
+            </Typography>
+            <Typography variant="body4" mt={4} gutterBottom>
+              {capturedSignatures.length > 0 && (
+                <SignatureImage
+                  src={capturedSignatures[0]}
+                  alt="Signature 1"
+                />
+              )}
+            </Typography>
+          </Box>
+          <Button variant="outlined" sx={{ marginTop: "40px" }} onClick={openSignatureDialog}>
+            Sign 1
+          </Button>
+        </Box>
+
 
         <Typography
           variant="body4"
@@ -233,9 +255,13 @@ const ConsentForm = ({ invoice }) => {
         </Typography>
 
         <Box
-          sx={{ marginTop: "40px", justifyContent: "center", display: "flex" }}
+          sx={{
+            marginTop: "40px",
+            display: "grid",
+            justifyContent: "space-around",
+          }}
         >
-          <TextField
+           <TextField
             label="Date"
             name="Date"
             variant="standard"
@@ -251,26 +277,30 @@ const ConsentForm = ({ invoice }) => {
               gridColumn: "span 2",
             }}
           />
-          <TextField
-            id="outlined-select-currency"
-            label="Signature"
-            name="Signature"
-            variant="standard"
-            value={signature}
-            inputProps={{
-              style: { height: "auto" },
-            }}
-            onChange={handleInputChange}
-            sx={{
-              marginRight: "20px",
-              width: "240px",
-              height: "auto",
-              gridColumn: "span 2",
-            }}
-          />
+          <Box>
+            <Typography variant="body4" mt={4} gutterBottom>
+              Signature 2:
+            </Typography>
+            <Typography variant="body4" mt={4} gutterBottom>
+              {capturedSignatures.length > 1 && (
+                <SignatureImage
+                  src={capturedSignatures[1]}
+                  alt="Signature 2"
+                />
+              )}
+            </Typography>
+          </Box>
+          <Button variant="outlined" sx={{ marginTop: "40px" }} onClick={openSignatureDialog}>
+            Sign 2
+          </Button>
         </Box>
-        {/* <Signature onSignatureCapture={handleSignatureCapture} />  */}
-        
+        {/* Signature Capture Dialog */}
+        <SignatureTextField
+          open={signatureDialogOpen}
+          onClose={closeSignatureDialog}
+          onSaveSignature={handleSignatureCapture}
+        />
+     
         {/* Display the captured signature */}
         {/* <Box
           sx={{
@@ -308,18 +338,10 @@ const ConsentForm = ({ invoice }) => {
             >
               {"Save Form"}
             </Button>
-            {/* <Button
-              disabled
-              variant="outlined"
-              sx={{
-                mx: 2,
-              }}
-              startIcon={<PictureAsPdfTwoToneIcon />}
-            >
-              {"y PDF"}
-            </Button> */}
+          
           </Box>
         </Tooltip>
+   
       </Card>
     </Container>
   );

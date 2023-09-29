@@ -12,17 +12,115 @@ import {
   Grid,
 } from "@mui/material";
 import DownloadTwoToneIcon from "@mui/icons-material/DownloadTwoTone";
+import SignatureTextField from "../../components/signature";
 
 const SafetyContractForm = () => {
+  const [capturedSignature, setCapturedSignature] = useState("");
+
   const [signature, setSignature] = useState("");
-  const [Name, setName] = useState("");
-  const [Position, setPosition] = useState("");
-  const [CurrentDate, setCurrentDate] = useState("");
-  const [Witness, setWitness] = useState("");
+  const [name, setName] = useState("");
 
-  const [formData, setFormData] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [selfCare, setSelfCare] = useState("");
+  const [fullNames1, setFullNames1] = useState("");
+  const [contact1, setContact1] = useState("");
+  const [relation1, setRelation1] = useState("");
+  const [fullNames2, setFullNames2] = useState("");
+  const [contact2, setContact2] = useState("");
+  const [relation2, setRelation2] = useState("");
+  const [placeName, setPlaceName] = useState("");
+  const [placeContact, setPlaceContact] = useState("");
+  const [emergencyContact1Name, setEmergencyContact1Name] = useState("");
+  const [emergencyContact1Contact, setEmergencyContact1Contact] = useState("");
+  const [emergencyContact2Name, setEmergencyContact2Name] = useState("");
+  const [emergencyContact2Contact, setEmergencyContact2Contact] = useState("");
+  const [crisisHotline, setCrisisHotline] = useState("");
+  const [contractAccepted, setContractAccepted] = useState(false);
+  const [witness, setWitness] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
 
-  const handleInputChange = () => {};
+  const handleInputChange = (e, fieldName) => {
+    const value = e.target.value;
+  
+    // Update the corresponding state variable based on the fieldName
+    switch (fieldName) {
+      case "startDate":
+        setStartDate(value);
+        break;
+      case "endDate":
+        setEndDate(value);
+        break;
+      case "selfCare":
+        setSelfCare(value);
+        break;
+      case "fullNames1":
+        setFullNames1(value);
+        break;
+      case "contact1":
+        setContact1(value);
+        break;
+      case "relation1":
+        setRelation1(value);
+        break;
+      case "fullNames2":
+        setFullNames2(value);
+        break;
+      case "contact2":
+        setContact2(value);
+        break;
+      case "relation2":
+        setRelation2(value);
+        break;
+      case "placeName":
+        setPlaceName(value);
+        break;
+      case "placeContact":
+        setPlaceContact(value);
+        break;
+      case "emergencyContact1Name":
+        setEmergencyContact1Name(value);
+        break;
+      case "emergencyContact1Contact":
+        setEmergencyContact1Contact(value);
+        break;
+      case "emergencyContact2Name":
+        setEmergencyContact2Name(value);
+        break;
+      case "emergencyContact2Contact":
+        setEmergencyContact2Contact(value);
+        break;
+      case "crisisHotline":
+        setCrisisHotline(value);
+        break;
+      case "contractAccepted":
+        setContractAccepted(!contractAccepted); // Toggle between true and false
+        break;
+      case "witness":
+        setWitness(value);
+        break;
+      case "currentDate":
+        setCurrentDate(value);
+        break;
+      default:
+        break;
+    }
+  };
+  
+  const [signatureDialogOpen, setSignatureDialogOpen] = useState(false);
+
+  const openSignatureDialog = () => {
+    setSignatureDialogOpen(true);
+  };
+
+  const closeSignatureDialog = () => {
+    setSignatureDialogOpen(false);
+  };
+
+  const handleSignatureCapture = (capturedImage) => {
+    setSignature(capturedImage);
+    closeSignatureDialog();
+  };
 
   return (
     <Container maxWidth="lg">
@@ -47,14 +145,14 @@ const SafetyContractForm = () => {
           <Typography variant="body1">
             I{" "}
             <TextField
-              name="Signature"
+              name="Name"
               variant="standard"
-              value={signature}
+              value={name}
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              onChange={handleInputChange}
-            />
+              onChange={(e) => handleInputChange(e, "name")}
+              />
             , agree to NOT harm myself in any way,
             <br /> attempt to kill myself, or kill myself during the period from{" "}
             <TextField
@@ -63,9 +161,9 @@ const SafetyContractForm = () => {
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={formData.StartDate}
-              onChange={handleInputChange}
-            />
+              value={startDate}
+              onChange={(e) => handleInputChange(e, "startDate")}
+              />
             to <br />{" "}
             <TextField
               name="EndDate"
@@ -73,8 +171,8 @@ const SafetyContractForm = () => {
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={formData.EndDate}
-              onChange={handleInputChange}
+              value={endDate}
+              onChange={(e) => handleInputChange(e, "endDate")}
             />{" "}
             (the time of my next appointment).
             <br />
@@ -92,8 +190,8 @@ const SafetyContractForm = () => {
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={formData.SelfCare}
-              onChange={handleInputChange}
+              value={selfCare}
+              onChange={(e) => handleInputChange(e, "selfCare")}
             />{" "}
             (e.g. eat well, get enough sleep each night, etc).
             <br />
@@ -116,9 +214,9 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={formData.FullNames}
-                  onChange={handleInputChange}
-                />
+                  value={fullNames1}
+                  onChange={(e) => handleInputChange(e, "fullNames1")}
+                  />
               </div>
               <div style={{ marginRight: "20px" }}>
                 <InputLabel htmlFor="input-with-icon-adornment">
@@ -130,8 +228,8 @@ const SafetyContractForm = () => {
                     style: { marginTop: "-11px" },
                   }}
                   variant="standard"
-                  value={formData.Contact}
-                  onChange={handleInputChange}
+                  value={contact1}
+                  onChange={(e) => handleInputChange(e, "contact1")}
                 />
               </div>
 
@@ -145,8 +243,8 @@ const SafetyContractForm = () => {
                   }}
                   name="Relation"
                   variant="standard"
-                  value={formData.Relation}
-                  onChange={handleInputChange}
+                  value={relation1}
+                  onChange={(e) => handleInputChange(e, "relation1")}
                 />
               </div>
             </Box>
@@ -161,8 +259,8 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={formData.FullNames}
-                  onChange={handleInputChange}
+                  value={fullNames2}
+                  onChange={(e) => handleInputChange(e, "fullNames2")}
                 />
               </div>
               <div style={{ marginRight: "20px" }}>
@@ -175,8 +273,8 @@ const SafetyContractForm = () => {
                     style: { marginTop: "-11px" },
                   }}
                   variant="standard"
-                  value={formData.Contact}
-                  onChange={handleInputChange}
+                  value={contact2}
+                  onChange={(e) => handleInputChange(e, "contact2")}
                 />
               </div>
 
@@ -190,8 +288,8 @@ const SafetyContractForm = () => {
                   }}
                   name="Relation"
                   variant="standard"
-                  value={formData.Relation}
-                  onChange={handleInputChange}
+                  value={relation2}
+                  onChange={(e) => handleInputChange(e, "relation2")}
                 />
               </div>
             </Box>
@@ -212,9 +310,9 @@ const SafetyContractForm = () => {
                 inputProps={{
                   style: { marginTop: "-11px" },
                 }}
-                value={formData.FullNames}
-                onChange={handleInputChange}
-              />
+                value={placeName}
+                onChange={(e) => handleInputChange(e, "placeName")}
+                />
             </div>
             <div style={{ marginRight: "20px" }}>
               <InputLabel htmlFor="input-with-icon-adornment">
@@ -226,8 +324,8 @@ const SafetyContractForm = () => {
                   style: { marginTop: "-11px" },
                 }}
                 variant="standard"
-                value={formData.Contact}
-                onChange={handleInputChange}
+                value={placeContact}
+                onChange={(e) => handleInputChange(e, "placeContact")}
               />
             </div>
           </Box>
@@ -248,14 +346,14 @@ const SafetyContractForm = () => {
     Name of the Place or location
         </InputLabel> */}
                 <TextField
-                  name="Full names"
+                  name="emergencyContact1Name"
                   variant="standard"
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={formData.FullNames}
-                  onChange={handleInputChange}
-                />
+                  value={emergencyContact1Name}
+                  onChange={(e) => handleInputChange(e, "emergencyContact1Name")}
+                  />
               </div>
               <div style={{ marginRight: "20px" }}>
                 {"at #"}
@@ -267,8 +365,8 @@ const SafetyContractForm = () => {
                     style: { marginTop: "-11px" },
                   }}
                   variant="standard"
-                  value={formData.Contact}
-                  onChange={handleInputChange}
+                  value={emergencyContact1Contact} 
+                  onChange={(e) => handleInputChange(e, "emergencyContact1Contact")}
                 />
               </div>
             </Box>
@@ -284,8 +382,8 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={formData.FullNames}
-                  onChange={handleInputChange}
+                  value={emergencyContact2Name}
+                  onChange={(e) => handleInputChange(e, "emergencyContact2Name")}
                 />
               </div>
               <div style={{ marginRight: "20px" }}>
@@ -297,9 +395,9 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  variant="standard"
-                  value={formData.Contact}
-                  onChange={handleInputChange}
+                  variant="standard" 
+                  value={emergencyContact2Contact}
+                  onChange={(e) => handleInputChange(e, "emergencyContact2Contact")}
                 />
               </div>
             </Box>
@@ -320,9 +418,9 @@ const SafetyContractForm = () => {
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={formData.CrisisHotline}
-              onChange={handleInputChange}
-            />{" "}
+              value={crisisHotline}
+              onChange={(e) => handleInputChange(e, "crisisHotline")}
+              />{" "}
             or nearby emergency center.
             <br />
           </Typography>
@@ -336,11 +434,35 @@ const SafetyContractForm = () => {
           <Box
             sx={{
               marginTop: "40px",
+              justifyContent: "space-between",
+              display: "flex",
+            }}
+          >
+          
+        {/* Signature Capture */}
+        <SignatureTextField
+          open={signatureDialogOpen}
+          onClose={closeSignatureDialog}
+          onSaveSignature={handleSignatureCapture}
+        />
+            <Typography variant="body4" gutterBottom>
+               Signature:
+            </Typography>
+        {/* Display Captured Signature */}
+        {signature && (
+          <Box
+            sx={{
+              // marginTop: "40px",
               justifyContent: "center",
               display: "flex",
             }}
           >
-            <TextField
+
+            <img src={signature} alt="Captured Signature" />
+          </Box>
+        )}
+
+            {/* <TextField
               label="Signature"
               name="Signature"
               variant="standard"
@@ -355,20 +477,21 @@ const SafetyContractForm = () => {
                 height: "auto",
                 gridColumn: "span 2",
               }}
-            />
+            /> */}
             <TextField
               label="Date"
               name="Date"
               variant="standard"
-              value={CurrentDate}
+              value={currentDate}
               inputProps={{
                 style: { height: "auto" },
               }}
               onChange={handleInputChange}
               sx={{
-                marginRight: "20px",
+                marginRight: "40px",
                 width: "240px",
                 height: "auto",
+                marginTop: "-30px",
                 gridColumn: "span 2",
               }}
             />
@@ -384,11 +507,11 @@ const SafetyContractForm = () => {
               label="Witnessed By"
               name="Name"
               variant="standard"
-              value={Witness}
+              value={witness}
               inputProps={{
                 style: { height: "auto" },
               }}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e, "witness")}
               sx={{
                 marginRight: "20px",
                 width: "240px",
@@ -404,7 +527,7 @@ const SafetyContractForm = () => {
               inputProps={{
                 style: { height: "auto" },
               }}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e, "crisisHotline")}
               sx={{
                 marginRight: "20px",
                 width: "240px",
@@ -435,16 +558,12 @@ const SafetyContractForm = () => {
               >
                 Save Form
               </Button>
-              <Button
-                disabled
-                variant="contained"
-                sx={{
+              <Button  variant="contained"   sx={{
                   mx: 2,
-                }}
-                startIcon={<DownloadTwoToneIcon />}
-              >
-                Generate PDF
-              </Button>
+                }} onClick={openSignatureDialog}>
+            Sign 
+          </Button>
+              
             </Box>
           </Tooltip>
         </div>

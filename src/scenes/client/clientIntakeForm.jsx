@@ -11,7 +11,7 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "../../components/Header";
+import FormHeader from '../../components/FormHeader'
 import MenuItem from "@mui/material/MenuItem";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ const ClientIntakeForm = () => {
       <Box m="20px">
         <Toaster />
 
-        <Header
+        <FormHeader
           title="COUNSELING CENTER INTAKE FORM 2"
           subtitle="Summer Semester 2023"
         />
