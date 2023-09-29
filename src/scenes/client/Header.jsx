@@ -1,28 +1,23 @@
-import React from 'react';
-import Select from 'react-select';
+import { Typography, Box, useTheme } from "@mui/material";
+import { tokens } from "../theme";
 
-const Header = ({ title }) => {
-  // Define options for the dropdown
-  const semesterOptions = [
-    { value: 'Summer', label: 'Summer' },
-    { value: '2023', label: '2023' },
-  ];
-
-  // Handle selection change
-  const handleSelectChange = (selectedOption) => {
-    // Implement your logic here when the dropdown value changes
-    console.log(`Selected value: ${selectedOption.value}`);
-  };
-
+const Header = ({ title, subtitle }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <div>
-      <h1>{title}</h1>
-      <Select
-        options={semesterOptions}
-        onChange={handleSelectChange}
-        placeholder="Select Semester"
-      />
-    </div>
+    <Box mb="30px">
+      <Typography
+        variant="h2"
+        color={colors.grey[100]}
+        fontWeight="bold"
+        sx={{ m: "0 0 5px 0" }}
+      >
+        {title}
+      </Typography>
+      <Typography variant="h5" color={colors.greenAccent[400]}>
+        {subtitle}
+      </Typography>
+    </Box>
   );
 };
 

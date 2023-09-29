@@ -32,7 +32,7 @@ import ExaminationForm from "./scenes/examinationform/Examinationform";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(true);
+  const [isPrivate, setisPrivate] = useState(false);
 
   return (
     // <ErrorBoundary>

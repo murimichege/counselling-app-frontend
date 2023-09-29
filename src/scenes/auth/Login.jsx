@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <Box
       sx={{
-        height: "100vh",
+        height: "62vh",
         display: "flex",
         flexDirection: "column",
         margin:"auto",
@@ -42,16 +42,16 @@ const Login = () => {
         src={logo}
         alt="Logo"
         style={{
-          width: "40%",
+          width: "20%",
           height: "auto",
         }}
       />
       <Typography
-        variant="h5"
+        variant="h3"
         textAlign="center"
         mb="1rem"
         fontWeight="700"
-        sx={{ fontSize: "1.5rem" }} // Adjust font size for mobile
+        // sx={{ fontSize: "1.5rem" }} // Adjust font size for mobile
       >
         Welcome to the Counseling Center
       </Typography>
