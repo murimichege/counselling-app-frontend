@@ -53,11 +53,32 @@ import CheckTwoToneIcon from "@mui/icons-material/CheckTwoTone";
 // Define folder data
 const folders = [
   {
-    title: "Client Intake 1",
-    fileCount: 1,
+    title: "Session #001/2023",
+    // fileCount: 1,
     links: [
-      { label: "Link 1", url: "/link1" },
-      { label: "Link 2", url: "/link2" },
+      { label: "Client Intake 1", url: "/link1" },
+      { label: "Consent Form", url: "/link2" },  
+      { label: "MSE Form", url: "/link2" },
+      { label: "Initial Counseling Record", url: "/link2" },
+      { label: "On-going Form", url: "/link2" },
+      { label: "Safety Form", url: "/link2" },
+      { label: "Termination Form", url: "/link2" },
+
+    ],
+    uploadedFiles: [],
+  },
+  {
+    title: "Session #002/2023",
+    // fileCount: 1,
+    links: [
+      { label: "Client Intake 1", url: "/link1" },
+      { label: "Consent Form", url: "/link2" },  
+      { label: "MSE Form", url: "/link2" },
+      { label: "Initial Counseling Record", url: "/link2" },
+      { label: "On-going Form", url: "/link2" },
+      { label: "Safety Form", url: "/link2" },
+      { label: "Termination Form", url: "/link2" },
+
     ],
     uploadedFiles: [],
   },
@@ -101,12 +122,12 @@ function FolderAccordion({ title, fileCount, links, uploadedFiles }) {
               <FolderOpenTwoToneIcon />
             </Avatar>
             <Box>
-              <Typography variant="h4" color="text.primary" gutterBottom noWrap>
+              <Typography variant="h4" ml={4} color="text.primary" gutterBottom noWrap>
                 {title}
               </Typography>
-              <Typography variant="subtitle1">
+              {/* <Typography variant="subtitle1">
                 <b>{fileCount}</b> files
-              </Typography>
+              </Typography> */}
             </Box>
           </Box>
         </Box>
@@ -202,7 +223,7 @@ function ClientSessions() {
           pb: 3,
         }}
       >
-        <Typography variant="h3">Session Documents</Typography>
+        <Typography variant="h3">Sessions</Typography>
       </Box>
 
       <Grid container spacing={3}>

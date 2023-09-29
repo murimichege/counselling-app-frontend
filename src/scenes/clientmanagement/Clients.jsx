@@ -41,7 +41,7 @@ const ClientManagement= () => {
 			headerName: "Actions",
 			width: 170,
 			renderCell: (params) => (
-				<Button variant="text" component={Link} to={`/session/${params.id}`} startIcon={<OpenInNewOutlinedIcon />}>
+				<Button variant="text" component={Link} to={`/clients/${params.id}`} startIcon={<OpenInNewOutlinedIcon />}>
 					Open
 				</Button>
 			),

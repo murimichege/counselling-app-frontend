@@ -29,6 +29,7 @@ import SafetyContractForm from "./scenes/safetycontract";
 import CounselingRecord from "./scenes/counsellingrecord/CounselingRecord";
 import OnGoingCounseling from "./scenes/ongoingcounselling/OngoingCounselingRecord";
 import ExaminationForm from "./scenes/examinationform/Examinationform";
+import ClientItem from "./scenes/clientmanagement/ClientItem"
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -78,7 +79,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/clients" element={<Team />} />
-                  <Route path="/clients/:id" element={<Team />} />
+                  <Route path="/clients/:id" element={<ClientItem />} />
 
                   <Route path="/Documents" element={<Team />} />
                   <Route path="/login" element={<Login />} />
