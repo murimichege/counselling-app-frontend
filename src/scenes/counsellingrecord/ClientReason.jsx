@@ -83,7 +83,7 @@ const ClientReason = ({ onButtonClick }) => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Why client is seeking counseling?</h2>
+      <h2>Client’s presenting problem(S) -  Why client is seeking counseling?</h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}

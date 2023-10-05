@@ -18,7 +18,7 @@ const ClientDetailsForm = ({ onButtonClick }) => {
 
   const { formData, setFormData } = useContext(ExaminationFormContext);
 
-  const [capturedSignatures, setCapturedSignatures] = useState([]);
+  const [capturedSignatures, setCapturedSignatures] = useState("");
   const [signatureDialogOpen, setSignatureDialogOpen] = useState(false);
   // Improved the function name to be more descriptive.
   const handleFieldChange = (event) => {
@@ -154,12 +154,11 @@ const ClientDetailsForm = ({ onButtonClick }) => {
               Signature:
             </Typography>
             <Typography variant="body4" mt={4} gutterBottom>
-              {capturedSignatures.length > 1 && (
                 <SignatureImage
-                  src={capturedSignatures[0]}
+                  src={capturedSignatures}
                   alt="Signature 2"
                 />
-              )}
+            
             </Typography>
           </Box>
         </Box>
