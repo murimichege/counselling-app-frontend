@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Typography,
@@ -39,7 +39,10 @@ const SafetyContractForm = () => {
   const [contractAccepted, setContractAccepted] = useState(false);
   const [witness, setWitness] = useState("");
   const [currentDate, setCurrentDate] = useState("");
-
+  useEffect(() => {
+    const currentDate = new Date().toLocaleDateString(); // Get the current date
+    setCurrentDate(currentDate); // Update the state with the current date
+  }, []);
   const handleInputChange = (e, fieldName) => {
     const value = e.target.value;
   
@@ -523,11 +526,11 @@ const SafetyContractForm = () => {
               label="Date"
               name="Date"
               variant="standard"
-              value={CurrentDate}
+              value={currentDate}
               inputProps={{
                 style: { height: "auto" },
               }}
-              onChange={(e) => handleInputChange(e, "crisisHotline")}
+              onChange={(e) => handleInputChange(e, "currentDate")}
               sx={{
                 marginRight: "20px",
                 width: "240px",

@@ -78,7 +78,7 @@ const StepTwo = ({ onButtonClick }) => {
     }));
   };
   const EmotionsDisplayItems = [
-    "Intense feelings (sad evidenced by facial expression,tearful and crying,Grooming &  Hygiene",
+    "Intense feelings (sad evidenced by facial expression,tearful and crying",
     "Irritability",
     "Anxious",
     "Is the affect discrepant from the situation he or she is in",
@@ -92,10 +92,7 @@ const StepTwo = ({ onButtonClick }) => {
   ]
 
   const CognitivefunctioningItems = [
-    "Clients intelligence – check on vocabulary , demonstrated complexity of thought", 
-       "Check for unwanted behavior (tics, unusual movement,repetitive motion)",
-    "Non-verbal behavior",
-    "Is level of activity within expected ranges?",
+    "Clients intelligence – check on vocabulary, demonstrated complexity of thought"
   ];
 
   const ThoughtcontentItems = [
@@ -112,7 +109,7 @@ const StepTwo = ({ onButtonClick }) => {
   ];
 
   const PerceptualdisturbancesItems = [
-    "Evidence of hallucinations – sensory experiences not experienced by others ( seeing, hearing ( common ),tasting , touching experiences )", 
+    "Evidence of hallucinations – sensory experiences not experienced by others ( seeing, hearing,tasting , touching experiences )", 
     "Rule out hallucination that has an organic cause", 
     "Delusions – ideas that are firmly held yet unrealistic or not shared by others ; ideas of being persecuted , ideas of self – grandeur , ideas of reference", 
     "Illusions – are distortions of existing sensory stimuli"];
@@ -127,7 +124,7 @@ const StepTwo = ({ onButtonClick }) => {
 
       <Accordion
         expanded={accordionStates.EmotionsDisplay}
-        onChange={handleAccordionChange("EmotionsDisplay")}
+        onChange={handleAccordionChange("Emotions Display")}
       >
         <AccordionSummary
           expandIcon={
@@ -138,7 +135,7 @@ const StepTwo = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="EmotionsDisplay" />
+          <ListItemText primary="Affect/Display Of Emotions" />
         </AccordionSummary>
         <AccordionDetails>
           {EmotionsDisplayItems.map((item, index) => (
@@ -320,7 +317,7 @@ const StepTwo = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="Cognitivefunctioning" />
+          <ListItemText primary="Cognitive Functioning" />
         </AccordionSummary>
         <AccordionDetails>
           {CognitivefunctioningItems.map((item, index) => (
@@ -411,7 +408,7 @@ const StepTwo = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="Thoughtcontent" />
+          <ListItemText primary="Thought Content" />
         </AccordionSummary>
         <AccordionDetails>
           {ThoughtcontentItems.map((item, index) => (
@@ -502,7 +499,7 @@ const StepTwo = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="Perceptualdisturbances" />
+          <ListItemText primary="Perceptual Disturbances" />
         </AccordionSummary>
         <AccordionDetails>
           {PerceptualdisturbancesItems.map((item, index) => (
@@ -602,7 +599,7 @@ const StepTwo = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagetwo")}
+          onClick={() => onButtonClick("pagethree")}
         >
           Save Client Details
         </Button>

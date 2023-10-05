@@ -1,47 +1,51 @@
-import React, { useState, useContext } from "react";
-import "./index.css";
+import React, { useContext, useState } from "react";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import {
-  Box,
-  Button,
-  ListItem,
-  Checkbox,
-  List,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import Collapse from "@mui/material/Collapse";
-import { ExaminationFormContext } from './Examinationform';
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { ExaminationFormContext } from "./Examinationform";
+import SignatureTextField from "../../components/signature"; 
 
-const StepFour = ({ onButtonClick }) => {
+const SignatureImage = styled("img")({
+  width: "40%",
+  maxWidth: "150px", // Adjust the max width as needed
+});
+
+// Renamed the component for better clarity.
+const ClientDetailsForm = ({ onButtonClick }) => {
+
   const { formData, setFormData } = useContext(ExaminationFormContext);
-  const [goalsMetOpen, setGoalsMetOpen] = useState(true);
-  const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
-  const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
-  const [checked, setChecked] = useState([1]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
-
-  const handleInputChange = (event) => {
+  const [capturedSignatures, setCapturedSignatures] = useState([]);
+  const [signatureDialogOpen, setSignatureDialogOpen] = useState(false);
+  // Improved the function name to be more descriptive.
+  const handleFieldChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
+ 
+  // Open the signature dialog
+  const openSignatureDialog = () => {
+    setSignatureDialogOpen(true);
+  };
 
-  const Item = styled(Paper)(({ theme }) => ({
+  // Close the signature dialog
+  const closeSignatureDialog = () => {
+    setSignatureDialogOpen(false);
+  };
+
+  // Handle saving the captured signature and closing the dialog
+  const handleSignatureCapture = (capturedImage) => {
+    setCapturedSignatures([...capturedSignatures, capturedImage]);
+    closeSignatureDialog();
+  };
+
+  console.log("formData", formData);
+
+  // Styled component for consistent styling.
+  const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(2),
@@ -54,13 +58,11 @@ const StepFour = ({ onButtonClick }) => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Client Progress</h2>
-      <p style={{ color: "#C0C0C0" }}>Goals met</p>
       <div
         className="center ph4 selectionDiv"
-        style={{ height: "46%", display: "inline-block" }}
+        style={{ height: "46%", display: "flow" }}
       >
-        {/* Goals Met section */}
+        {/* Using flexbox for improved layout */}
         <Box
           sx={{
             display: "flex",
@@ -68,34 +70,105 @@ const StepFour = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-          <ListItemButton onClick={() => setGoalsMetOpen(!goalsMetOpen)}>
-            <ListItemText primary="Goals met" />
-            {goalsMetOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsMetOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText primary={`Line item ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
+          <TextField
+            id="counselors-name"
+            label="Counselor's Name" // Corrected the label text
+            name="Counselorsname" // Updated the name attribute
+            variant="standard"
+            value={formData.Counselorsname}
+            onChange={handleFieldChange}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
+          />
+          <TextField
+            id="date"
+            label="Date"
+            name="Date"
+            variant="standard"
 
-        {/* Goals Being Worked On section */}
+            value={formData.Date}
+            onChange={handleFieldChange}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
+          />
+        </Box>
+        <Box
+        mt={4}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+
+          }}
+        >
+          <TextField
+            id="client-name"
+            variant="standard"
+            label="Client's Name" // Corrected the label text
+            name="Clientname" // Updated the name attribute
+            value={formData.ClientName}
+            onChange={handleFieldChange}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
+          />
+          <TextField
+            id="ID"
+            label="ID Number"
+            name="IdNumber"
+            variant="standard"
+
+            value={formData.IdNumber}
+            onChange={handleFieldChange}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
+          />
+        </Box>
+        <Box
+                mt={4}
+
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          
+          <Box>
+            <Typography variant="body4" mt={4} gutterBottom>
+              Signature:
+            </Typography>
+            <Typography variant="body4" mt={4} gutterBottom>
+              {capturedSignatures.length > 1 && (
+                <SignatureImage
+                  src={capturedSignatures[0]}
+                  alt="Signature 2"
+                />
+              )}
+            </Typography>
+          </Box>
+        </Box>
+         {/* Signature Capture Dialog */}
+         <SignatureTextField
+          open={signatureDialogOpen}
+          onClose={closeSignatureDialog}
+          onSaveSignature={handleSignatureCapture}
+        />
         <Box
           sx={{
             display: "flex",
@@ -103,100 +176,42 @@ const StepFour = ({ onButtonClick }) => {
             alignItems: "center",
           }}
         >
-         <ListItemButton onClick={() => setGoalsBeingWorkedOnOpen(!goalsBeingWorkedOnOpen)}>
-            <ListItemText primary="Goals Being Worked" />
-            {goalsBeingWorkedOnOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsBeingWorkedOnOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%",  minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText primary={`Goal ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
+          {/* You can add more fields here if needed */}
         </Box>
-
-        {/* Goals Not Met section */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-              <ListItemButton onClick={() => setGoalsNotMetOpen(!goalsNotMetOpen)}>
-            <ListItemText primary="Goals Not Met " />
-            {goalsNotMetOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsNotMetOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText primary={`Line item ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-
-        {/* Recommendation component */}
-        {/* ... (your Recommendation component) */}
       </div>
-
-      {/* Buttons */}
-      <Box 
-sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
->
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagetwo")}
+      <Box
+        sx={{
+          marginTop: "40px",
+          justifyContent: "space-between",
+          display: "flex",
+        }}
       >
-       Cancel
-      </Button>
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="button" // Specify the button type
+          variant="contained"
+          onClick={() => onButtonClick("pagetwo")}
+        >
+          Cancel
+        </Button>
+        <Button type="button" 
+                  className="f6 grow br2 ph3 pv2 mb2 dib white"
 
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagefour")}
-      >
-        Save Client Details.
-      </Button>
-
-</Box>
-     
+        // Specify the button type
+          variant="contained" onClick={openSignatureDialog}>
+            Sign
+          </Button>
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="button" // Specify the button type
+          variant="contained"
+          onClick={() => onButtonClick("pagetwo")}
+        >
+          Save Client Details
+        </Button>
+      </Box>
     </main>
   );
 };
 
-export default StepFour;
+export default ClientDetailsForm;

@@ -5,21 +5,13 @@ import { ProgressBar, Step } from "react-step-progress-bar";
 const MultiStepProgressBar = ({ page, onPageNumberClick }) => {
   var stepPercentage = 0;
   if (page === "pageone") {
-    stepPercentage = 12.5;
+    stepPercentage = 25.0;
   } else if (page === "pagetwo") {
-    stepPercentage = 25;
+    stepPercentage = 50.0;
   } else if (page === "pagethree") {
-    stepPercentage = 37.5;
+    stepPercentage = 75.0;
   } else if (page === "pagefour") {
-    stepPercentage = 50;
-  } else if (page === "pagefive") {
-    stepPercentage = 62.5;
-  } else if (page === "pagesix") {
-    stepPercentage = 75;
-  } else if (page === "pageseven") {
-    stepPercentage = 87.5;
-  } else if (page === "pageeight") {
-    stepPercentage = 100;
+    stepPercentage = 100.0;
   } else {
     stepPercentage = 0;
   }
@@ -61,46 +53,6 @@ const MultiStepProgressBar = ({ page, onPageNumberClick }) => {
           <div
             className={`indexedStep ${accomplished ? "accomplished" : null}`}
             onClick={() => onPageNumberClick("4")}
-          >
-            {index + 1}
-          </div>
-        )}
-      </Step>
-      <Step>
-        {({ accomplished, index }) => (
-          <div
-            className={`indexedStep ${accomplished ? "accomplished" : null}`}
-            onClick={() => onPageNumberClick("5")}
-          >
-            {index + 1}
-          </div>
-        )}
-      </Step>
-      <Step>
-        {({ accomplished, index }) => (
-          <div
-            className={`indexedStep ${accomplished ? "accomplished" : null}`}
-            onClick={() => onPageNumberClick("6")}
-          >
-            {index + 1}
-          </div>
-        )}
-      </Step>
-      <Step>
-        {({ accomplished, index }) => (
-          <div
-            className={`indexedStep ${accomplished ? "accomplished" : null}`}
-            onClick={() => onPageNumberClick("7")}
-          >
-            {index + 1}
-          </div>
-        )}
-      </Step>
-      <Step>
-        {({ accomplished, index }) => (
-          <div
-            className={`indexedStep ${accomplished ? "accomplished" : null}`}
-            onClick={() => onPageNumberClick("8")}
           >
             {index + 1}
           </div>
