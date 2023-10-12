@@ -566,7 +566,7 @@ const SafetyContractForm = () => {
                 }} onClick={openSignatureDialog}>
             Sign 
           </Button>
-              
+          *this contract is renewable after expiry of specified period*
             </Box>
           </Tooltip>
         </div>

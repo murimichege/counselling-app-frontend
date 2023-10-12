@@ -131,13 +131,13 @@ const StepOne = ({ onButtonClick }) => {
               key={index}
             >
               <AccordionSummary
-                expandIcon={
-                  accordionStates[`appearanceOpen${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
+                // expandIcon={
+                //   accordionStates[`appearanceOpen${index}`] ? (
+                //     <ExpandLessIcon />
+                //   ) : (
+                //     <ExpandMoreIcon />
+                //   )
+                // }
               >
                 <ListItemText primary={item} />
               </AccordionSummary>

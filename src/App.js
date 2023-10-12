@@ -30,10 +30,12 @@ import CounselingRecord from "./scenes/counsellingrecord/CounselingRecord";
 import OnGoingCounseling from "./scenes/ongoingcounselling/OngoingCounselingRecord";
 import ExaminationForm from "./scenes/examinationform/Examinationform";
 import ClientItem from "./scenes/clientmanagement/ClientItem"
+import ReportTabs from "./scenes/reports/tabs";
+import ReportBuilder from "./scenes/reports/reportBuilder";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(true);
+  const [isPrivate, setisPrivate] = useState(false);
 
   return (
     // <ErrorBoundary>
@@ -84,7 +86,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/sessions" element={<Sessions />} />
                   <Route path="/session/:id" element={<SessionItem />} />
-                  <Route path="/reports" element={<Reports />} />
+                  <Route path="/reports" element={<ReportBuilder />} />
                   <Route
                     path="/clientIntakeForm"
                     element={<ClientIntakeForm />}

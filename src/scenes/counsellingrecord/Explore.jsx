@@ -84,13 +84,50 @@ const Explore = ({ onButtonClick }) => {
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
       <h2>
-        Explore for how long this has been going on and how this has affected
-        the client’s?
+        Explore for how long this has been going on and 
+                
+        how this has affected the client’s?
       </h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
       >
+         <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div">
+         Explore for how long this has been going on and 
+        </Typography>
+        <Box
+          sx={
+            {
+              // mb: `${theme.spacing(3)}`
+            }
+          }
+          item
+          xs={12}
+          sm={8}
+          md={9}
+        >
+          <EditorWrapper>
+            <ReactQuill value={editorContent} onChange={handleEditorChange} />
+          </EditorWrapper>
+        </Box>
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div">
+        how this has affected the client’s?
+        </Typography>
+        <Box
+          sx={
+            {
+              // mb: `${theme.spacing(3)}`
+            }
+          }
+          item
+          xs={12}
+          sm={8}
+          md={9}
+        >
+          <EditorWrapper>
+            <ReactQuill value={editorContent} onChange={handleEditorChange} />
+          </EditorWrapper>
+        </Box>
         <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
           i. Current functioning
         </Typography>
