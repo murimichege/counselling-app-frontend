@@ -18,6 +18,8 @@ function GeneralInfo() {
         >
           <MenuItem value={10}>Summer</MenuItem>
           <MenuItem value={20}>Spring</MenuItem>
+          <MenuItem value={30}>Fall</MenuItem>
+
         </TextField>
         <TextField select label="Year" name="Year" sx={{ width: "20%" }}>
           <MenuItem value={10}>2023</MenuItem>
@@ -51,8 +53,34 @@ function GeneralInfo() {
         />
         <TextField label="%" />
       </Grid>
-
-     
+      <Grid item xs={12} mt={3}>
+        <Typography variant="subtitle1">
+        Access by Nationality
+                </Typography>{" "}
+        {"  "}
+        <TextField
+          label="Total No. Of Clients"
+          sx={{ gridColumn: "span 2", marginRight: "30px" }}
+        />
+                <TextField
+          label="Total No. Of Clients"
+          sx={{ gridColumn: "span 2", marginRight: "30px" }}
+        />
+        <TextField label="%" />
+      </Grid>
+      <Grid item xs={12} mt={3}>
+        <TextField
+          mr={3}
+          sx={{ gridColumn: "span 2", marginRight: "30px" }}
+          label="Male"
+        />
+        <TextField
+          ml={3}
+          sx={{ gridColumn: "span 2", marginRight: "30px" }}
+          label="Female"
+        />
+        <TextField label="Total" />
+      </Grid>
     </Grid>
   );
 }
