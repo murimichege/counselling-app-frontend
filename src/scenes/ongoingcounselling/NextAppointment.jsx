@@ -111,7 +111,7 @@ const NextAppointment = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagethree")}
+          onClick={() => onButtonClick("pageone")}
         >
           Save Referral and Close Record.
         </Button>

@@ -3,20 +3,21 @@ import ClientDetails from "./ClientDetails";
 import ClientReason from "./ClientReason";
 import Recommendation from "./Recommendation";
 import CounsellorSignature from "./CounsellorSignature";
-import Explore from './Explore'
+import Explore from "./Explore";
 import History from "./Progress";
-import Goals from './Assignment'
+import Goals from "./Goals";
 import FinalStep from "./FinalStep";
 import MultiStepProgressBar from "./Multistepbar/MultiStepProgressBar";
 import Assessment from "./Assessment";
 import TreatmentPlan from "./Outcome";
 import Referrals from "./NextAppointment";
-import InitialDiagnosis from './InitialDiagnosis'
-import Progress from './Progress'
-import Assignment from './Assignment'
-import Outcome from './Outcome'
+import InitialDiagnosis from "./InitialDiagnosis";
+import Progress from "./Progress";
+import Assignment from "./Assignment";
+import Outcome from "./Outcome";
 import Prognosis from "./Prognosis";
-import NextAppointment from './NextAppointment'
+import NextAppointment from "./NextAppointment";
+import SessionIntervention from "./SessionIntervention";
 // Create a new context
 export const CounsellingRecordContext = createContext();
 function OnGoingCounseling() {
@@ -66,12 +67,14 @@ function OnGoingCounseling() {
           {
             pageone: <ClientDetails onButtonClick={nextPage} />,
             pagetwo: <InitialDiagnosis onButtonClick={nextPage} />,
-            pagethree:  <Goals onButtonClick={nextPage} />,
+            pagethree: <Goals onButtonClick={nextPage} />,
             pagefour: <Progress onButtonClick={nextPage} />,
-            pagefive: <Assignment onButtonClick={nextPage} />,
-            pagesix: <Outcome onButtonClick={nextPage} />,
-            pageseven: <Prognosis onButtonClick={nextPage} />,
-            pageeight: <NextAppointment onButtonClick={nextPage} />,
+            pagefive: <SessionIntervention onButtonClick={nextPage} />,
+
+            pagesix: <Assignment onButtonClick={nextPage} />,
+            pageseven: <Outcome onButtonClick={nextPage} />,
+            pageeight: <Prognosis onButtonClick={nextPage} />,
+            pagenine: <NextAppointment onButtonClick={nextPage} />,
           }[page]
         }
       </div>

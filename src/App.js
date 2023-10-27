@@ -86,7 +86,7 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/sessions" element={<Sessions />} />
                   <Route path="/session/:id" element={<SessionItem />} />
-                  <Route path="/reports" element={<ReportBuilder />} />
+                  <Route path="/reports" element={<ReportTabs />} />
                   <Route
                     path="/clientIntakeForm"
                     element={<ClientIntakeForm />}
