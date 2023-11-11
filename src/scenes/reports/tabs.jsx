@@ -5,7 +5,9 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import ReportBuilder from './reportBuilder';
-import Reports from './index'
+// import Reports from './index'
+// import CounselingByMajorTable from './ReportTable/Counselingbymajor';
+import General from './ReportTable/General';
 export default function ReportTabs() {
   const [value, setValue] = React.useState('1');
 
@@ -23,7 +25,7 @@ export default function ReportTabs() {
           </TabList>
         </Box>
         <TabPanel value="1"><ReportBuilder/></TabPanel>
-        <TabPanel value="2"><Reports/></TabPanel>
+        <TabPanel value="2"><General/></TabPanel>
       </TabContext>
     </Box>
   );

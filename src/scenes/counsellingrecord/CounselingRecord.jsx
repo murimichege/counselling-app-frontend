@@ -11,6 +11,7 @@ import MultiStepProgressBar from "./Multistepbar/MultiStepProgressBar";
 import Assessment from "./Assessment";
 import TreatmentPlan from "./TreatmentPlan";
 import Referrals from "./Referrals";
+import AssessmentOptions from "./AssessmentOptions";
 // Create a new context
 export const CounsellingRecordContext = createContext();
 function CounselingRecord() {
@@ -62,7 +63,7 @@ function CounselingRecord() {
             pagetwo: <ClientReason onButtonClick={nextPage} />,
             pagethree: <Explore onButtonClick={nextPage} />,
             pagefour: <History onButtonClick={nextPage} />,
-            pagefive: <Assessment onButtonClick={nextPage} />,
+            pagefive: <AssessmentOptions onButtonClick={nextPage} />,
             pagesix: <Goals onButtonClick={nextPage} />,
             pageseven: <TreatmentPlan onButtonClick={nextPage} />,
             pageeight: <Referrals onButtonClick={nextPage} />,

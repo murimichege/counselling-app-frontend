@@ -179,7 +179,7 @@ const StudentBookingForm = () => {
                   fullWidth
                   // variant="filled"
                   type="text"
-                  label="Notes"
+                  label="any other comment"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Notes}

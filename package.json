@@ -28,7 +28,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "aws-sdk": "^2.1363.0",
-    "chart.js": "^3.9.1",
+    "chart.js": "^4.4.0",
     "country-region-data": "^2.7.0",
     "country-state-city": "^3.1.2",
     "crypto": "^1.0.1",

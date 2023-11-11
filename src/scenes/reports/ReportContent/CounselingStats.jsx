@@ -53,6 +53,25 @@ function CounselingStats() {
   const [editorContent, setEditorContent] = useState([]); // State to store editor content
   const [dense, setDense] = React.useState(false);
 
+    // States for Total Number of Clients
+    const [studentCount, setStudentCount] = useState(0);
+    const [staffCount, setStaffCount] = useState(0);
+    const [facultyCount, setFacultyCount] = useState(0);
+    const [familyCount, setFamilyCount] = useState(0);
+    const [alumniCount, setAlumniCount] = useState(0);
+  
+    // States for Family Therapy
+    const [familyTherapySessions, setFamilyTherapySessions] = useState(0);
+  
+    // States for Marital Therapy
+    const [maritalTherapySessions, setMaritalTherapySessions] = useState(0);
+  
+    // States for Group Counseling
+    const [maleGroupCount, setMaleGroupCount] = useState(0);
+    const [femaleGroupCount, setFemaleGroupCount] = useState(0);
+    const [totalGroupCount, setTotalGroupCount] = useState(0);
+    const [totalSessionsCount, setTotalSessionsCount] = useState(0);
+
   // Handler to update the state when editor content changes
   const handleEditorChange = (content) => {
     setEditorContent(content);
@@ -822,7 +841,10 @@ function CounselingStats() {
           sx={{ gridColumn: "span 2", marginRight: "30px" }}
           label="Number of Students. "
         />
-     
+     <Button variant="outlined">
+  Add Presentation
+
+</Button>
       </Grid>
 
 
@@ -847,13 +869,17 @@ function CounselingStats() {
           sx={{ gridColumn: "span 2", marginRight: "30px" }}
           label=" To Counseling Centre."
         />
-        <TextField
+        {/* <TextField
           ml={3}
           type="text"
           sx={{ gridColumn: "span 2", marginRight: "30px" }}
           label="  Events Organized."
-        />
-     
+        /> */}
+      
+      <Button variant="outlined">
+  Add Referral
+
+</Button>
       </Grid>
 
       <Grid item  mt={3}>
@@ -932,7 +958,10 @@ function CounselingStats() {
     sx={{ gridColumn: "span 4", marginRight: "30px" }}
     label="Topic Presented  "
   />
+  <Button variant="outlined">
+          Add Event
 
+        </Button>
 </Grid>
 <Grid item mt={3}>
         <Typography variant="h4">Findings in the Semester.</Typography>{" "}

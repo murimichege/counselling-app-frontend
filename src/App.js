@@ -87,8 +87,7 @@ function App() {
                   <Route path="/sessions" element={<Sessions />} />
                   <Route path="/session/:id" element={<SessionItem />} />
                   <Route path="/reports" element={<ReportTabs />} />
-                  <Route
-                    path="/clientIntakeForm"
+                  <Route             path="/clientIntakeForm"
                     element={<ClientIntakeForm />}
                   />
                   <Route path="/form" element={<Form />} />
