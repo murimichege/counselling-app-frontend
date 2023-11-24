@@ -14,27 +14,65 @@ import {
 import { Line } from "react-chartjs-2";
 
 const semesters = ["Spring", "Summer", "Fall"];
+const years = Array.from({ length: 10 }, (_, index) => 2026 - index); // Generates years from 2017 to 2026
 
 const sampleData = {
   Spring: [
-    { year: 2022, maleCount: 40, femaleCount: 50, totalCount: 90 },
-    { year: 2023, maleCount: 50, femaleCount: 70, totalCount: 120 },
+    { year: 2015, maleCount: 120, femaleCount: 55, totalCount: 175 },
+    { year: 2016, maleCount: 300, femaleCount: 350, totalCount: 650 },
+    { year: 2017, maleCount: 210, femaleCount: 82, totalCount: 292 },
+    { year: 2018, maleCount: 120, femaleCount: 89, totalCount: 209 },
+    { year: 2019, maleCount: 230, femaleCount: 305, totalCount: 535 },
+    { year: 2020, maleCount: 137, femaleCount: 305, totalCount: 442 },
+    { year: 2021, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
+    { year: 2022, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 400) + 200, totalCount: Math.floor(Math.random() * 600) + 300 },
+    { year: 2023, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
   ],
   Summer: [
-    { year: 2022, maleCount: 30, femaleCount: 40, totalCount: 70 },
-    { year: 2023, maleCount: 40, femaleCount: 60, totalCount: 100 },
+    { year: 2015, maleCount: 120, femaleCount: 55, totalCount: 175 },
+    { year: 2016, maleCount: 300, femaleCount: 350, totalCount: 650 },
+    { year: 2017, maleCount: 210, femaleCount: 82, totalCount: 292 },
+    { year: 2018, maleCount: 120, femaleCount: 89, totalCount: 209 },
+    { year: 2019, maleCount: 230, femaleCount: 305, totalCount: 535 },
+    { year: 2020, maleCount: 137, femaleCount: 305, totalCount: 442 },
+    // Reproduce random data for Summer semester...
+    { year: 2021, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
+    { year: 2022, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 400) + 200, totalCount: Math.floor(Math.random() * 600) + 300 },
+    { year: 2023, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
+    // ... Continue for other years till 2016
   ],
   Fall: [
-    { year: 2022, maleCount: 50, femaleCount: 60, totalCount: 110 },
-    { year: 2023, maleCount: 60, femaleCount: 80, totalCount: 140 },
+    { year: 2015, maleCount: 120, femaleCount: 55, totalCount: 175 },
+    { year: 2016, maleCount: 300, femaleCount: 350, totalCount: 650 },
+    { year: 2017, maleCount: 210, femaleCount: 82, totalCount: 292 },
+    { year: 2018, maleCount: 120, femaleCount: 89, totalCount: 209 },
+    { year: 2019, maleCount: 230, femaleCount: 305, totalCount: 535 },
+    { year: 2020, maleCount: 137, femaleCount: 305, totalCount: 442 },
+    // Reproduce random data for Fall semester...
+    { year: 2021, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
+    { year: 2022, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 400) + 200, totalCount: Math.floor(Math.random() * 600) + 300 },
+    { year: 2023, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
+    // ... Continue for other years till 2016
   ],
+  // Add data for other semesters...
 };
+
 
 const AttendanceTrend = () => {
   const [currentSemester, setCurrentSemester] = useState("Fall");
+  const [year1, setYear1] = useState(2021);
+  const [year2, setYear2] = useState(2020);
 
   const handleChangeSemester = (event) => {
     setCurrentSemester(event.target.value);
+  };
+
+  const handleChangeYear1 = (event) => {
+    setYear1(event.target.value);
+  };
+
+  const handleChangeYear2 = (event) => {
+    setYear2(event.target.value);
   };
 
   const renderTable = () => {
@@ -113,6 +151,22 @@ const AttendanceTrend = () => {
         {semesters.map((semester) => (
           <MenuItem key={semester} value={semester}>
             {semester}
+          </MenuItem>
+        ))}
+      </Select>
+
+      <Select value={year1} onChange={handleChangeYear1}>
+        {years.map((year) => (
+          <MenuItem key={year} value={year}>
+            {year}
+          </MenuItem>
+        ))}
+      </Select>
+
+      <Select value={year2} onChange={handleChangeYear2}>
+        {years.map((year) => (
+          <MenuItem key={year} value={year}>
+            {year}
           </MenuItem>
         ))}
       </Select>
