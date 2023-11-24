@@ -8,7 +8,15 @@ const familydata = [
     total: 30,
   },
   {
-    title: "Marital Therapy",
+    title: "Couple/Marital Therapy",
+    total: 20,
+  },
+  {
+    title: "Individual therapy",
+    total: 20,
+  },
+  {
+    title: "Group therapy",
     total: 20,
   },
 

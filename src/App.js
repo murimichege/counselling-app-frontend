@@ -7,17 +7,14 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/clientmanagement/Clients";
 // import Invoices from "./scenes/Payments";
-import Reports from "./scenes/reports";
 import Bar from "./scenes/bar";
 import Form from "./scenes/form";
 // import Line from "./scenes/line";
 // import Pie from "./scenes/pie";
 // import FAQ from "./scenes/faq";
-import Geography from "./scenes/geography";
 import ConsentForm from "./scenes/consentform";
 import Sessions from "./scenes/sessionmanagement/Sessions";
 import SessionItem from "./scenes/sessionmanagement/SessionItem";
-
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./scenes/auth/Login";
 import IntroPage from "./scenes/auth/intro";
@@ -29,7 +26,7 @@ import SafetyContractForm from "./scenes/safetycontract";
 import CounselingRecord from "./scenes/counsellingrecord/CounselingRecord";
 import OnGoingCounseling from "./scenes/ongoingcounselling/OngoingCounselingRecord";
 import ExaminationForm from "./scenes/examinationform/Examinationform";
-import ClientItem from "./scenes/clientmanagement/ClientItem"
+import ClientItem from "./scenes/clientmanagement/ClientItem";
 import ReportTabs from "./scenes/reports/tabs";
 import ReportBuilder from "./scenes/reports/reportBuilder";
 function App() {
@@ -87,7 +84,8 @@ function App() {
                   <Route path="/sessions" element={<Sessions />} />
                   <Route path="/session/:id" element={<SessionItem />} />
                   <Route path="/reports" element={<ReportTabs />} />
-                  <Route             path="/clientIntakeForm"
+                  <Route
+                    path="/clientIntakeForm"
                     element={<ClientIntakeForm />}
                   />
                   <Route path="/form" element={<Form />} />

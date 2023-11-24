@@ -5,31 +5,42 @@ import { Bar } from "react-chartjs-2";
 const data = [
   {
     title: "Student",
+    Male:20,
+    Female:20,
     total: 30,
   },
   {
     title: "Staff",
+    Male:20,
+    Female:20,
     total: 20,
   },
   {
     title: "Faculty",
+    Male:20,
+    Female:20,
     total: 20,
   },
   {
     title: "Family",
+    Male:20,
+    Female:20,
     total: 15,
   },
   {
     title: "Alumni",
+    Male:20,
+    Female:20,
     total: 10,
   },
 ];
 
 const CounselingStatsTable = () => {
-  // Table Data
   const tableData = data.map((row, index) => (
     <TableRow key={index}>
       <TableCell>{row.title}</TableCell>
+      <TableCell>{row.Male}</TableCell>
+      <TableCell>{row.Female}</TableCell>
       <TableCell>{row.total}</TableCell>
     </TableRow>
   ));
@@ -46,6 +57,17 @@ const CounselingStatsTable = () => {
         data: data.map((row) => row.total),
         backgroundColor: barColors,
       },
+      {
+        label: "Female",
+        data: data.map((row) => row.Female),
+        backgroundColor: barColors,
+      },
+      {
+        label: "Male",
+        data: data.map((row) => row.Male),
+        backgroundColor: barColors,
+      },
+
     ],
   };
 
@@ -72,6 +94,7 @@ const CounselingStatsTable = () => {
       </Button>
     </Box>
      
+    <Typography variant="h4">General Statistics</Typography>
 
       <TableContainer component={Paper}>
         <Table>

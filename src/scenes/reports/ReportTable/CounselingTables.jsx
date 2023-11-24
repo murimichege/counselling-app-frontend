@@ -5,13 +5,16 @@ const data = [
   { category: "Online Counseling", male: 10, female: 15, total: 25 },
   { category: "Email Counseling", male: 8, female: 12, total: 20 },
   { category: "Telephone Counseling", male: 6, female: 9, total: 15 },
-  { category: "Client Flow", male: 6, female: 9, total: 15 },
 
 ];
-
 const CounselingTables = () => {
+
+
   return (
-    <TableContainer component={Paper}>
+    <>
+      <Typography variant="h4">Medium of Counseling
+  </Typography>
+  <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
@@ -35,6 +38,8 @@ const CounselingTables = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </>
+
   );
 };
 

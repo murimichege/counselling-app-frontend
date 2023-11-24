@@ -47,7 +47,7 @@ const ServiceAccess = () => {
   ));
 
   // Custom colors for each bar
-  const barColors = ["blue", "green", "orange", "purple"];
+  const barColors = ["blue", "green", "orange"];
 
   // Chart Data
   const chartData = {
@@ -84,7 +84,7 @@ const ServiceAccess = () => {
 
   return (
     <>
-      <Typography variant="h3">Access to Counseling by Student Level</Typography>
+      <Typography variant="h4">Access to Counseling by Student Level</Typography>
 
       <TableContainer component={Paper}>
         <Table>
