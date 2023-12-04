@@ -19,7 +19,7 @@ const years = Array.from({ length: 10 }, (_, index) => 2026 - index); // Generat
 const sampleData = {
   Spring: [
     { year: 2015, maleCount: 120, femaleCount: 55, totalCount: 175 },
-    { year: 2016, maleCount: 300, femaleCount: 350, totalCount: 650 },
+    { year: 2016, maleCount: 190, femaleCount: 250, totalCount: 340 },
     { year: 2017, maleCount: 210, femaleCount: 82, totalCount: 292 },
     { year: 2018, maleCount: 120, femaleCount: 89, totalCount: 209 },
     { year: 2019, maleCount: 230, femaleCount: 305, totalCount: 535 },
@@ -30,20 +30,18 @@ const sampleData = {
   ],
   Summer: [
     { year: 2015, maleCount: 120, femaleCount: 55, totalCount: 175 },
-    { year: 2016, maleCount: 300, femaleCount: 350, totalCount: 650 },
+    { year: 2016, maleCount: 190, femaleCount: 250, totalCount: 340 },
     { year: 2017, maleCount: 210, femaleCount: 82, totalCount: 292 },
     { year: 2018, maleCount: 120, femaleCount: 89, totalCount: 209 },
     { year: 2019, maleCount: 230, femaleCount: 305, totalCount: 535 },
     { year: 2020, maleCount: 137, femaleCount: 305, totalCount: 442 },
-    // Reproduce random data for Summer semester...
     { year: 2021, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
     { year: 2022, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 400) + 200, totalCount: Math.floor(Math.random() * 600) + 300 },
     { year: 2023, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
-    // ... Continue for other years till 2016
   ],
   Fall: [
     { year: 2015, maleCount: 120, femaleCount: 55, totalCount: 175 },
-    { year: 2016, maleCount: 300, femaleCount: 350, totalCount: 650 },
+    { year: 2016, maleCount: Math.floor(Math.random() * 200) + 100, femaleCount: Math.floor(Math.random() * 200) + 100, totalCount: Math.floor(Math.random() * 400) + 200 },
     { year: 2017, maleCount: 210, femaleCount: 82, totalCount: 292 },
     { year: 2018, maleCount: 120, femaleCount: 89, totalCount: 209 },
     { year: 2019, maleCount: 230, femaleCount: 305, totalCount: 535 },

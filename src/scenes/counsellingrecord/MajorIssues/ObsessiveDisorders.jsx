@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import {
-  Box,
-  Button,
   ListItem,
   Checkbox,
   List,
@@ -10,36 +8,43 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  TextField,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CommentIcon from "@mui/icons-material/Comment";
 import { CounsellingRecordContext } from "../CounselingRecord";
 
-const SuicidalBehaviorDisorder = () => {
+const ObsessiveDisorders = () => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [accordionStates, setAccordionStates] = useState({
-    NonSuicidalSelfinjuryorharm  : true,
-    SuicidalIdeations: true,
-    strugglewiththeanguish: true,
-    Suicidalattempt:true,
+    ObsessiveCompulsiveDisorder   : true,
+    BodyWeightIssues  : true,
+    BodyDysphormicDisorder: true,
+    HoardingDisorder : true, 
+    Trichotillomania: true,
+    Excoriation: true,
+    MedicationInduced: true
+
   });
   const [checked, setChecked] = useState([1]);
   const [commentInputOpen, setCommentInputOpen] = useState({
-    NonSuicidalSelfinjuryorharm  : true,
-    SuicidalIdeations: true,
-    strugglewiththeanguish: true,
-    Suicidalattempt:true
+     ObsessiveCompulsiveDisorder   : true,
+    BodyWeightIssues  : true,
+    BodyDysphormicDisorder: true,
+    HoardingDisorder : true, 
+    Trichotillomania: true,
+    Excoriation: true,
+    MedicationInduced: true
+
 
   });
   const [comments, setComments] = useState({
-    NonSuicidalSelfinjuryorharm  : "",
-    SuicidalIdeations:  "",
-    strugglewiththeanguish:  "",
-    Suicidalattempt: ""
-    
-  
+    ObsessiveCompulsiveDisorder   : "",
+    BodyWeightIssues  : "",
+    BodyDysphormicDisorder: "",
+    HoardingDisorder : "", 
+    Trichotillomania: "",
+    Excoriation: "",
+    MedicationInduced: ""  
   });
 
   const handleToggle = (value) => () => {
@@ -76,10 +81,7 @@ const SuicidalBehaviorDisorder = () => {
       [section]: value,
     }));
   };
-  const NonSuicidalSelfinjuryorharmItems = ["Symptom"];
-  const SuicidalIdeationsItems = ["Symptom"];
-  const strugglewiththeanguishItems = ["Symptom"];
-  const SuicidalattemptItems = ["Symptom"];
+ 
 
 
   return (
@@ -87,41 +89,31 @@ const SuicidalBehaviorDisorder = () => {
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h3>Suicidal Behavior Disorder</h3>
+      <h3>Obsessive Compulsive and Related Disorders</h3>
 
       <Accordion
-        expanded={accordionStates.NonSuicidalSelfinjuryorharmItems}
-        onChange={handleAccordionChange("NonSuicidalSelfinjuryorharmItems")}
+        expanded={accordionStates.ObsessiveCompulsiveDisorder}
+        onChange={handleAccordionChange("ObsessiveCompulsiveDisorder")}
       >
         <AccordionSummary
           expandIcon={
-            accordionStates.NonSuicidalSelfinjuryorharmItems ? (
+            accordionStates.ObsessiveCompulsiveDisorder ? (
               <ExpandLessIcon />
             ) : (
               <ExpandMoreIcon />
             )
           }
         >
-          <ListItemText primary="NonSuicidalSelfinjuryorharm" />
+          <ListItemText primary="Obsessive Compulsive Disorder" />
         </AccordionSummary>
         <AccordionDetails>
-          {NonSuicidalSelfinjuryorharmItems.map((item, index) => (
+   
+
             <Accordion
-              expanded={accordionStates[`NonSuicidalSelfinjuryorharm${index}`]}
-              onChange={handleAccordionChange(`NonSuicidalSelfinjuryorharm${index}`)}
-              key={index}
+              expanded={accordionStates[`ObsessiveCompulsiveDisorder`]}
+              onChange={handleAccordionChange(`ObsessiveCompulsiveDisorder`)}
             >
-              <AccordionSummary
-                // expandIcon={
-                //   accordionStates[`LowerAcademicAchievementItemsOpen${index}`] ? (
-                //     <ExpandLessIcon />
-                //   ) : (
-                //     <ExpandMoreIcon />
-                //   )
-                // }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
+             
               <AccordionDetails>
                 <List
                   dense
@@ -190,44 +182,35 @@ const SuicidalBehaviorDisorder = () => {
                 </List>
               </AccordionDetails>
             </Accordion>
-          ))}
+    
         </AccordionDetails>
       </Accordion>
+
       <Accordion
-        expanded={accordionStates.SuicidalIdeationsItems}
-        onChange={handleAccordionChange("SuicidalIdeationsItems")}
+        expanded={accordionStates.BodyWeightIssues}
+        onChange={handleAccordionChange("BodyWeightIssues")}
       >
         <AccordionSummary
           expandIcon={
-            accordionStates.SuicidalIdeationsItems ? (
+            accordionStates.BodyWeightIssues ? (
               <ExpandLessIcon />
             ) : (
               <ExpandMoreIcon />
             )
           }
         >
-          <ListItemText primary="Dependence" />
+          <ListItemText primary="Body Weight Issues" />
         </AccordionSummary>
         <AccordionDetails>
-          {SuicidalIdeationsItems.map((item, index) => (
+   
+
             <Accordion
-              expanded={accordionStates[`SuicidalIdeations${index}`]}
-              onChange={handleAccordionChange(`SuicidalIdeations${index}`)}
-              key={index}
+              expanded={accordionStates[`BodyWeightIssues`]}
+              onChange={handleAccordionChange(`BodyWeightIssues`)}
             >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`SuicidalIdeations${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
+            
               <AccordionDetails>
-              <List
+                <List
                   dense
                   sx={{
                     width: "100%",
@@ -290,48 +273,39 @@ const SuicidalBehaviorDisorder = () => {
                      </ListItemButton>
                      
                    </ListItem>
-
+        
                 </List>
               </AccordionDetails>
             </Accordion>
-          ))}
+    
         </AccordionDetails>
       </Accordion>
+
       <Accordion
-        expanded={accordionStates.strugglewiththeanguishItems}
-        onChange={handleAccordionChange("strugglewiththeanguishItems")}
+        expanded={accordionStates.BodyDysphormicDisorder}
+        onChange={handleAccordionChange("BodyDysphormicDisorder")}
       >
         <AccordionSummary
           expandIcon={
-            accordionStates.Withdrawalfrompeople ? (
+            accordionStates.BodyDysphormicDisorder ? (
               <ExpandLessIcon />
             ) : (
               <ExpandMoreIcon />
             )
           }
         >
-          <ListItemText primary="strugglewiththeanguishItems" />
+          <ListItemText primary="Body Dysphormic Disorder" />
         </AccordionSummary>
         <AccordionDetails>
-          {strugglewiththeanguishItems.map((item, index) => (
+   
+
             <Accordion
-              expanded={accordionStates[`strugglewiththeanguish${index}`]}
-              onChange={handleAccordionChange(`strugglewiththeanguish${index}`)}
-              key={index}
+              expanded={accordionStates[`BodyDysphormicDisorder`]}
+              onChange={handleAccordionChange(`BodyDysphormicDisorder`)}
             >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`strugglewiththeanguish${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
+             
               <AccordionDetails>
-              <List
+                <List
                   dense
                   sx={{
                     width: "100%",
@@ -394,49 +368,40 @@ const SuicidalBehaviorDisorder = () => {
                      </ListItemButton>
                      
                    </ListItem>
-           
+        
                 </List>
               </AccordionDetails>
             </Accordion>
-          ))}
+    
         </AccordionDetails>
       </Accordion>
 
+
       <Accordion
-        expanded={accordionStates.SuicidalattemptItems}
-        onChange={handleAccordionChange("SuicidalattemptItems")}
+        expanded={accordionStates.HoardingDisorder}
+        onChange={handleAccordionChange("HoardingDisorder")}
       >
         <AccordionSummary
           expandIcon={
-            accordionStates.Suicidalattempt ? (
+            accordionStates.HoardingDisorder ? (
               <ExpandLessIcon />
             ) : (
               <ExpandMoreIcon />
             )
           }
         >
-          <ListItemText primary="SuicidalattemptItems" />
+          <ListItemText primary="Hoarding Disorder" />
         </AccordionSummary>
         <AccordionDetails>
-          {SuicidalattemptItems.map((item, index) => (
+   
+
             <Accordion
-              expanded={accordionStates[`SuicidalattemptItems${index}`]}
-              onChange={handleAccordionChange(`SuicidalattemptItems${index}`)}
-              key={index}
+              expanded={accordionStates[`HoardingDisorder`]}
+              onChange={handleAccordionChange(`HoardingDisorder`)}
             >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`SuicidalattemptItems${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
+             
               <AccordionDetails>
-              <List
+                <List
                   dense
                   sx={{
                     width: "100%",
@@ -499,16 +464,300 @@ const SuicidalBehaviorDisorder = () => {
                      </ListItemButton>
                      
                    </ListItem>
-           
+        
                 </List>
               </AccordionDetails>
             </Accordion>
-          ))}
+    
         </AccordionDetails>
       </Accordion>
-      
+
+      <Accordion
+        expanded={accordionStates.Trichotillomania}
+        onChange={handleAccordionChange("Trichotillomania")}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates.Trichotillomania ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
+        >
+          <ListItemText primary="Trichotillomania – (Hair Pulling Disorder )" />
+        </AccordionSummary>
+        <AccordionDetails>
+   
+
+            <Accordion
+              expanded={accordionStates[`Trichotillomania`]}
+              onChange={handleAccordionChange(`Trichotillomania`)}
+            >
+             
+              <AccordionDetails>
+                <List
+                  dense
+                  sx={{
+                    width: "100%",
+                    minWidth: 400,
+                    bgcolor: "background.paper",
+                  }}
+                >
+                  
+                  <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Mild`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+                   <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Moderate`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+                    <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Severe`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+        
+                </List>
+              </AccordionDetails>
+            </Accordion>
+    
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion
+        expanded={accordionStates.Excoriation}
+        onChange={handleAccordionChange("Excoriation")}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates.Excoriation ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
+        >
+          <ListItemText primary="Excoriation (Skin picking) Disorder" />
+        </AccordionSummary>
+        <AccordionDetails>
+   
+
+            <Accordion
+              expanded={accordionStates[`Excoriation`]}
+              onChange={handleAccordionChange(`Excoriation`)}
+            >
+              
+              <AccordionDetails>
+                <List
+                  dense
+                  sx={{
+                    width: "100%",
+                    minWidth: 400,
+                    bgcolor: "background.paper",
+                  }}
+                >
+                  
+                  <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Mild`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+                   <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Moderate`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+                    <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Severe`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+        
+                </List>
+              </AccordionDetails>
+            </Accordion>
+    
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion
+        expanded={accordionStates.MedicationInduced}
+        onChange={handleAccordionChange("MedicationInduced")}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates.MedicationInduced ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
+        >
+          <ListItemText primary="Substance /Medication Induced Obsessive Compulsive and Related Disorders " />
+        </AccordionSummary>
+        <AccordionDetails>
+   
+
+            <Accordion
+              expanded={accordionStates[`MedicationInduced`]}
+              onChange={handleAccordionChange(`MedicationInduced`)}
+            >
+             
+              <AccordionDetails>
+                <List
+                  dense
+                  sx={{
+                    width: "100%",
+                    minWidth: 400,
+                    bgcolor: "background.paper",
+                  }}
+                >
+                  
+                  <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Mild`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+                   <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Moderate`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+                    <ListItem
+                     
+                     secondaryAction={
+                       <Checkbox
+                         edge="end"
+                         onChange={handleToggle()}
+                         checked={checked}
+                       />
+                     }
+                     disablePadding
+                   >
+                   
+                     <ListItemButton>
+                       <ListItemText primary={`Severe`} />
+
+                     </ListItemButton>
+                     
+                   </ListItem>
+        
+                </List>
+              </AccordionDetails>
+            </Accordion>
+    
+        </AccordionDetails>
+      </Accordion>
     </main>
   );
 };
 
-export default SuicidalBehaviorDisorder;
+export default ObsessiveDisorders;

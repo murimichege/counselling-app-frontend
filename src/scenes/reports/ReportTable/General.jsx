@@ -12,6 +12,7 @@ import AttendanceTrend from './AttendanceTrend'
 import ClientFlow from './ClientFlow'
 import StudyYear from './StudyYear'
 import MajorIssuesPresented from './MajorIssuesPresented'
+import GeneralAdministrationIssues from './GeneralAdminstrationIssues'
 function General() {
   return (
    <>
@@ -28,6 +29,7 @@ function General() {
    <MajorIssuesPresented/>
    <PsychologicalTest/>
    <AttendanceTrend/>
+   <GeneralAdministrationIssues/>
 
    </>
   )

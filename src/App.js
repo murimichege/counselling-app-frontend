@@ -32,7 +32,7 @@ import ReportBuilder from "./scenes/reports/reportBuilder";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isPrivate, setisPrivate] = useState(false);
+  const [isPrivate, setisPrivate] = useState(true);
 
   return (
     // <ErrorBoundary>
