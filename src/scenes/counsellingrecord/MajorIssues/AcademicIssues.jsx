@@ -14,15 +14,60 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
 
+const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+  return (
+    <Accordion expanded={accordionState} onChange={handleAccordionChange}>
+      <AccordionSummary
+        expandIcon={accordionState ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+      >
+        <ListItemText primary={title} />
+      </AccordionSummary>
+      <AccordionDetails>
+        <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
+          {items.map((item, index) => (
+            <ListItem key={index}>
+              <ListItemButton>
+                <ListItemText primary={item} />
+                <Checkbox
+                  edge="end"
+                  onChange={handleToggle(item)}
+                  checked={checked.indexOf(item) !== -1}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+          {commentInputOpen && (
+            <ListItem>
+              <ListItemButton>
+                <TextField
+                  fullWidth
+                  label="Add a comment"
+                  variant="outlined"
+                  value={comments}
+                  onChange={handleCommentChange}
+                />
+              </ListItemButton>
+            </ListItem>
+          )}
+          <ListItem>
+            <ListItemButton onClick={toggleCommentInput}>
+              <CommentIcon color={commentInputOpen ? "primary" : "inherit"} />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </AccordionDetails>
+    </Accordion>
+  );
+};
+
 const AcademicIssues = () => {
   const [accordionStates, setAccordionStates] = useState({
     LowerAcademicAchievement: true,
   });
 
   const [checked, setChecked] = useState([]);
-  const [commentInputOpen, setCommentInputOpen] = useState({});
-
-  const [comments, setComments] = useState({});
+  const [commentInputOpen, setCommentInputOpen] = useState(false);
+  const [comments, setComments] = useState("");
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -44,19 +89,13 @@ const AcademicIssues = () => {
     }));
   };
 
-  const toggleCommentInput = (section) => () => {
-    setCommentInputOpen((prevState) => ({
-      ...prevState,
-      [section]: !prevState[section],
-    }));
+  const toggleCommentInput = () => {
+    setCommentInputOpen((prevState) => !prevState);
   };
 
-  const handleCommentChange = (section) => (event) => {
+  const handleCommentChange = (event) => {
     const { value } = event.target;
-    setComments((prevComments) => ({
-      ...prevComments,
-      [section]: value,
-    }));
+    setComments(value);
   };
 
   const LowerAcademicAchievementItems = [
@@ -66,68 +105,22 @@ const AcademicIssues = () => {
     "Course Registration Difficulties",
   ];
 
-
-
   return (
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems </h2>
+      <h2>Academic or Educational Problems</h2>
 
-      <Accordion
-        expanded={accordionStates.LowerAcademicAchievement}
-        onChange={handleAccordionChange("LowerAcademicAchievement")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.LowerAcademicAchievement ? <ExpandLessIcon /> : <ExpandMoreIcon />
-          }
-        >
-          <ListItemText primary="Lower Academic Achievement" />
-        </AccordionSummary>
-        <AccordionDetails>
-          <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
-            {LowerAcademicAchievementItems.map((item, index) => (
-              <ListItem key={index}>
-                <ListItemButton>
-                  <ListItemText primary={item} />
-                  <Checkbox
-                    edge="end"
-                    onChange={handleToggle(item)}
-                    checked={checked.indexOf(item) !== -1}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-            {/* Display sub-items */}
-            {/* {LowerAcademicAchievementSubItems.map((subItem, index) => (
-              <ListItem key={index}>
-                <ListItemButton>
-                  <ListItemText primary={`${subItem.option1} / ${subItem.option2}`} />
-                </ListItemButton>
-              </ListItem>
-            ))} */}
-            {commentInputOpen.LowerAcademicAchievement && (
-              <ListItem>
-                <ListItemButton>
-                  <TextField
-                    fullWidth
-                    label="Add a comment"
-                    variant="outlined"
-                    value={comments.LowerAcademicAchievement}
-                    onChange={handleCommentChange("LowerAcademicAchievement")}
-                  />
-                </ListItemButton>
-              </ListItem>
-            )}
-            <ListItem>
-              <ListItemButton onClick={toggleCommentInput("LowerAcademicAchievement")}>
-                <CommentIcon
-                  color={commentInputOpen.LowerAcademicAchievement ? "primary" : "inherit"}
-                />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </AccordionDetails>
-      </Accordion>
+      <AcademicIssuesAccordion
+        title="Lower Academic Achievement"
+        items={LowerAcademicAchievementItems}
+        accordionState={accordionStates.LowerAcademicAchievement}
+        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+        checked={checked}
+        handleToggle={handleToggle}
+        commentInputOpen={commentInputOpen}
+        toggleCommentInput={toggleCommentInput}
+        comments={comments}
+        handleCommentChange={handleCommentChange}
+      />
     </main>
   );
 };

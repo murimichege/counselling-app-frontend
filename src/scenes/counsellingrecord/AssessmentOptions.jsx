@@ -35,6 +35,7 @@ import SleepWakedisorders from "./MajorIssues/SleepWakedisorders";
 import PornAddiction from "./MajorIssues/PornAddiction";
 import ParaphilicSexualDisorders from "./MajorIssues/ParaphilicSexualDisorders";
 import GenderRelatedIssues from "./MajorIssues/GenderRelatedIssues";
+import AbuseandNeglect from "./MajorIssues/AbuseandNeglect"
 const AssessmentOptions = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   return (
@@ -66,6 +67,7 @@ const AssessmentOptions = ({ onButtonClick }) => {
  <PornAddiction/>
 <ParaphilicSexualDisorders/>
 <GenderRelatedIssues/>
+<AbuseandNeglect/>
     <Box
         sx={{
           marginTop: "40px",
