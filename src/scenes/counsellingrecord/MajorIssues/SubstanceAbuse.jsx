@@ -109,7 +109,7 @@ const AcademicIssues = () => {
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
       <h2>Academic or Educational Problems</h2>
 
-      <AcademicIssuesAccordion
+      <AcademicIssues
         title="Lower Academic Achievement"
         items={LowerAcademicAchievementItems}
         accordionState={accordionStates.LowerAcademicAchievement}

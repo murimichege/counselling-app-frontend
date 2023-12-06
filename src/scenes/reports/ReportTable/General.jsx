@@ -11,7 +11,7 @@ import AgeCounseling from './AgeCounseling'
 import AttendanceTrend from './AttendanceTrend'
 import ClientFlow from './ClientFlow'
 import StudyYear from './StudyYear'
-import MajorIssuesPresented from './MajorIssuesPresented'
+import MajorIssuesPresented from './MajorIssues/MajorIssuesPresented'
 import GeneralAdministrationIssues from './GeneralAdminstrationIssues'
 function General() {
   return (

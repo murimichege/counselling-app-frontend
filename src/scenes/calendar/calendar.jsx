@@ -9,7 +9,13 @@ import {
   List,
   ListItem,
   ListItemText,
+  Drawer,
+  Button,
+  TextField,
   Typography,
+  Select, 
+  InputLabel,
+  MenuItem,
   useTheme,
 } from "@mui/material";
 import Header from "../../components/Header";
@@ -19,25 +25,28 @@ const Calendar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [currentEvents, setCurrentEvents] = useState([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+
+  const [counsellor, setCounsellor] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [receptionist, setReceptionist] = useState("");
+  const [location, setLocation] = useState();
+  const [meetingLink, setMeetingLink] = useState("");
+  const [isOnline, setIsOnline] = useState(false)
+
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
 
   const handleDateClick = (selected) => {
-    const title = prompt("Please enter a new title for your event");
-    const cousellor = prompt("Please the counsellor for this session");
-    
-
-    const calendarApi = selected.view.calendar;
-    calendarApi.unselect();
-
-    if (title) {
-      calendarApi.addEvent({
-        id: `${selected.dateStr}-${title}`,
-        title,
-        cousellor,
-        start: selected.startStr,
-        end: selected.endStr,
-        allDay: selected.allDay,
-      });
-    }
+    setSelectedDate(selected);
+    handleDrawerOpen();
   };
 
   const handleEventClick = (selected) => {
@@ -50,9 +59,131 @@ const Calendar = () => {
     }
   };
 
+  const handleAddEvent = () => {
+    if (selectedDate && clientEmail && counsellor) {
+      const { startStr, endStr, allDay } = selectedDate;
+      const calendarApi = selectedDate.view.calendar;
+      calendarApi.unselect();
+
+      calendarApi.addEvent({
+        id: `${startStr}-${clientName}`,
+        clientName,
+        counsellor,
+        clientEmail,
+        receptionist,
+        location,
+        meetingLink,
+        start: startStr,
+        end: endStr,
+        allDay,
+      });
+
+      handleDrawerClose();
+      setSelectedDate(null);
+      setClientName("");
+      setClientEmail("")
+      setCounsellor("");
+      setReceptionist("");
+      setLocation("");
+      setMeetingLink("");
+    }
+  };
+
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value); 
+  };
   return (
     <Box m="20px">
-      <Header title="Calendar" subtitle="Schedule Counselling Sessions" />
+      <Header title="Calendar" subtitle="Schedule Counseling Sessions" />
+        {/* Drawer for Event Input */}
+        <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
+        <Box p="20px" width="300px">
+          <Typography variant="h6">Create New Session</Typography>
+          
+     
+
+       <InputLabel id="counsellor-label">Counselor</InputLabel>
+          <Select
+            labelId="counsellor-label"
+            id="counsellor"
+            value={counsellor}
+            onChange={(e) => setCounsellor(e.target.value)}
+            fullWidth
+            required
+            margin="normal"
+          >
+            <MenuItem value="Lucy">Lucy Kung'u</MenuItem>
+            <MenuItem value="Lydia">Lydia Winda</MenuItem>
+            <MenuItem value="Patrick">Patrick Obel</MenuItem>
+            <MenuItem value="Adolphine">Adolphine Nyandoro</MenuItem>
+          </Select>
+          <TextField
+            label="Client Name"
+            value={clientName}
+            onChange={(e) => setClientName(e.target.value)}
+            fullWidth
+            required
+            margin="normal"
+          />
+   <TextField
+            label="Client Email"
+            value={clientEmail}
+            onChange={(e) => setClientEmail(e.target.value)}
+            fullWidth
+            required
+            margin="normal"
+          />      
+              <TextField
+            label="Receptionist"
+            value={receptionist}
+            onChange={(e) => setReceptionist(e.target.value)}
+            fullWidth
+            required
+            margin="normal"
+          />
+          
+<InputLabel id="location-label">Location</InputLabel>
+          <Select
+            labelId="location-label"
+            id="location"
+            value={location}
+            onChange={handleLocationChange}
+            fullWidth
+            margin="normal"
+          >
+            <MenuItem aria-required value="Counseling Center">Counseling Center</MenuItem>
+            <MenuItem aria-required value="Online">Online</MenuItem>
+          </Select>
+
+          {
+            isOnline ? (
+              <TextField
+              label="Meeting Link"
+              value={meetingLink}
+              onChange={(e) => setMeetingLink(e.target.value)}
+              fullWidth
+              required
+              margin="normal"
+            />
+            ) : (
+              <TextField
+              label="Meeting Link"
+              value={meetingLink}
+              onChange={(e) => setMeetingLink(e.target.value)}
+              fullWidth
+              disabled
+              required
+              margin="normal"
+            />
+            )
+          }
+         
+          {/* Button to add event */}
+          <Button variant="contained" color="primary" onClick={handleAddEvent}>
+            Add Session
+          </Button>
+        </Box>
+      </Drawer>
 
       <Box display="flex" justifyContent="space-between">
         {/* CALENDAR SIDEBAR */}
@@ -62,7 +193,8 @@ const Calendar = () => {
           p="15px"
           borderRadius="4px"
         >
-          <Typography variant="h5">Events</Typography>
+          
+          <Typography variant="h5">Counseling Sessions </Typography>
           <List>
             {currentEvents.map((event) => (
               <ListItem
