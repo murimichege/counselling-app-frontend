@@ -11,26 +11,36 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import FormHeader from '../../components/FormHeader'
+import FormHeader from "../../components/FormHeader";
 import MenuItem from "@mui/material/MenuItem";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
-import userApi from "../../api/users";
+import CounselorIntakeFormApi from "../../api/forms/counselorIntakeform";
 const ClientIntakeForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
+  const [values, setValues] = useState(initialValues);
 
   const handleFormSubmit = async () => {
-    toast.success("User Created Successfully!");
-    navigate("/users");
+    try {
+      const response = await CounselorIntakeFormApi.create(values);
+      console.log("response", response);
+      toast.success("Form submitted successfully!");
+      navigate("/");
+    } catch (error) {
+      // Handle error appropriately
+      console.error("Error:", error);
+      toast.error("Failed to submit form. Please contact IT support");
+    }
+  };
 
-    // try {
-    // 	const res = await userApi.create(initialValues);
-    // 	res.status(201);
-    // } catch (error) {
-    // 	res.status(401).json({ message: error });
-    // }
+  // Function to update form values
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
 
   return (
@@ -50,19 +60,8 @@ const ClientIntakeForm = () => {
           subtitle="Summer Semester 2023"
         />
 
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-          }) => (
+        <Formik initialValues={initialValues}>
+          {({ errors, touched, handleBlur, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <Box
                 display="grid"
@@ -75,7 +74,6 @@ const ClientIntakeForm = () => {
                   alignItems: "center",
                 }}
               >
-                
                 <TextField
                   fullWidth
                   // variant="filled"
@@ -84,7 +82,8 @@ const ClientIntakeForm = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.FullName}
-                  name="StudentID"
+                  required
+                  name="FullName"
                   error={!!touched.FullName && !!errors.FullName}
                   helperText={touched.FullName && errors.FullName}
                   sx={{ gridColumn: "span 2" }}
@@ -93,6 +92,7 @@ const ClientIntakeForm = () => {
                   fullWidth
                   // variant="filled"
                   type="text"
+                  required
                   label="Client Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -102,7 +102,7 @@ const ClientIntakeForm = () => {
                   helperText={touched.ClientNo && errors.ClientNo}
                   sx={{ gridColumn: "span 2" }}
                 />
-               
+
                 <TextField
                   fullWidth
                   // variant="filled"
@@ -121,6 +121,7 @@ const ClientIntakeForm = () => {
                   // variant="filled"
                   type="number"
                   label="Age"
+                  required
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Age}
@@ -135,6 +136,7 @@ const ClientIntakeForm = () => {
                   // variant="filled"
                   type="text"
                   label="Gender"
+                  required
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Gender}
@@ -150,15 +152,42 @@ const ClientIntakeForm = () => {
                   <MenuItem value={20}>Female</MenuItem>
                 </TextField>
 
+
+                /**Review this  */
                 <TextField
                   fullWidth
                   select
                   // variant="filled"
                   type="text"
                   label="ClientCategory"
+                  required
                   onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.Referee}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (e.target.value !== "20") {
+                      // If the selected value is not 'Undergraduate' (value='20')
+                      setValues({
+                        ...values,
+                        UnderGraduateYearofStudy: "", // Resetting the UnderGraduateYearofStudy value
+                        ClientCategory: e.target.value, // Update ClientCategory only if it's not Undergraduate
+                      });
+                    } else if (e.target.value !== "30") {
+                      // If the selected value is not 'Graduate' (value='30')
+                      setValues({
+                        ...values,
+                        GraduateYearofStudy: "", // Resetting the GraduateYearofStudy value
+                        ClientCategory: e.target.value, // Update ClientCategory only if it's not Graduate
+                      });
+                    } else {
+                      // No other category selected, keep the selected value
+                      setValues({
+                        ...values,
+                        ClientCategory: e.target.value,
+                      });
+                    }
+                  }}
+                  
+                  value={values.ClientCategory}
                   name="ClientCategory"
                   error={!!touched.ClientCategory && !!errors.ClientCategory}
                   helperText={touched.ClientCategory && errors.ClientCategory}
@@ -182,7 +211,7 @@ const ClientIntakeForm = () => {
                   label="Undergraduate Year of Study"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.Referee}
+                  value={values.UnderGraduateYearofStudy}
                   name="UnderGraduateYearofStudy"
                   error={
                     !!touched.GraduateYearofStudy &&
@@ -192,6 +221,7 @@ const ClientIntakeForm = () => {
                     touched.GraduateYearofStudy && errors.GraduateYearofStudy
                   }
                   sx={{ gridColumn: "span 2" }}
+                  disabled={values.ClientCategory !== "20"} // Disable if ClientCategory is not 'Undergraduate'
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -199,8 +229,9 @@ const ClientIntakeForm = () => {
                   <MenuItem value={10}>Freshman</MenuItem>
                   <MenuItem value={20}>Sophomore</MenuItem>
                   <MenuItem value={30}>Junior</MenuItem>
-                  <MenuItem value={20}>Senior</MenuItem>
+                  <MenuItem value={40}>Senior</MenuItem>
                 </TextField>
+
                 <TextField
                   fullWidth
                   select
@@ -209,7 +240,7 @@ const ClientIntakeForm = () => {
                   label="Graduate Year of Study"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.Referee}
+                  value={values.GraduateYearofStudy}
                   name="GraduateYearofStudy"
                   error={
                     !!touched.GraduateYearofStudy &&
@@ -219,13 +250,15 @@ const ClientIntakeForm = () => {
                     touched.GraduateYearofStudy && errors.GraduateYearofStudy
                   }
                   sx={{ gridColumn: "span 2" }}
-                >
+                  disabled={values.ClientCategory !== '30'} // Disable if ClientCategory is not 'Graduate'
+                  >
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
                   <MenuItem value={10}>First</MenuItem>
                   <MenuItem value={20}>Second</MenuItem>
                 </TextField>
+
                 <TextField
                   fullWidth
                   select
@@ -252,7 +285,6 @@ const ClientIntakeForm = () => {
                   <MenuItem value={20}>Dean of School</MenuItem>
                   <MenuItem value={20}>Dean of Students</MenuItem>
                   <MenuItem value={20}>Other</MenuItem>
-
                 </TextField>
                 <TextField
                   fullWidth
@@ -261,10 +293,15 @@ const ClientIntakeForm = () => {
                   label="Specify"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.Email}
-                  name="Phone Number"
-                  error={!!touched.Email && !!errors.Email}
-                  helperText={touched.Email && errors.Email}
+                  value={values.RefereeSpecification}
+                  name="RefereeSpecification"
+                  error={
+                    !!touched.RefereeSpecification &&
+                    !!errors.RefereeSpecification
+                  }
+                  helperText={
+                    touched.RefereeSpecification && errors.RefereeSpecification
+                  }
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
@@ -272,6 +309,7 @@ const ClientIntakeForm = () => {
                   select
                   // variant="filled"
                   type="text"
+                  required
                   label="Residence"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -287,17 +325,17 @@ const ClientIntakeForm = () => {
                   <MenuItem value={20}>On Campus</MenuItem>
                   <MenuItem value={30}>Nearby hostels</MenuItem>
                   <MenuItem value={40}>Off Campus</MenuItem>
-
                 </TextField>
                 <TextField
                   fullWidth
                   // variant="filled"
                   type="text"
                   label="Phone Number"
+                  required
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Phone}
-                  name="Phone Number"
+                  name="Phone"
                   error={!!touched.Phone && !!errors.Phone}
                   helperText={touched.Phone && errors.Phone}
                   sx={{ gridColumn: "span 2" }}
@@ -308,9 +346,10 @@ const ClientIntakeForm = () => {
                   type="text"
                   label="Email"
                   onBlur={handleBlur}
+                  required
                   onChange={handleChange}
                   value={values.Email}
-                  name="Phone Number"
+                  name="Email"
                   error={!!touched.Email && !!errors.Email}
                   helperText={touched.Email && errors.Email}
                   sx={{ gridColumn: "span 2" }}
@@ -332,10 +371,11 @@ const ClientIntakeForm = () => {
                   // variant="filled"
                   type="text"
                   label="Marital Status"
+                  required
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.MaritalStatus}
-                  name="Marital Status"
+                  name="MaritalStatus"
                   error={!!touched.MaritalStatus && !!errors.MaritalStatus}
                   helperText={touched.MaritalStatus && errors.MaritalStatus}
                   sx={{ gridColumn: "span 4" }}
@@ -353,28 +393,32 @@ const ClientIntakeForm = () => {
                   <MenuItem value={60}>Divorced</MenuItem>
 
                   <MenuItem value={70}>Widowed</MenuItem>
-
                 </TextField>
-                <div>
-                <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-        Kin Details
-          </Typography></div>                <TextField
+                <Typography
+                  sx={{ mt: 1, mb: 2, gridColumn: "span 4" }}
+                  variant="h4"
+                >
+                  Kin Details
+                </Typography>
+                <TextField
                   fullWidth
                   // variant="filled"
                   type="text"
-                  label="Next of kin"
+                  label="Next of Kin Name"
+                  required
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.Nextofkin}
+                  value={values.NextofkinName}
                   name="Nextofkin"
-                  error={!!touched.Nextofkin && !!errors.Nextofkin}
-                  helperText={touched.Nextofkin && errors.Nextofkin}
+                  error={!!touched.NextofkinName && !!errors.NextofkinName}
+                  helperText={touched.NextofkinName && errors.NextofkinName}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
                   fullWidth
                   // variant="filled"
                   type="text"
+                  required
                   label=" Relation"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -389,10 +433,11 @@ const ClientIntakeForm = () => {
                   // variant="filled"
                   type="text"
                   label="Email"
+                  required
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.KinEmail}
-                  name="lastName"
+                  name="KinEmail"
                   error={!!touched.KinEmail && !!errors.KinEmail}
                   helperText={touched.KinEmail && errors.KinEmail}
                   sx={{ gridColumn: "span 2" }}
@@ -402,6 +447,7 @@ const ClientIntakeForm = () => {
                   fullWidth
                   // variant="filled"
                   type="text"
+                  required
                   label=" Telephone Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -417,7 +463,14 @@ const ClientIntakeForm = () => {
                 />
               </Box>
               <Box display="flex" justifyContent="end" mt="20px">
-                <Button type="submit" color="secondary" variant="contained">
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "rgba(43,57,144, 0.7)",
+                  }}
+                  onClick={handleFormSubmit}
+                >
                   Save
                 </Button>
               </Box>
@@ -429,44 +482,28 @@ const ClientIntakeForm = () => {
   );
 };
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  CounsellorName: yup.string().required("required"),
-  StudentID: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  phone: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address: yup.string().required("required"),
-  role: yup.string().required("required"),
-  nationalidentity: yup.string().required("required"),
-});
 const initialValues = {
-  StudentID: "",
-  FullName: "",
-  CurrentDate: "",
-  CurrentTime: "",
-  Gender: "",
-  Nationality: "",
-  Major: "",
-  Age: 16,
-  Religion: "",
-  Role: "",
-  ClientCategory: "",
-  Service: "",
-  GraduateYearofStudy: "",
-  Referee: "",
-  Residence: "",
-  ClientContact: "",
-  ClientEmailAddress: "",
-  MaritalStatus: "",
-  Nextofkin: "",
-  KinRelation: "",
-  KinEmail: "",
-  KinTelephoneNumber: "",
+  FullName: "", // Official Name
+  ClientNo: "", // Client Number
+  Major: "", // Major
+  Age: 0, // Age (assuming it's a number)
+  Gender: "", // Gender
+  ClientCategory: "", // Client Category
+  UnderGraduateYearofStudy: "", // Undergraduate Year of Study
+  GraduateYearofStudy: "", // Graduate Year of Study
+  Referee: "", // Referred By
+  RefereeSpecification: "",
+  Email: "", // Email
+  Residence: "", // Residence
+  Phone: "", // Phone Number
+  MaritalStatus: "", // Marital Status
+  NextofkinName: "", // Next of Kin
+  KinRelation: "", // Relation of Next of Kin
+  KinEmail: "", // Email of Next of Kin
+  KinTelephoneNumber: "", // Telephone Number of Next of Kin
+  semester: "",
+  Year: "",
+  // Add other fields as needed
 };
 
 export default ClientIntakeForm;
