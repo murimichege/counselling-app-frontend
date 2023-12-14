@@ -1,27 +1,20 @@
 import axios from "axios"
 import queryString from 'query-string'
-import { BASE_URL } from "config"
 
-
+const baseUrl = 'https://backend-5rqw.onrender.com/api/'
 const getToken = () => localStorage.getItem('token')
 
 const axiosClient = axios.create({
-    baseURL: BASE_URL,
+    baseURL: baseUrl,
     paramsSerializer: params => queryString.stringify({params})
 })
 
 axiosClient.interceptors.request.use(async (config) => {
     return {
         ...config,
-        // withCredentials: true,
-        // crossdomain: true, 
-         credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
-            //  'Access-Control-Allow-Origin': 'https://vaccine-passport-app-backend.vercel.app',
-           
-            // 'crossDomain': 'true',
-            'Authorization': `Bearer ${getToken()}`,
+            'Authorization': `Bearer ${getToken()}`
         }
     }
 })

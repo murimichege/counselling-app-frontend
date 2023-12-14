@@ -70,14 +70,26 @@ const Sessions = () => {
 			),
 		},
 	];
-	const createUser = () => {
-		navigate("/form");
+	const createSession = () => {
+		navigate("/newsession");
 	};
 
 	return (
 		<Box m="20px">
 			{/* HEADER */}
-
+			<Header title="Sessions" subtitle="List of Sessions by different counselors" />
+			<Button
+            sx={{
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[100],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+            }}
+            onClick={createSession}
+          >
+            Create session
+          </Button>
 			<Box
 				m="40px 0 0 0"
 				height="75vh"

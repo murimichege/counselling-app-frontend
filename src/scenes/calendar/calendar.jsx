@@ -178,9 +178,8 @@ const Calendar = () => {
             )
           }
          
-          {/* Button to add event */}
           <Button variant="contained" color="primary" onClick={handleAddEvent}>
-            Add Session
+            Schedule Session
           </Button>
         </Box>
       </Drawer>

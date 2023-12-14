@@ -8,7 +8,7 @@ import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/clientmanagement/Clients";
 // import Invoices from "./scenes/Payments";
 import Bar from "./scenes/bar";
-import Form from "./scenes/form";
+import NewSession from "./scenes/forms/NewSession";
 // import Line from "./scenes/line";
 // import Pie from "./scenes/pie";
 // import FAQ from "./scenes/faq";
@@ -56,7 +56,6 @@ function App() {
                   element={<CounselingRecord />}
                 />
                 <Route path="/ongoingrecord" element={<OnGoingCounseling />} />
-
                 <Route
                   path="/clientintakeForm"
                   element={<ClientIntakeForm />}
@@ -88,7 +87,7 @@ function App() {
                     path="/clientIntakeForm"
                     element={<ClientIntakeForm />}
                   />
-                  <Route path="/form" element={<Form />} />
+                  <Route path="/newsession" element={<NewSession />} />
 
                   <Route path="/bar" element={<Bar />} />
                   {/* <Route path="/pie" element={<Pie />} />

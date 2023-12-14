@@ -23,20 +23,7 @@ const Dashboard = () => {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-        <Box>
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
+     
       </Box>
 
       {/* GRID & CHARTS */}
@@ -49,9 +36,10 @@ const Dashboard = () => {
         {/* ROW 1 */}
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="white"
           display="flex"
           alignItems="center"
+          borderRadius="6px"
           justifyContent="center"
         >
           <StatBox
@@ -68,7 +56,8 @@ const Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="white"
+          borderRadius="6px"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -87,7 +76,8 @@ const Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="white"
+          borderRadius="6px"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -106,8 +96,9 @@ const Dashboard = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
+          backgroundColor="white"
+          borderRadius="6px"
+                    display="flex"
           alignItems="center"
           justifyContent="center"
         >
@@ -153,11 +144,7 @@ const Dashboard = () => {
               </Typography>
             </Box>
             <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
+              
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
