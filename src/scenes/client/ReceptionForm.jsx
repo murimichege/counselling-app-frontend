@@ -15,48 +15,67 @@ import Header from "../../components/Header";
 import MenuItem from "@mui/material/MenuItem";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import IntakeFormApi from "../../api/forms/receptionintakeform";
 
-import userApi from "../../api/users";
 const IntakeForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
-  const [initialValues, setValues] = useState({
+  const [isOnScholarship, setIsOnScholarship] = useState(false);
+
+  const [initialValues, setInitialValues] = useState({
     CounsellorName: "",
     StudentID: "",
+    StudentName:"",
     CurrentDate: "",
     CurrentTime: "",
     Position: "",
+    Degree:"",
+    Gender: "",
     StudentCategory: "",
-    ScholarshipSpecification:"",
+    ScholarshipSpecification: "",
     Service: "",
-  });
-  const handleFormSubmit = async () => {
-    toast.success("User Created Successfully!");
-    navigate("/users");
-
-    // try {
-    // 	const res = await userApi.create(initialValues);
-    // 	res.status(201);
-    // } catch (error) {
-    // 	res.status(401).json({ message: error });
-    // }
+  }
+  )
+  const handleScholarshipChange = (event) => {
+    setIsOnScholarship(event.target.checked);
   };
-  // useEffect(() => {
-  //   const currentDate = new Date();
-  //   const currentTime = currentDate.toLocaleTimeString([], {
-  //     hour: "2-digit",
-  //     minute: "2-digit",
-  //   });
-  //   const formattedDate = currentDate.toISOString().split("T")[0]; // Get the date in 'YYYY-MM-DD' format
+  // Function to update form values
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInitialValues(prevValues => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  }
 
-  //   setValues({
-  //     ...initialValues,
-  //     CurrentDate: formattedDate,
-  //     CurrentTime: currentTime,
-  //   });
-  //   console.log("currentDate", currentDate);
-  //   console.log("currenttime", currentTime);
-  // }, []);
+  const handleFormSubmit = async () => {
+    try {
+      const response = await IntakeFormApi.create(initialValues);
+      console.log("response", response);
+      toast.success("Form submitted successfully!");
+      navigate("/");
+    } catch (error) {
+      // Handle error appropriately
+      console.error("Error:", error);
+      toast.error("Failed to submit form");
+    }
+  };
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentTime = currentDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const formattedDate = currentDate.toISOString().split("T")[0]; // Get the date in 'YYYY-MM-DD' format
+
+    setInitialValues({
+      ...initialValues,
+      CurrentDate: formattedDate,
+      CurrentTime: currentTime,
+    });
+  }, []);
+
   return (
     <Box
       sx={{
@@ -75,16 +94,13 @@ const IntakeForm = () => {
         />
 
         <Formik
-          onSubmit={handleFormSubmit}
           initialValues={initialValues}
-          validationSchema={checkoutSchema}
         >
           {({
-            values,
+            
             errors,
             touched,
             handleBlur,
-            handleChange,
             handleSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
@@ -99,11 +115,12 @@ const IntakeForm = () => {
                 <TextField
                   fullWidth
                   // variant="filled"
+                  required
                   type="text"
                   label="Current Date"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.currentDate}
+                  value={initialValues.CurrentDate} // Update to use CurrentDate
                   name="currentDate"
                   error={!!touched.currentDate && !!errors.currentDate}
                   helperText={touched.currentDate && errors.currentDate}
@@ -112,11 +129,12 @@ const IntakeForm = () => {
                 <TextField
                   fullWidth
                   // variant="filled"
+                  required
                   type="text"
                   label="Current Time"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.currentTime}
+                  value={initialValues.CurrentTime}
                   name="currentTime"
                   error={!!touched.currentTime && !!errors.currentTime}
                   helperText={touched.currentTime && errors.currentTime}
@@ -125,40 +143,42 @@ const IntakeForm = () => {
                 <TextField
                   fullWidth
                   // variant="filled"
+                  required
                   type="text"
                   label="Student Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.CounsellorName}
-                  name="Student Name"
-                  error={!!touched.CounsellorName && !!errors.CounsellorName}
-                  helperText={touched.CounsellorName && errors.CounsellorName}
+                  value={initialValues.StudentName}
+                  name="StudentName"
+                  error={!!touched.StudentName && !!errors.StudentName}
+                  helperText={touched.StudentName && errors.StudentName}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
                   fullWidth
                   // variant="filled"
+                  required
                   type="text"
                   label="Student ID Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.StudentID}
+                  value={initialValues.StudentID}
                   name="StudentID"
                   error={!!touched.StudentID && !!errors.StudentID}
                   helperText={touched.StudentID && errors.StudentID}
                   sx={{ gridColumn: "span 2" }}
                 />
-                  
-              
+
                 <TextField
                   fullWidth
                   select
                   // variant="filled"
+                  required
                   type="text"
                   label="Gender"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.Gender}
+                  value={initialValues.Gender}
                   name="Gender"
                   error={!!touched.Gender && !!errors.Gender}
                   helperText={touched.Gender && errors.Gender}
@@ -174,11 +194,12 @@ const IntakeForm = () => {
                   fullWidth
                   select
                   // variant="filled"
+                  required
                   type="text"
                   label="Client Category"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.Position}
+                  value={initialValues.Position}
                   name="Position"
                   error={!!touched.Position && !!errors.Position}
                   helperText={touched.Position && errors.Position}
@@ -198,14 +219,15 @@ const IntakeForm = () => {
                   fullWidth
                   select
                   // variant="filled"
+                  required
                   type="text"
                   label="Degree"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.StudentCategory}
-                  name="Position"
-                  error={!!touched.StudentCategory && !!errors.StudentCategory}
-                  helperText={touched.StudentCategory && errors.StudentCategory}
+                  value={initialValues.Degree}
+                  name="Degree"
+                  error={!!touched.Degree && !!errors.Degree}
+                  helperText={touched.Degree && errors.Degree}
                   sx={{ gridColumn: "span 2" }}
                 >
                   <MenuItem value="">
@@ -215,16 +237,30 @@ const IntakeForm = () => {
                   <MenuItem value={20}>Undergraduate</MenuItem>
                   <MenuItem value={30}>Graduate</MenuItem>
                 </TextField>
-               
-                
-              
+
                 <Typography>On Scholarship?</Typography>
-                <FormGroup sx={{ gridColumn: "span 2" }}>
-                 
-                  <FormControlLabel control={<Checkbox />} label="No" />
+                <FormGroup sx={{ gridColumn: "span 2", display: "block" }}>
                   <FormControlLabel
-                    control={<Checkbox defaultChecked />}
+                    control={
+                      <Checkbox
+                        checked={isOnScholarship}
+                        onChange={handleScholarshipChange}
+                      />
+                    }
                     label="Yes"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={!isOnScholarship}
+                        onChange={(e) =>
+                          handleScholarshipChange({
+                            target: { checked: !e.target.checked },
+                          })
+                        }
+                      />
+                    }
+                    label="No"
                   />
                 </FormGroup>
                 <TextField
@@ -232,23 +268,31 @@ const IntakeForm = () => {
                   // variant="filled"
                   type="text"
                   label="Specify"
+                  disabled={!isOnScholarship} // Disable the field if isOnScholarship is false
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.ScholarshipSpecification}
+                  value={initialValues.ScholarshipSpecification}
                   name="Specify"
-                  error={!!touched.ScholarshipSpecification && !!errors.ScholarshipSpecification}
-                  helperText={touched.ScholarshipSpecification && errors.ScholarshipSpecification}
+                  error={
+                    !!touched.ScholarshipSpecification &&
+                    !!errors.ScholarshipSpecification
+                  }
+                  helperText={
+                    touched.ScholarshipSpecification &&
+                    errors.ScholarshipSpecification
+                  }
                   sx={{ gridColumn: "span 4" }}
                 />
-                  <TextField
+                <TextField
                   fullWidth
                   select
+                  required
                   // variant="filled"
                   type="text"
                   label="Service Sought "
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.Service}
+                  value={initialValues.Service}
                   name="Service"
                   error={!!touched.Service && !!errors.Service}
                   helperText={touched.Service && errors.Service}
@@ -262,24 +306,32 @@ const IntakeForm = () => {
                   <MenuItem value={30}>Consultation Services</MenuItem>
                   <MenuItem value={30}>Other</MenuItem>
                 </TextField>
-                   <TextField
+                <TextField
                   fullWidth
                   // variant="filled"
                   type="text"
+                  select
                   label="Counselor Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.CounsellorName}
-                  name="CounselorName"
+                  value={initialValues.CounsellorName}
+                  name="CounsellorName"
                   error={!!touched.CounsellorName && !!errors.CounsellorName}
                   helperText={touched.CounsellorName && errors.CounsellorName}
                   sx={{ gridColumn: "span 2" }}
-                />
-              
-              
+                >
+                  <MenuItem value="Lucy">Lucy Kung'u</MenuItem>
+            <MenuItem value="Lydia">Lydia Winda</MenuItem>
+            <MenuItem value="Patrick">Patrick Obel</MenuItem>
+            <MenuItem value="Adolphine">Adolphine Nyandoro</MenuItem>
+
+                  </TextField>
               </Box>
               <Box display="flex" justifyContent="end" mt="20px">
-                <Button type="submit" color="secondary" variant="outlined">
+                <Button type="submit" variant="outlined" sx={{
+                            backgroundColor: "rgba(43,57,144, 0.7)",
+
+                }} onClick={handleFormSubmit}>
                   Save and Schedule Session
                 </Button>
               </Box>
@@ -291,20 +343,5 @@ const IntakeForm = () => {
   );
 };
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  CounsellorName: yup.string().required("required"),
-  StudentID: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  phone: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address: yup.string().required("required"),
-  Position: yup.string().required("required"),
-  nationalidentity: yup.string().required("required"),
-});
 
 export default IntakeForm;

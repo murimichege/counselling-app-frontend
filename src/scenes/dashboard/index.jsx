@@ -134,7 +134,7 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-               Session attendance analytics
+               Session attendance general analytics
               </Typography>
               <Typography
                 variant="h3"
