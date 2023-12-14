@@ -57,7 +57,7 @@ const IntakeForm = () => {
     } catch (error) {
       // Handle error appropriately
       console.error("Error:", error);
-      toast.error("Failed to submit form");
+      toast.error("Failed to submit form. Please contact IT support");
     }
   };
 
