@@ -109,7 +109,7 @@ const MoodDisorders = () => {
             )
           }
         >
-          <ListItemText primary="Bipolartype1" />
+          <ListItemText primary="Bipolar type 1" />
         </AccordionSummary>
         <AccordionDetails>
           {Bipolartype1Items.map((item, index) => (
@@ -213,7 +213,7 @@ const MoodDisorders = () => {
             )
           }
         >
-          <ListItemText primary="WithPsychoticfeatures" />
+          <ListItemText primary="With Psychotic features" />
         </AccordionSummary>
         <AccordionDetails>
           {WithPsychoticfeaturesItems.map((item, index) => (
@@ -318,7 +318,7 @@ const MoodDisorders = () => {
             )
           }
         >
-          <ListItemText primary="WithHypomaniaepisode" />
+          <ListItemText primary="With Hypomania episode" />
         </AccordionSummary>
         <AccordionDetails>
           {WithHypomaniaepisodeItems.map((item, index) => (
@@ -422,7 +422,7 @@ const MoodDisorders = () => {
             )
           }
         >
-          <ListItemText primary="WithDepressiveepisode" />
+          <ListItemText primary="With Depressive episode" />
         </AccordionSummary>
         <AccordionDetails>
           {WithDepressiveepisodeItems.map((item, index) => (
@@ -527,7 +527,7 @@ const MoodDisorders = () => {
             )
           }
         >
-          <ListItemText primary="WithDepressiveepisode" />
+          <ListItemText primary="With Depressive episode" />
         </AccordionSummary>
         <AccordionDetails>
           {WithmixedfeaturesItems.map((item, index) => (

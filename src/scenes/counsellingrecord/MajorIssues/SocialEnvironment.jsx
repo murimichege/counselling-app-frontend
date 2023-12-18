@@ -141,7 +141,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="Impairmentinsocialcommunicationandinteractions" />
+          <ListItemText primary="Impairment in social communication and interactions" />
         </AccordionSummary>
         <AccordionDetails>
           {ImpairmentinsocialcommunicationandinteractionsItems.map(
@@ -237,7 +237,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="Difficultiesreadingsocialcuesandsocialconsequences" />
+          <ListItemText primary="Difficulties reading social cues and social consequences" />
         </AccordionSummary>
         <AccordionDetails>
           {DifficultiesreadingsocialcuesandsocialconsequencesItems.map(
@@ -331,7 +331,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="DisinhibitedattachmentDisorders" />
+          <ListItemText primary="Disinhibited attachment Disorders" />
         </AccordionSummary>
         <AccordionDetails>
           {DisinhibitedattachmentDisordersItems.map((item, index) => (
@@ -422,7 +422,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="NegativePeerpressure" />
+          <ListItemText primary="Negative Peer pressure" />
         </AccordionSummary>
         <AccordionDetails>
           {NegativePeerpressureItems.map((item, index) => (
@@ -510,7 +510,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="NegativePeerpressure" />
+          <ListItemText primary="Negative Peer pressure" />
         </AccordionSummary>
         <AccordionDetails>
           {AcculturationdifficultyItems.map((item, index) => (
@@ -679,7 +679,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="DifficultieswithCommunicationlack" />
+          <ListItemText primary="Difficulties with Communication lack" />
         </AccordionSummary>
         <AccordionDetails>
           {DifficultieswithCommunicationlackItems.map((item, index) => (
@@ -770,7 +770,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="DifficultieswithCommunicationlack" />
+          <ListItemText primary="Difficulties with Communication lack" />
         </AccordionSummary>
         <AccordionDetails>
           {LoveRelationshipbreakupItems.map((item, index) => (
@@ -859,7 +859,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="Friendshipbreakupseclusion" />
+          <ListItemText primary="Friendship breakup seclusion" />
         </AccordionSummary>
         <AccordionDetails>
           {FriendshipbreakupseclusionItems.map((item, index) => (
@@ -946,7 +946,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="ProblemsrelatedtocrimeItems" />
+          <ListItemText primary="Problems related to crime Items" />
         </AccordionSummary>
         <AccordionDetails>
           {ProblemsrelatedtocrimeItems.map((item, index) => (
@@ -1034,7 +1034,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="ProblemsrelatedtocrimeItems" />
+          <ListItemText primary="Problems related to crime Items" />
         </AccordionSummary>
         <AccordionDetails>
           {ProblemsrelatedtoincarcerationItems.map((item, index) => (
@@ -1122,7 +1122,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="Problemstolegalissues" />
+          <ListItemText primary="Problems to legal issues" />
         </AccordionSummary>
         <AccordionDetails>
           {ProblemstolegalissuesItems.map((item, index) => (
@@ -1205,7 +1205,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="ReligiousorSpiritualproblem" />
+          <ListItemText primary="Religious or Spiritual problem" />
         </AccordionSummary>
         <AccordionDetails>
           {ReligiousorSpiritualproblemItems.map((item, index) => (
@@ -1290,7 +1290,7 @@ const SocialEnvironment = () => {
             )
           }
         >
-          <ListItemText primary="Exposuretodisasters" />
+          <ListItemText primary="Exposure to disasters" />
         </AccordionSummary>
         <AccordionDetails>
           {ExposuretodisastersItems.map((item, index) => (

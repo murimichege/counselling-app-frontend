@@ -91,7 +91,7 @@ const AttentionDeficit = () => {
             )
           }
         >
-          <ListItemText primary="SpecialLearningDisorder" />
+          <ListItemText primary="Special Learning Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {SpecialLearningDisorderItems.map((item, index) => (

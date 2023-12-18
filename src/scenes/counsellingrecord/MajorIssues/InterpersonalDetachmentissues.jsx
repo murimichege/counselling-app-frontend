@@ -98,7 +98,7 @@ const InterpersonalDetachmentissues = () => {
             )
           }
         >
-          <ListItemText primary="Detachmentinavoidanceofsocioemotionalexperience" />
+          <ListItemText primary="Detachment in avoidance of socio-emotional experience" />
         </AccordionSummary>
         <AccordionDetails>
           {DetachmentinavoidanceofsocioemotionalexperienceItems.map((item, index) => (
@@ -356,7 +356,7 @@ const InterpersonalDetachmentissues = () => {
             )
           }
         >
-          <ListItemText primary="Withdrawalfrompeople" />
+          <ListItemText primary="Withdrawal from people" />
         </AccordionSummary>
         <AccordionDetails>
           {WithdrawalfrompeopleItems.map((item, index) => (

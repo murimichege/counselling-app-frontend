@@ -355,7 +355,7 @@ const AssessmentOptions = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="AcademicProblems" />
+          <ListItemText primary="Academic Problems" />
         </AccordionSummary>
         <AccordionDetails>
           {AcademicProblems.map((item, index) => (
@@ -430,7 +430,7 @@ const AssessmentOptions = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="Learningproblems" />
+          <ListItemText primary="Learning problems" />
         </AccordionSummary>
         <AccordionDetails>
           {LearningproblemsItems.map((item, index) => (

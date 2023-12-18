@@ -95,7 +95,7 @@ const CommunicationDisorders = () => {
             )
           }
         >
-          <ListItemText primary="NonSuicidalSelfinjuryorharm" />
+          <ListItemText primary="Non Suicidal Self injury or harm" />
         </AccordionSummary>
         <AccordionDetails>
           {StammeringItems.map((item, index) => (

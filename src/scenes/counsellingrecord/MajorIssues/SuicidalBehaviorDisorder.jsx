@@ -102,7 +102,7 @@ const SuicidalBehaviorDisorder = () => {
             )
           }
         >
-          <ListItemText primary="NonSuicidalSelfinjuryorharm" />
+          <ListItemText primary="Non-Suicidal Self injury or harm" />
         </AccordionSummary>
         <AccordionDetails>
           {NonSuicidalSelfinjuryorharmItems.map((item, index) => (
@@ -310,7 +310,7 @@ const SuicidalBehaviorDisorder = () => {
             )
           }
         >
-          <ListItemText primary="strugglewiththeanguishItems" />
+          <ListItemText primary="Struggle with the anguish Items" />
         </AccordionSummary>
         <AccordionDetails>
           {strugglewiththeanguishItems.map((item, index) => (
@@ -415,7 +415,7 @@ const SuicidalBehaviorDisorder = () => {
             )
           }
         >
-          <ListItemText primary="SuicidalattemptItems" />
+          <ListItemText primary="Suicidal attempt" />
         </AccordionSummary>
         <AccordionDetails>
           {SuicidalattemptItems.map((item, index) => (

@@ -108,7 +108,7 @@ const DepressiveDisorder = () => {
             )
           }
         >
-          <ListItemText primary="Singleepisode" />
+          <ListItemText primary="Single episode" />
         </AccordionSummary>
         <AccordionDetails>
           {SingleepisodeItems.map((item, index) => (
@@ -212,7 +212,7 @@ const DepressiveDisorder = () => {
             )
           }
         >
-          <ListItemText primary="Recurrentepisode" />
+          <ListItemText primary="Recurrent episode" />
         </AccordionSummary>
         <AccordionDetails>
           {RecurrentepisodeItems.map((item, index) => (
@@ -318,7 +318,7 @@ const DepressiveDisorder = () => {
             )
           }
         >
-          <ListItemText primary="DysthymiaPersistentDepressiveDisorder" />
+          <ListItemText primary="Dysthymia Persistent Depressive Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {DysthymiaPersistentDepressiveDisorderItems.map((item, index) => (
@@ -422,7 +422,7 @@ const DepressiveDisorder = () => {
             )
           }
         >
-          <ListItemText primary="PremenstrualDysphoricDisorder" />
+          <ListItemText primary="Premenstrual Dysphoric Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {PremenstrualDysphoricDisorderItems.map((item, index) => (
@@ -528,7 +528,7 @@ const DepressiveDisorder = () => {
             )
           }
         >
-          <ListItemText primary="SubstanceinducedDepressiveDisorder" />
+          <ListItemText primary="Substance induced Depressive Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {SubstanceinducedDepressiveDisorderItems.map((item, index) => (

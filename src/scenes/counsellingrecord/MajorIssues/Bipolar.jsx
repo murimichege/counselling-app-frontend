@@ -72,7 +72,7 @@ const BiPolar11 = () => {
             )
           }
         >
-          <ListItemText primary="CyclothymicDisorder" />
+          <ListItemText primary="Cyclothymic Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {CyclothymicDisorderItems.map((item, index) => (
@@ -177,7 +177,7 @@ const BiPolar11 = () => {
             )
           }
         >
-          <ListItemText primary="MedicationinducedBipolar" />
+          <ListItemText primary="Medication induced Bipolar" />
         </AccordionSummary>
         <AccordionDetails>
           {MedicationinducedBipolarItems.map((item, index) => (

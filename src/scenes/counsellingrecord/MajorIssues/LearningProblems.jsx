@@ -125,7 +125,7 @@ const LearningProblems = () => {
             )
           }
         >
-          <ListItemText primary="LowMotivation" />
+          <ListItemText primary="Low Motivation" />
         </AccordionSummary>
         <AccordionDetails>
           {LowMotivationItems.map((item, index) => (
@@ -203,7 +203,7 @@ const LearningProblems = () => {
             )
           }
         >
-          <ListItemText primary="Lackoffocus" />
+          <ListItemText primary="Lack of focus" />
         </AccordionSummary>
         <AccordionDetails>
           {LackoffocusItems.map((item, index) => (
@@ -366,7 +366,7 @@ const LearningProblems = () => {
             )
           }
         >
-          <ListItemText primary="OccupationalProblems" />
+          <ListItemText primary="Occupational Problems" />
         </AccordionSummary>
         <AccordionDetails>
           {OccupationalProblemsItems.map((item, index) => (
@@ -454,7 +454,7 @@ const LearningProblems = () => {
             )
           }
         >
-          <ListItemText primary="HousingProblems" />
+          <ListItemText primary="Housing Problems" />
         </AccordionSummary>
         <AccordionDetails>
           {HousingProblemsItems.map((item, index) => (
@@ -540,7 +540,7 @@ const LearningProblems = () => {
             )
           }
         >
-          <ListItemText primary="FinancialDistressIssues" />
+          <ListItemText primary="Financial Distress Issues" />
         </AccordionSummary>
         <AccordionDetails>
           {FinancialDistressIssuesItems.map((item, index) => (

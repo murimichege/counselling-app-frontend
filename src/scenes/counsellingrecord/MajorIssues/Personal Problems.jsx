@@ -125,7 +125,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="selfCriticism" />
+          <ListItemText primary="Self Criticism" />
         </AccordionSummary>
         <AccordionDetails>
           {selfCriticismItems.map((item, index) => (
@@ -254,7 +254,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="lowSelfEsteem" />
+          <ListItemText primary="Low Self Esteem" />
         </AccordionSummary>
         <AccordionDetails>
           {lowSelfEsteemItems.map((item, index) => (
@@ -383,7 +383,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="identityIssues" />
+          <ListItemText primary="Identity Issues" />
         </AccordionSummary>
         <AccordionDetails>
           {identityIssuesItems.map((item, index) => (
@@ -513,7 +513,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="lackOfConfidence" />
+          <ListItemText primary="Lack Of Confidence" />
         </AccordionSummary>
         <AccordionDetails>
           {lackOfConfidenceItems.map((item, index) => (
@@ -643,7 +643,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="timeManagement" />
+          <ListItemText primary="Time Management" />
         </AccordionSummary>
         <AccordionDetails>
           {timeManagementItems.map((item, index) => (
@@ -772,7 +772,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="selfManagement" />
+          <ListItemText primary="Self Management" />
         </AccordionSummary>
         <AccordionDetails>
           {selfManagementItems.map((item, index) => (
@@ -902,7 +902,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="fraudulentBehavior" />
+          <ListItemText primary="Fraudulent Behavior" />
         </AccordionSummary>
         <AccordionDetails>
           {fraudulentBehaviorItems.map((item, index) => (
@@ -1031,7 +1031,7 @@ const PersonalProblems = () => {
             )
           }
         >
-          <ListItemText primary="dishonesty" />
+          <ListItemText primary="Dishonesty" />
         </AccordionSummary>
         <AccordionDetails>
           {fraudulentBehaviorItems.map((item, index) => (

@@ -38,17 +38,7 @@ const SignatureImage = styled("img")({
 });
 
 
-// interface InvoiceBodyProps {
-//   invoice: Invoice;
-// }
 
-// interface Item {
-//   id: number;
-//   name: string;
-//   quantity: number;
-//   price: number;
-//   currency: string;
-// }
 
 const ConsentForm = ({ invoice }) => {
   //   const { t }  = useTranslation();

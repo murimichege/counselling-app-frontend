@@ -132,7 +132,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="SeparationAnxietyDisorder" />
+          <ListItemText primary="Separation Anxiety Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {SeparationAnxietyDisorderItems.map((item, index) => (
@@ -261,7 +261,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="SpecificPhobia" />
+          <ListItemText primary="Specific Phobia" />
         </AccordionSummary>
         <AccordionDetails>
           {SpecificPhobiaItems.map((item, index) => (
@@ -519,7 +519,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="SocialAnxietyDisorder" />
+          <ListItemText primary="Social Anxiety Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {SocialAnxietyDisorderItems.map((item, index) => (
@@ -648,7 +648,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="SpecificPhobia" />
+          <ListItemText primary="Specific Phobia" />
         </AccordionSummary>
         <AccordionDetails>
           {AgoraphobiaItems.map((item, index) => (
@@ -777,7 +777,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="SpecificPhobia" />
+          <ListItemText primary="Specific Phobia" />
         </AccordionSummary>
         <AccordionDetails>
           {AgoraphobiaItems.map((item, index) => (
@@ -906,7 +906,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="PanicDisorder" />
+          <ListItemText primary="Panic Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {PanicDisorderItems.map((item, index) => (
@@ -1035,7 +1035,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="GeneralizedAnxietyDisorder" />
+          <ListItemText primary="Generalized Anxiety Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {GeneralizedAnxietyDisorderItems.map((item, index) => (
@@ -1164,7 +1164,7 @@ const AnxietyDisorders = ({ onButtonClick }) => {
             )
           }
         >
-          <ListItemText primary="Substance_MedicationInducedAnxietyDisorder" />
+          <ListItemText primary="Substance Medication Induced Anxiety Disorder" />
         </AccordionSummary>
         <AccordionDetails>
           {Substance_MedicationInducedAnxietyDisorderItems.map((item, index) => (

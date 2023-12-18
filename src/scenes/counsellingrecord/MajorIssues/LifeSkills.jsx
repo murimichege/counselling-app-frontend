@@ -104,7 +104,7 @@ const LifeSkills = () => {
             )
           }
         >
-          <ListItemText primary="SelfAwareness" />
+          <ListItemText primary="Self Awareness" />
         </AccordionSummary>
         <AccordionDetails>
           {SelfAwarenessItems.map((item, index) => (
@@ -182,7 +182,7 @@ const LifeSkills = () => {
             )
           }
         >
-          <ListItemText primary="TimeManagement" />
+          <ListItemText primary="Time Management" />
         </AccordionSummary>
         <AccordionDetails>
           {TimeManagementItems.map((item, index) => (
@@ -427,7 +427,7 @@ const LifeSkills = () => {
             )
           }
         >
-          <ListItemText primary="HousingProblems" />
+          <ListItemText primary="Housing Problems" />
         </AccordionSummary>
         <AccordionDetails>
           {GoalSettingItems.map((item, index) => (
