@@ -1,4 +1,7 @@
-import React, { useState, useContext } from "react";
+
+
+
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,9 +16,10 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
-const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+
+
+const Lot12 = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
   return (
     <Accordion expanded={accordionState} onChange={handleAccordionChange}>
       <AccordionSummary
@@ -61,35 +65,27 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const GoalsBeingWorked = ({Goals}) => {
   const [accordionStates, setAccordionStates] = useState({
-    LowerAcademicAchievement: true,
+    Lot1: true,
   });
 
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      majorIssues: newChecked,
-    }));
-
     setChecked(newChecked);
   };
-  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
@@ -106,23 +102,35 @@ const AcademicIssues = () => {
     const { value } = event.target;
     setComments(value);
   };
+  const FamilyAndRelationshipEnhancement = [
+    "Strengthen the family",
+    "Identify what is driving the interactions among couples or families e.g. self-interests, social skills",
+    "psycho-educate on healthy relationships",
+    "encourage a focus on the solution",
+    "create a harmonious flow in the home by purposing to improve on their relationship every day",
+    "learn to promote greater intimacy, connection, passion",
+    "Conduct a rewards and cost-benefit analysis of relationships",
+    "confront a behavior that has been avoided in the relationship",
+    "learn to grow towards each other",
+    "Manage interpersonal traumatic experiences",
+    "seek to be valuable, know why the partner is valuable to them and what value they add to the relationship",
+    "make readjustments after an interpersonal relationship conflict or disagreements",
+    "embrace diversity",
+    "Have dialogue",
+    "Sustain and have meaningful social and family relationships.",
+];
 
-  const LowerAcademicAchievementItems = [
-    "Academic Warning",
-    "Academic Probation",
-    "Academic Dismissal",
-    "Course Registration Difficulties",
-  ];
+
 
   return (
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems</h2>
+      <h2>Goals Being Worked On</h2>
 
-      <AcademicIssuesAccordion
-        title="Lower Academic Achievement"
-        items={LowerAcademicAchievementItems}
+      <Lot12
+        title="Expand"
+        items={FamilyAndRelationshipEnhancement}
         accordionState={accordionStates.LowerAcademicAchievement}
-        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+        handleAccordionChange={handleAccordionChange("Lot9")}
         checked={checked}
         handleToggle={handleToggle}
         commentInputOpen={commentInputOpen}
@@ -134,4 +142,5 @@ const AcademicIssues = () => {
   );
 };
 
-export default AcademicIssues;
+export default GoalsBeingWorked;
+

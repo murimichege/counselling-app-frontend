@@ -37,7 +37,9 @@ import DissociativeDisorders from "./MajorIssues/DissociativeDisorders";
 import SomaticDisorders from "./MajorIssues/SomaticDisorders";
 import FactitiousDisorders from "./MajorIssues/FactitiousDisorders";
 const AssessmentOptions = ({ onButtonClick }) => {
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
+  // const { formData, setFormData } = useContext(CounsellingRecordContext);
+
+  
   return (
     <>
       <AcademicIssues />
@@ -91,7 +93,7 @@ const AssessmentOptions = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagetwo")}
+          onClick={() => onButtonClick("pagesix")}
         >
           Save Client Details
         </Button>

@@ -17,6 +17,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
 	const theme = useTheme();
@@ -112,6 +113,8 @@ const Sidebar = () => {
 						{/* <Item title="Profile Form" to="/form" icon={<PersonOutlinedIcon />} selected={selected} setSelected={setSelected} /> */}
 						<Item title="Calendar" to="/calendar" icon={<CalendarTodayOutlinedIcon />} selected={selected} setSelected={setSelected} />
 						<Item title="Reports" to="/reports" icon={<AssessmentOutlinedIcon />} selected={selected} setSelected={setSelected} />
+						<Item title="Logout" to="/login" icon={<LogoutIcon />} selected={selected} setSelected={setSelected} />
+
 
 
 						</Box>

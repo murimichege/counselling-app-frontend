@@ -26,13 +26,7 @@ function FinalStep({ onButtonClick }) {
 
   console.log("formdata", formData);
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
+
   const navigate = useNavigate();
 
   const CloseSession = () => {
@@ -48,7 +42,7 @@ function FinalStep({ onButtonClick }) {
           <Box
             sx={{
               marginTop: "40px",
-              justifyContent: "space-between",
+              justifyContent: "space-evenly",
               display: "flex",
             }}
           >
@@ -56,7 +50,7 @@ function FinalStep({ onButtonClick }) {
               className="f6 grow br2 ph3 pv2 mb2 dib white"
               type="submit"
               variant="contained"
-              onClick={() => onButtonClick("pagetwo")}
+              onClick={() => onButtonClick("pagefive")}
             >
               Cancel
             </Button>

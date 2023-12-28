@@ -12,7 +12,8 @@ const SignatureCapture = ({ open, onClose, onSaveSignature }) => {
 
   const handleSaveSignature = () => {
     const capturedSignatureImage = signatureRef.current.getTrimmedCanvas().toDataURL('image/png'); // Get the trimmed canvas as an image
-    saveImageLocally(capturedSignatureImage);
+    // console.log("capturedSignatureImage",capturedSignatureImage)
+
     onSaveSignature(capturedSignatureImage); // Pass the image data to the parent component or perform any other action
     onClose(); // Close the dialog after saving the signature
   };
@@ -21,24 +22,7 @@ const SignatureCapture = ({ open, onClose, onSaveSignature }) => {
     signatureRef.current.clear();
   };
 
-  const saveImageLocally = (imageData) => {
-    // Convert the base64 image data to a Blob
-    const byteCharacters = atob(imageData.split(',')[1]);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], { type: 'image/png' });
 
-    // Create a link and trigger a download
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'signature.png'; // Define the file name
-    document.body.appendChild(link); // Append the link to the body
-    link.click(); // Trigger the downloadn
-    document.body.removeChild(link); // Remove the link from the body after download
-  };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>

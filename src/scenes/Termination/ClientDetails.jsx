@@ -12,7 +12,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import {TerminationContext} from './Termination'
+import { TerminationContext } from "./Termination";
 
 const ClientDetails = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(TerminationContext);
@@ -22,15 +22,10 @@ const ClientDetails = ({ onButtonClick }) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  console.log("formdata", formData);
+  // Destructuring formData for better readability
+  const { ClientName, StudentID, SessionsHeld, dateFrom, dateTo } = formData;
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
+  console.log("formdata", formData);
 
   return (
     <main
@@ -38,7 +33,7 @@ const ClientDetails = ({ onButtonClick }) => {
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
       <h2>Client Details</h2>
-    
+
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
@@ -52,26 +47,34 @@ const ClientDetails = ({ onButtonClick }) => {
           }}
         >
           <TextField
-            id="outlined-select-currency"
             label="ClientName"
             name="ClientName"
-            value={formData.ClientName}
+            value={ClientName}
             inputProps={{
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            sx={{ marginRight: "20px", width: "240px", height: "auto", gridColumn: "span 2" }}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
           />
           <TextField
-            id="outlined-select-currency"
             label="StudentID"
             name="StudentID"
-            value={formData.StudentID}
+            value={StudentID}
             inputProps={{
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2" }}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
           />
         </Box>
         <Box
@@ -83,40 +86,33 @@ const ClientDetails = ({ onButtonClick }) => {
           }}
         >
           <TextField
-             select
+            select
             label="Sessions Held"
-            name="Sessions Held"
-            value={formData.SessionsHeld}
+            name="SessionsHeld"
+            value={SessionsHeld}
             inputProps={{
               style: { height: "auto" },
             }}
             onChange={handleInputChange}
-            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2",marginTop:"30px" }}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+              marginTop: "30px",
+            }}
           >
-              <MenuItem value="">
-                  </MenuItem>
-                  <MenuItem value={10}>1</MenuItem>
-                  <MenuItem value={20}>2</MenuItem>
-                  <MenuItem value={30}>3</MenuItem>
-                  <MenuItem value={40}>4</MenuItem>
-                  <MenuItem value={50}>5</MenuItem>
-                  <MenuItem value={60}>6</MenuItem>
-                  <MenuItem value={70}>7</MenuItem>
-                  <MenuItem value={80}>8</MenuItem>
-            </TextField>
-{/* 
-          <Demo>
-            <List dense={dense}>
-              <ListItem>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>
-            </List>
-          </Demo> */}
+            <MenuItem value=""></MenuItem>
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={6}>6</MenuItem>
+            <MenuItem value={7}>7</MenuItem>
+            <MenuItem value={8}>8</MenuItem>
+          </TextField>
         </Box>
-        {/* <p style={{ color: "#C0C0C0" }}>Delivery Dates.</p> */}
         <Box
           sx={{
             display: "flex",
@@ -133,10 +129,15 @@ const ClientDetails = ({ onButtonClick }) => {
             name="dateFrom"
             label="From"
             type="date"
-            value={formData.dateFrom}
+            value={dateFrom}
             onChange={handleInputChange}
             // defaultValue=now()
-            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2" }}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -146,9 +147,14 @@ const ClientDetails = ({ onButtonClick }) => {
             name="dateTo"
             label="To"
             type="date"
-            value={formData.dateTo}
+            value={dateTo}
             onChange={handleInputChange}
-            sx={{ marginRight: "20px", width: "240px", height: "auto",gridColumn: "span 2" }}
+            sx={{
+              marginRight: "20px",
+              width: "240px",
+              height: "auto",
+              gridColumn: "span 2",
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -162,45 +168,34 @@ const ClientDetails = ({ onButtonClick }) => {
             // justifyContent: space-evenly
           }}
         >
-          <TextField
-            id="outlined-select-currency"
-            label="Counseling Goals Set"
-            name="price"
-            value={formData.GoalsSet}
-            inputProps={{
-              style: { height: "auto" },
-            }}
-            onChange={handleInputChange}
-            sx={{ marginRight: "20px", width: "240px", height: "auto" }}
-          />
-
+         
         </Box>
       </div>
-<Box 
-sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
->
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagetwo")}
+      <Box
+        sx={{
+          marginTop: "40px",
+          justifyContent: "space-between",
+          display: "flex",
+        }}
       >
-       Cancel
-      </Button>
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pagetwo")}
+        >
+          Cancel
+        </Button>
 
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagetwo")}
-      >
-        Save Client Details.
-      </Button>
-
-</Box>
-     
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pagetwo")}
+        >
+          Save Client Details.
+        </Button>
+      </Box>
     </main>
   );
 };

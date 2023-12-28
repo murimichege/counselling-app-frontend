@@ -2,35 +2,37 @@ import React, { useState, useContext } from "react";
 import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import {
-  Box,
-  TextField,
-  MenuItem,
-  Button,
-  List,
-  Demo,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Box, TextField, Button, Typography } from "@mui/material";
+import SignatureTextField from "../../components/signature";
 import { TerminationContext } from "./Termination";
 
 const CounsellorSignature = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(TerminationContext);
+  const [signature, setSignature] = useState("");
+  const [signatureDialogOpen, setSignatureDialogOpen] = useState(false);
+
+  const openSignatureDialog = () => {
+    setSignatureDialogOpen(true);
+  };
+
+  const closeSignatureDialog = () => {
+    setSignatureDialogOpen(false);
+  };
+
+  const handleSignatureCapture = (capturedImage) => {
+    setSignature(capturedImage);
+    closeSignatureDialog();
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  console.log("formdata", formData);
+  const {CounsellorName, CurrentDate } = formData;
+  
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
+  console.log("formdata", formData);
 
   return (
     <main
@@ -54,7 +56,7 @@ const CounsellorSignature = ({ onButtonClick }) => {
           <TextField
             label="Counselor Name"
             name="CounsellorName"
-            value={formData.CounsellorName}
+            value={CounsellorName}
             inputProps={{
               style: { height: "auto" },
             }}
@@ -71,7 +73,7 @@ const CounsellorSignature = ({ onButtonClick }) => {
             name="CurrentDate"
             label="CurrentDate"
             type="date"
-            value={formData.CurrentDate}
+            value={CurrentDate}
             onChange={handleInputChange}
             // defaultValue=now()
             sx={{
@@ -93,28 +95,33 @@ const CounsellorSignature = ({ onButtonClick }) => {
             // justifyContent: space-evenly
           }}
         >
-          <TextField
-            label="Signature"
-            variant="standard"
-            name="CounsellorSignature"
-            value={formData.CounsellorSignature}
-            inputProps={{
-              style: { height: "auto" },
-            }}
-            onChange={handleInputChange}
-            sx={{
-              marginRight: "20px",
-              height: "auto",
-              gridColumn: "span 4",
-              marginTop: "30px",
-            }}
+          {/* Signature Capture */}
+          <SignatureTextField
+            open={signatureDialogOpen}
+            onClose={closeSignatureDialog}
+            onSaveSignature={handleSignatureCapture}
           />
+          <Typography variant="body4" gutterBottom>
+            Signature:
+          </Typography>
+          {/* Display Captured Signature */}
+          {signature && (
+            <Box
+              sx={{
+                // marginTop: "40px",
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              <img src={signature} alt="Captured Signature" />
+            </Box>
+          )}
         </Box>
       </div>
       <Box
         sx={{
           marginTop: "40px",
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
           display: "flex",
         }}
       >
@@ -126,14 +133,22 @@ const CounsellorSignature = ({ onButtonClick }) => {
         >
           Cancel
         </Button>
-
+        <Button
+                variant="contained"
+                sx={{
+                  mx: 2,
+                }}
+                onClick={openSignatureDialog}
+              >
+                Sign
+              </Button>
         <Button
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pageone")}
+          onClick={() => onButtonClick("pagesix")}
         >
-          Save Counselor Details and Close Session.
+          Save Counselor Details
         </Button>
       </Box>
     </main>

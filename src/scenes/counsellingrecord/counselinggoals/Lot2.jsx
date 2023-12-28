@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,9 +13,8 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
-const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+const Lot2 = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
   return (
     <Accordion expanded={accordionState} onChange={handleAccordionChange}>
       <AccordionSummary
@@ -61,35 +60,27 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const BehaviorChange = () => {
   const [accordionStates, setAccordionStates] = useState({
-    LowerAcademicAchievement: true,
+    Behavior: true,
   });
 
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      majorIssues: newChecked,
-    }));
-
     setChecked(newChecked);
   };
-  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
@@ -107,22 +98,44 @@ const AcademicIssues = () => {
     setComments(value);
   };
 
-  const LowerAcademicAchievementItems = [
-    "Academic Warning",
-    "Academic Probation",
-    "Academic Dismissal",
-    "Course Registration Difficulties",
-  ];
+  const Lot2Items = [
+  
+   "unlearn, learn and relearn healthy coping mechanisms",
+   "change acquired habits that are potentially self-destructive or unhealthy behaviors.",
+   "Help the client identify the errors they've made in the development of their style of life, character or behavior.",
+   "Modify or unlearn harmful behaviors",
+   "develop their strengths.",
+   "Focus on healthy, appropriate compensations for their weaknesses.",
+   "Learn the interpretation, meaning attached to their behavior",
+   "explore the presence of faulty reinforcement history or socially inadequate or inappropriate responses to situations.",
+   "Feel encouraged about their capacity to create meaning and connections in their life.",
+   "creates awareness that the dysfunctional behavior is a result of a conditioned automatic response to an external event (Stimulus-response)",
+   "learn how to respond appropriately to the external environment.",
+   "Learn how to break the abuse cycle",
+   "Learn to take control and charge of their life.",
+   "Learn to say No.",
+   "Learn to be assertive.",
+   "Learn to make the right and positive choices.",
+   "Learn goal setting.",
+   "Learn social skills.",
+   "Make changes in one’s environment",
+   "understand and manage the unconscious intrapsychic functioning of the client, make the Unconscious Conscious (The iceberg principle).",
+   "understand how they receive, organize, perceive, conceptualize, interpret and construe the world.",
+   "understand the determinants of behavior as influenced by Conditioning, Observing, Copying others, Imitation.",
+   "Recognize their attitude and perfectionism tendencies",
+   "Stop personalization and projection tendencies",
+   "Enhance empathy"
+];
 
   return (
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems</h2>
+      <h2>Lot 2</h2>
 
-      <AcademicIssuesAccordion
-        title="Lower Academic Achievement"
-        items={LowerAcademicAchievementItems}
-        accordionState={accordionStates.LowerAcademicAchievement}
-        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+      <Lot2
+        title="Behavior Change and modification"
+        items={Lot2Items}
+        accordionState={accordionStates.Behavior}
+        handleAccordionChange={handleAccordionChange("Behavior")}
         checked={checked}
         handleToggle={handleToggle}
         commentInputOpen={commentInputOpen}
@@ -134,4 +147,4 @@ const AcademicIssues = () => {
   );
 };
 
-export default AcademicIssues;
+export default BehaviorChange;

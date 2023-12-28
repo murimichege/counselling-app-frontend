@@ -1,200 +1,82 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import {
-  Box,
-  Button,
-  ListItem,
-  Checkbox,
-  List,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import Collapse from "@mui/material/Collapse";
-import { TerminationContext } from './Termination';
-
+import { Box, Button } from "@mui/material";
+import GoalsBeingWorked from "./ClientProgress/GoalsBeingWorked";
+import GoalsMet from "./ClientProgress/GoalsMet";
+import GoalsNotMet from "./ClientProgress/GoalsNotMet";
+import "react-quill/dist/quill.snow.css";
+import { TerminationContext } from "./Termination";
+import GoalsApi from '../../api/goals/couselinggoals'
 const ClientProgress = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(TerminationContext);
-  const [goalsMetOpen, setGoalsMetOpen] = useState(true);
-  const [goalsBeingWorkedOnOpen, setGoalsBeingWorkedOnOpen] = useState(true);
-  const [goalsNotMetOpen, setGoalsNotMetOpen] = useState(true);
-  const [checked, setChecked] = useState([1]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  const {Goals, setGoals} = useState([])
+  const fetchCounselingGoals = async (selectedUserId) => {
+    try {
+      
+    const response =  await GoalsApi.get(selectedUserId); 
+    setGoals(response)
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+    if(response.length > 0 ){
+      const {goal_status} = response[0]
+      console.log("response", response);
+      setFormData((prevItems) => ({
+        ...prevItems, 
+        GoalsSet: goal_status === "set",
+        GoalsMet: goal_status === "done",
+        GoalsbeingWorkedOn: goal_status === "progress", 
+        GoalsNotMet:  goal_status === "notmet"
+      }))
     }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+   }
 
-    setChecked(newChecked);
-  };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-
+   useEffect(() => {
+    const selectedUserId = formData.StudentID; // Get the selected user ID from form data
+    if (selectedUserId) {
+      fetchCounselingGoals(selectedUserId);
+    }
+   },[formData.selectedUserId])
   return (
     <main
       className="pt5 black-80"
-      style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
+      // style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h2>Client Progress</h2>
-      <p style={{ color: "#C0C0C0" }}>Goals met</p>
-      <div
-        className="center ph4 selectionDiv"
-        style={{ height: "46%", display: "inline-block" }}
-      >
-        {/* Goals Met section */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <ListItemButton onClick={() => setGoalsMetOpen(!goalsMetOpen)}>
-            <ListItemText primary="Goals met" />
-            {goalsMetOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsMetOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText primary={`Line item ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-
-        {/* Goals Being Worked On section */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-         <ListItemButton onClick={() => setGoalsBeingWorkedOnOpen(!goalsBeingWorkedOnOpen)}>
-            <ListItemText primary="Goals Being Worked" />
-            {goalsBeingWorkedOnOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsBeingWorkedOnOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%",  minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText primary={`Goal ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-
-        {/* Goals Not Met section */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-              <ListItemButton onClick={() => setGoalsNotMetOpen(!goalsNotMetOpen)}>
-            <ListItemText primary="Goals Not Met " />
-            {goalsNotMetOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={goalsNotMetOpen} timeout="auto" unmountOnExit>
-            <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
-              {[0, 1, 2, 3].map((value) => (
-                <ListItem
-                  key={value}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value)}
-                      checked={checked.indexOf(value) !== -1}
-                    />
-                  }
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemText primary={`Line item ${value + 1}`} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </Box>
-
-        {/* Recommendation component */}
-        {/* ... (your Recommendation component) */}
-      </div>
+      <h2 sx={{justifyContent:"center" ,display:"flex"}}>Counseling Goals</h2>
+      <GoalsBeingWorked Goals={Goals} />
+      <GoalsMet Goals={Goals}/>
+      <GoalsNotMet Goals={Goals}/>
 
       {/* Buttons */}
-      <Box 
-sx={{marginTop:"40px", justifyContent:"space-between", display:"flex"}}
->
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagetwo")}
+      <Box
+        sx={{
+          marginTop: "40px",
+          justifyContent: "space-evenly",
+          display: "flex",
+        }}
       >
-       Cancel
-      </Button>
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pageone")}
+        >
+          Cancel
+        </Button>
 
-<Button
-        className="f6 grow br2 ph3 pv2 mb2 dib white"
-       
-        type="submit"
-        variant="contained"
-        onClick={() => onButtonClick("pagethree")}
-      >
-        Save Client Details.
-      </Button>
-
-</Box>
-     
+        <Button
+          className="f6 grow br2 ph3 pv2 mb2 dib white"
+          type="submit"
+          variant="contained"
+          onClick={() => onButtonClick("pagefour")}
+        >
+          Save & Continue.
+        </Button>
+      </Box>
     </main>
   );
 };

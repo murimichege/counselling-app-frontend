@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,9 +13,8 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
-const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+const Lot5 = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
   return (
     <Accordion expanded={accordionState} onChange={handleAccordionChange}>
       <AccordionSummary
@@ -61,35 +60,27 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const TraumaMemoryManagement = () => {
   const [accordionStates, setAccordionStates] = useState({
-    LowerAcademicAchievement: true,
+    Trauma: true,
   });
 
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      majorIssues: newChecked,
-    }));
-
     setChecked(newChecked);
   };
-  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
@@ -106,23 +97,27 @@ const AcademicIssues = () => {
     const { value } = event.target;
     setComments(value);
   };
+  const Lot5Items = [
+    "Deal with trauma Memories",
+    "Be fully present in their current life",
+    "Deal with re-experiencing of the trauma",
+    "Deal with intrusive thoughts and physical sensations, hyperarousal, or being easily alarmed, obsession with safety",
+    "Enhance self-monitoring abilities",
+    "Reconsolidate sensory memory to be integrated into verbal memory",
+    "Understand normalize and be knowledgeable about their reactions at and after the traumatic event",
+    "Unfreeze unprocessed stress and create positive change"
+];
 
-  const LowerAcademicAchievementItems = [
-    "Academic Warning",
-    "Academic Probation",
-    "Academic Dismissal",
-    "Course Registration Difficulties",
-  ];
 
   return (
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems</h2>
+      <h2>Lot 5</h2>
 
-      <AcademicIssuesAccordion
-        title="Lower Academic Achievement"
-        items={LowerAcademicAchievementItems}
-        accordionState={accordionStates.LowerAcademicAchievement}
-        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+      <Lot5
+        title="Trauma Memory Management"
+        items={Lot5Items}
+        accordionState={accordionStates.Trauma}
+        handleAccordionChange={handleAccordionChange("Trauma")}
         checked={checked}
         handleToggle={handleToggle}
         commentInputOpen={commentInputOpen}
@@ -134,4 +129,4 @@ const AcademicIssues = () => {
   );
 };
 
-export default AcademicIssues;
+export default TraumaMemoryManagement;

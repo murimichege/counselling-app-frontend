@@ -1,129 +1,82 @@
-import React, { useState, useContext } from "react";
-import "./index.css";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import { FC, useContext, useEffect, useState } from 'react';
 import {
-  Box,
-  Button,
-  ListItem,
-  Checkbox,
-  List,
-  Typography,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import FolderIcon from "@mui/icons-material/Folder";
+  EditorComposer,
+  Editor,
+  ToolbarPlugin,
+  FontFamilyDropdown,
+  FontSizeDropdown,
+  BoldButton,
+  ItalicButton,
+  UnderlineButton,
+  CodeFormatButton,
+  InsertLinkButton,
+  TextColorPicker,
+  BackgroundColorPicker,
+  TextFormatDropdown,
+  InsertDropdown,
+  AlignDropdown,
+  Divider,
+} from 'verbum';
 
-import CheckIcon from "@mui/icons-material/Check";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { CounsellingRecordContext } from "./CounselingRecord";
+import { CounsellingRecordContext } from './CounselingRecord';
+import { Container, Typography, Button, Box } from '@mui/material';
 
 const ClientReason = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
-  const [secondary, setSecondary] = React.useState(false);
+  const { ReasonsforCounseling } = formData;
 
-  const [editorContent, setEditorContent] = useState([]); // State to store editor content
-  const [dense, setDense] = React.useState(false);
+  const [orderedItemsText, setOrderedItemsText] = useState([]);
 
-  // Handler to update the state when editor content changes
-  const handleEditorChange = (content) => {
-    setEditorContent(content);
+  const handleContentChange = (content) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      ReasonsforCounseling: content,
+    }));
   };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  const EditorWrapper = styled(Box)(
-    ({ theme }) => `
-  
-      .ql-editor {
-        min-height: 100px;
-        width: 86vh;
-      }
-  
-      .ql-toolbar.ql-snow {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-      }
-  
-      .ql-toolbar.ql-snow,
-      .ql-container.ql-snow {
-        border-color: gray;
-      }
-  
-      .ql-container.ql-snow {
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-      }
-  
-      &:hover {
-        .ql-toolbar.ql-snow,
-        .ql-container.ql-snow {
-          border-color: gray;
-        }
-      }
-  `
-  );
-  function generate(element) {
-    return [0, 1, 2].map((value) =>
-      React.cloneElement(element, {
-        key: value,
-      })
-    );
-  }
+  useEffect(() => {
+    const orderedItems = ReasonsforCounseling[0]?.root?.children[0]?.children || [];
 
+    const itemsText = orderedItems.map((item, index) => {
+      return `${index + 1}: ${item.children[0]?.text || ''}`;
+    });
+
+    setOrderedItemsText(itemsText);
+  }, [ReasonsforCounseling]);
   return (
-    <main
-      className="pt5 black-80"
-      style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
-    >
-      <h2>Client’s presenting problem(S) -  Why client is seeking counseling?</h2>
-      <div
-        className="center ph4 selectionDiv"
-        style={{ height: "46%", display: "inline-block" }}
-      >
-        <Box
-          sx={
-            {
-              // mb: `${theme.spacing(3)}`
-            }
-          }
-          item
-          xs={12}
-          sm={8}
-          md={9}
-        >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
-        </Box>
-        <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Reasons
-          </Typography>
-          <List dense={dense}>
-            {formData.CounsellingReasons.map((item) => {
-              <ListItem>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>;
-            })}
-          </List>
-        </Box>
-      </div>
+  <Container sx={{mt:4}}>
+   <EditorComposer>
+      <Editor hashtagsEnabled={true} onChange={handleContentChange} defaultValue={ReasonsforCounseling[0]}>
+        <ToolbarPlugin defaultFontSize="10px">
+          <FontFamilyDropdown />
+          <FontSizeDropdown />
+          <Divider />
+          <BoldButton />
+          <ItalicButton />
+          <UnderlineButton />
+          <CodeFormatButton />
+          <InsertLinkButton />
+          {/* <TextColorPicker />
+          <BackgroundColorPicker /> */}
+          <TextFormatDropdown />
+          <Divider />
+          <InsertDropdown enablePoll={true} />
+          <Divider />
+          <AlignDropdown />
+        </ToolbarPlugin>
+      </Editor>
+    </EditorComposer>
 
-      {/* Buttons */}
+<Typography variant="h4">
+  Reasons
+</Typography>
+
+ <Typography variant="body4">
+        {orderedItemsText.map((text, index) => (
+          <div key={index}>{text}</div>
+        ))}
+      </Typography>
+
       <Box
         sx={{
           marginTop: "40px",
@@ -146,10 +99,11 @@ const ClientReason = ({ onButtonClick }) => {
           variant="contained"
           onClick={() => onButtonClick("pagethree")}
         >
-          Save.
+          Save Client Details.
         </Button>
       </Box>
-    </main>
+  </Container>
+ 
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,9 +13,8 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
-const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+const Lot4 = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
   return (
     <Accordion expanded={accordionState} onChange={handleAccordionChange}>
       <AccordionSummary
@@ -61,35 +60,27 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const PersonalDevelopmentAndGrief = () => {
   const [accordionStates, setAccordionStates] = useState({
-    LowerAcademicAchievement: true,
+    DevelopmentState: true,
   });
 
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      majorIssues: newChecked,
-    }));
-
     setChecked(newChecked);
   };
-  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
@@ -106,23 +97,39 @@ const AcademicIssues = () => {
     const { value } = event.target;
     setComments(value);
   };
+  const Lot4Items = [
+    "Develop inner aspects of their personality",
+    "Enhance Ego strength (check from what level are they operating from, id, ego, super-ego)",
+    "Normalize grieving significant losses - accept the pain, sadness, brokenness is part of the grieving process",
+    "Psycho-educate on the loss process",
+    "Manage their response and reaction to the loss",
+    "find presence, connection and healing in the midst of the loss",
+    "deal with the strong grief-related emotions",
+    "get insight, a new perspective and ways to move forward after the loss.",
+    "choose not to live with the pain and suffering following the loss",
+    "Accept the “new person” they have become after the loss",
+    "adjust and adapt to the changes",
+    "learn to let go what they have no control over",
+    "Tap into their social support",
+    "identify their belief system",
+    "evaluate the consequences of the beliefs",
+    "Explore the self-defeating beliefs -work on/change irrational beliefs.",
+    "Replace irrational with rational. Logical, coherent beliefs.",
+    "deal with tensions between different explanatory frameworks be it cultural, traditional or modern religion or therapies.",
+    "Practice effective ways of thinking.",
+    "Manage distractors or blocks to their success"
+];
 
-  const LowerAcademicAchievementItems = [
-    "Academic Warning",
-    "Academic Probation",
-    "Academic Dismissal",
-    "Course Registration Difficulties",
-  ];
 
   return (
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems</h2>
+      <h2>Lot 4</h2>
 
-      <AcademicIssuesAccordion
-        title="Lower Academic Achievement"
-        items={LowerAcademicAchievementItems}
-        accordionState={accordionStates.LowerAcademicAchievement}
-        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+      <Lot4
+        title="Personal Development And Grief"
+        items={Lot4Items}
+        accordionState={accordionStates.DevelopmentState}
+        handleAccordionChange={handleAccordionChange("DevelopmentState")}
         checked={checked}
         handleToggle={handleToggle}
         commentInputOpen={commentInputOpen}
@@ -134,4 +141,4 @@ const AcademicIssues = () => {
   );
 };
 
-export default AcademicIssues;
+export default PersonalDevelopmentAndGrief;

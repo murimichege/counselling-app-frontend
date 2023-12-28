@@ -1,4 +1,7 @@
-import React, { useState, useContext } from "react";
+
+
+
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,9 +16,8 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
-const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+const Lot13 = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
   return (
     <Accordion expanded={accordionState} onChange={handleAccordionChange}>
       <AccordionSummary
@@ -61,35 +63,27 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const PersonalEmpowerment = () => {
   const [accordionStates, setAccordionStates] = useState({
-    LowerAcademicAchievement: true,
+    Empowerment: true,
   });
 
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      majorIssues: newChecked,
-    }));
-
     setChecked(newChecked);
   };
-  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
@@ -106,23 +100,34 @@ const AcademicIssues = () => {
     const { value } = event.target;
     setComments(value);
   };
+  const PersonalEmpowerment = [
+    "Turn down the intensity of emotions and thoughts",
+    "Make peace with their experience",
+    "Work towards autonomy and preservation of their privacy and freedom",
+    "Work towards meeting their own needs, desires, life goals.",
+    "Focus on what they have control over and they can change",
+    "Make the choice to have control over their life",
+    "Enhance the ability to have fun and to experience satisfaction, pleasure, and delight.",
+    "Enhance tolerance and know they have a choice to change and work towards solutions to the problem they are facing",
+    "Enhance problem-solving skills",
+    "Encourage facing reality and the facts of life",
+    "Be conscious, stop operating from the suppressed unconscious emotions or thoughts",
+    "Tap into their strength to take control and move forward",
+    "Get unstuck from or not be trapped in narratives/stories of the past",
+    "Engage in self-care"
+];
 
-  const LowerAcademicAchievementItems = [
-    "Academic Warning",
-    "Academic Probation",
-    "Academic Dismissal",
-    "Course Registration Difficulties",
-  ];
+
 
   return (
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems</h2>
+      <h2>Lot 13</h2>
 
-      <AcademicIssuesAccordion
-        title="Lower Academic Achievement"
-        items={LowerAcademicAchievementItems}
-        accordionState={accordionStates.LowerAcademicAchievement}
-        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+      <Lot13
+        title="Personal Empowerment"
+        items={PersonalEmpowerment}
+        accordionState={accordionStates.Empowerment}
+        handleAccordionChange={handleAccordionChange("Empowerment")}
         checked={checked}
         handleToggle={handleToggle}
         commentInputOpen={commentInputOpen}
@@ -134,4 +139,5 @@ const AcademicIssues = () => {
   );
 };
 
-export default AcademicIssues;
+export default PersonalEmpowerment;
+

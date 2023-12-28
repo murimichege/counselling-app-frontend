@@ -20,21 +20,26 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
+import SessionsApi from '../../api/session/session'
+import toast, { Toaster } from "react-hot-toast";
+
 
 const Calendar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [currentEvents, setCurrentEvents] = useState([]);
+  const [formData, setFormData] = useState({
+    currentEvents:[],
+    clientName: "",
+    clientEmail:"",
+    counsellor:"",
+    selectedDate:"",
+    receptionist:"",
+    location:"",
+    meetingLink:"",
+    isOnline:false,
+  })
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [clientName, setClientName] = useState("");
-  const [clientEmail, setClientEmail] = useState("");
 
-  const [counsellor, setCounsellor] = useState("");
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [receptionist, setReceptionist] = useState("");
-  const [location, setLocation] = useState();
-  const [meetingLink, setMeetingLink] = useState("");
-  const [isOnline, setIsOnline] = useState(false)
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -45,7 +50,11 @@ const Calendar = () => {
   };
 
   const handleDateClick = (selected) => {
-    setSelectedDate(selected);
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedDate: selected
+    }))
+
     handleDrawerOpen();
   };
 
@@ -59,46 +68,75 @@ const Calendar = () => {
     }
   };
 
+  const handleFetchSessions  =async () => {
+
+
+  }
+ const  createNewEvent = async () => {
+  try {
+  
+    const response =  await SessionsApi.create(formData);
+    console.log("response", response);
+    toast.success(`Session created successfully! <br> Both the counselor and the client have been alerted`);
+  } catch (error) {
+    console.error("Error:", error);
+    toast.error("Failed to create counseling session. Please contact IT support");
+  }
+ }
   const handleAddEvent = () => {
-    if (selectedDate && clientEmail && counsellor) {
-      const { startStr, endStr, allDay } = selectedDate;
-      const calendarApi = selectedDate.view.calendar;
+    if (formData.selectedDate && formData.clientEmail && formData.counsellor) {
+      const { startStr, endStr, allDay } = formData.selectedDate;
+      const calendarApi = formData.selectedDate.view.calendar;
       calendarApi.unselect();
 
-      calendarApi.addEvent({
-        id: `${startStr}-${clientName}`,
-        clientName,
-        counsellor,
-        clientEmail,
-        receptionist,
-        location,
-        meetingLink,
+     const newEvent = {
+        id: `${startStr}-${formData.clientName}`,
+        clientName: formData.clientName,
+        counsellor: formData.counsellor,
+        clientEmail: formData.clientEmail,
+        receptionist:  formData.receptionist,
+        location: formData.location,
+        meetingLink: formData.meetingLink,
         start: startStr,
         end: endStr,
         allDay,
-      });
+      };
+      calendarApi.addEvent(newEvent)
+      setFormData({
+        ...formData, 
+        clientName: "",
+        clientEmail:"",
+        counsellor:"",
+        selectedDate:"",
+        receptionist:"",
+        location:"",
+        meetingLink:"",
+        isOnline:false,
 
+      })
+      createNewEvent()
       handleDrawerClose();
-      setSelectedDate(null);
-      setClientName("");
-      setClientEmail("")
-      setCounsellor("");
-      setReceptionist("");
-      setLocation("");
-      setMeetingLink("");
+
     }
   };
 
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value); 
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
+ 
   return (
     <Box m="20px">
       <Header title="Calendar" subtitle="Schedule Counseling Sessions" />
         {/* Drawer for Event Input */}
         <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
         <Box p="20px" width="300px">
-          <Typography variant="h6">Create New Session</Typography>
+          <Typography variant="h6">Create a New Session</Typography>
           
      
 
@@ -106,8 +144,9 @@ const Calendar = () => {
           <Select
             labelId="counsellor-label"
             id="counsellor"
-            value={counsellor}
-            onChange={(e) => setCounsellor(e.target.value)}
+            name="counsellor"
+            value={formData.counsellor}
+            onChange={handleInputChange}
             fullWidth
             required
             margin="normal"
@@ -119,24 +158,26 @@ const Calendar = () => {
           </Select>
           <TextField
             label="Client Name"
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
+            value={formData.clientName}
+            onChange={handleInputChange}
             fullWidth
             required
             margin="normal"
           />
    <TextField
             label="Client Email"
-            value={clientEmail}
-            onChange={(e) => setClientEmail(e.target.value)}
+            name="clientEmail"
+            value={formData.clientEmail}
+            onChange={handleInputChange}
             fullWidth
             required
             margin="normal"
           />      
               <TextField
             label="Receptionist"
-            value={receptionist}
-            onChange={(e) => setReceptionist(e.target.value)}
+            name="receptionist"
+            value={formData.receptionist}
+            onChange={handleInputChange}
             fullWidth
             required
             margin="normal"
@@ -145,9 +186,9 @@ const Calendar = () => {
 <InputLabel id="location-label">Location</InputLabel>
           <Select
             labelId="location-label"
-            id="location"
-            value={location}
-            onChange={handleLocationChange}
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
             fullWidth
             margin="normal"
           >
@@ -156,11 +197,12 @@ const Calendar = () => {
           </Select>
 
           {
-            isOnline ? (
+            formData.isOnline ? (
               <TextField
               label="Meeting Link"
-              value={meetingLink}
-              onChange={(e) => setMeetingLink(e.target.value)}
+              name="meetingLink"
+              value={formData.meetingLink}
+              onChange={handleInputChange}
               fullWidth
               required
               margin="normal"
@@ -168,8 +210,9 @@ const Calendar = () => {
             ) : (
               <TextField
               label="Meeting Link"
-              value={meetingLink}
-              onChange={(e) => setMeetingLink(e.target.value)}
+              name="meetingLink"
+              value={formData.meetingLink}
+              onChange={handleInputChange}
               fullWidth
               disabled
               required
@@ -195,7 +238,7 @@ const Calendar = () => {
           
           <Typography variant="h5">Counseling Sessions </Typography>
           <List>
-            {currentEvents.map((event) => (
+            {formData.currentEvents.map((event) => (
               <ListItem
                 key={event.id}
                 sx={{
@@ -243,19 +286,19 @@ const Calendar = () => {
             dayMaxEvents={true}
             select={handleDateClick}
             eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
-            initialEvents={[
-              {
-                id: "12315",
-                title: "Session with Eddie",
-                date: "2023-08-22  15:00",
-              },
-              {
-                id: "5123",
-                title: "Session with Staff",
-                date: "2023-08-22  14:00",
-              },
-            ]}
+            eventsSet={handleInputChange}
+            // initialEvents={[
+            //   {
+            //     id: "12315",
+            //     title: "Session with Eddie",
+            //     date: "2023-08-22  15:00",
+            //   },
+            //   {
+            //     id: "5123",
+            //     title: "Session with Staff",
+            //     date: "2023-08-22  14:00",
+            //   },
+            // ]}
           />
         </Box>
       </Box>

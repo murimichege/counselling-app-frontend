@@ -13,70 +13,47 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import FolderIcon from "@mui/icons-material/Folder";
+import {
+  EditorComposer,
+  Editor,
+  ToolbarPlugin,
+  FontFamilyDropdown,
+  FontSizeDropdown,
+  BoldButton,
+  ItalicButton,
+  UnderlineButton,
+  CodeFormatButton,
+  InsertLinkButton,
+  TextColorPicker,
+  BackgroundColorPicker,
+  TextFormatDropdown,
+  InsertDropdown,
+  AlignDropdown,
+  Divider,
+} from 'verbum';
 
-import CheckIcon from "@mui/icons-material/Check";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { CounsellingRecordContext } from "./CounselingRecord";
 
 const Explore = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
+
+  const {
+    Durationofissuepresented,
+    effectsonclient,
+    currentfunctioning,
+    pastfunctioning,
+  } = formData;
   const [secondary, setSecondary] = React.useState(false);
 
   const [editorContent, setEditorContent] = useState([]); // State to store editor content
   const [dense, setDense] = React.useState(false);
 
   // Handler to update the state when editor content changes
-  const handleEditorChange = (content) => {
-    setEditorContent(content);
+
+  const handleInputChange = (content) => {
+    setFormData((prevState) => ({ ...prevState, Durationofissuepresented: [content], effectsonclient: [content], currentfunctioning: [content],pastfunctioning:[content]  }));
   };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  const EditorWrapper = styled(Box)(
-    ({ theme }) => `
-  
-      .ql-editor {
-        min-height: 100px;
-        width: 86vh;
-      }
-  
-      .ql-toolbar.ql-snow {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-      }
-  
-      .ql-toolbar.ql-snow,
-      .ql-container.ql-snow {
-        border-color: gray;
-      }
-  
-      .ql-container.ql-snow {
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-      }
-  
-      &:hover {
-        .ql-toolbar.ql-snow,
-        .ql-container.ql-snow {
-          border-color: gray;
-        }
-      }
-  `
-  );
-  function generate(element) {
-    return [0, 1, 2].map((value) =>
-      React.cloneElement(element, {
-        key: value,
-      })
-    );
-  }
 
   return (
     <main
@@ -84,16 +61,15 @@ const Explore = ({ onButtonClick }) => {
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
       <h2>
-        Explore for how long this has been going on and 
-                
-        how this has affected the client’s?
+        Explore for how long this has been going on and how this has affected
+        the client’s?
       </h2>
       <div
         className="center ph4 selectionDiv"
         style={{ height: "46%", display: "inline-block" }}
       >
-         <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div">
-         Explore for how long this has been going on and 
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+          Explore for how long this has been going on and
         </Typography>
         <Box
           sx={
@@ -106,12 +82,30 @@ const Explore = ({ onButtonClick }) => {
           sm={8}
           md={9}
         >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
+        <EditorComposer>
+      <Editor hashtagsEnabled={true} onChange={handleInputChange} defaultValue={Durationofissuepresented[0]}>
+        <ToolbarPlugin defaultFontSize="10px">
+          <FontFamilyDropdown />
+          <FontSizeDropdown />
+          <Divider />
+          <BoldButton />
+          <ItalicButton />
+          <UnderlineButton />
+          <CodeFormatButton />
+          <InsertLinkButton />
+          {/* <TextColorPicker />
+          <BackgroundColorPicker /> */}
+          <TextFormatDropdown />
+          <Divider />
+          <InsertDropdown enablePoll={true} />
+          <Divider />
+          <AlignDropdown />
+        </ToolbarPlugin>
+      </Editor>
+    </EditorComposer>
         </Box>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div">
-        how this has affected the client’s?
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+          how this has affected the client’s?
         </Typography>
         <Box
           sx={
@@ -124,11 +118,29 @@ const Explore = ({ onButtonClick }) => {
           sm={8}
           md={9}
         >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
+             <EditorComposer>
+      <Editor hashtagsEnabled={true} onChange={handleInputChange} defaultValue={effectsonclient[0]}>
+        <ToolbarPlugin defaultFontSize="10px">
+          <FontFamilyDropdown />
+          <FontSizeDropdown />
+          <Divider />
+          <BoldButton />
+          <ItalicButton />
+          <UnderlineButton />
+          <CodeFormatButton />
+          <InsertLinkButton />
+          {/* <TextColorPicker />
+          <BackgroundColorPicker /> */}
+          <TextFormatDropdown />
+          <Divider />
+          <InsertDropdown enablePoll={true} />
+          <Divider />
+          <AlignDropdown />
+        </ToolbarPlugin>
+      </Editor>
+    </EditorComposer>
         </Box>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
           i. Current functioning
         </Typography>
         <Box
@@ -142,11 +154,29 @@ const Explore = ({ onButtonClick }) => {
           sm={8}
           md={9}
         >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
+                <EditorComposer>
+      <Editor hashtagsEnabled={true} onChange={handleInputChange} defaultValue={currentfunctioning[0]}>
+        <ToolbarPlugin defaultFontSize="10px">
+          <FontFamilyDropdown />
+          <FontSizeDropdown />
+          <Divider />
+          <BoldButton />
+          <ItalicButton />
+          <UnderlineButton />
+          <CodeFormatButton />
+          <InsertLinkButton />
+          {/* <TextColorPicker />
+          <BackgroundColorPicker /> */}
+          <TextFormatDropdown />
+          <Divider />
+          <InsertDropdown enablePoll={true} />
+          <Divider />
+          <AlignDropdown />
+        </ToolbarPlugin>
+      </Editor>
+    </EditorComposer>
         </Box>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
           ii. Past Functioning
         </Typography>
         <Box
@@ -160,15 +190,33 @@ const Explore = ({ onButtonClick }) => {
           sm={8}
           md={9}
         >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
+                    <EditorComposer>
+      <Editor hashtagsEnabled={true} onChange={handleInputChange} defaultValue={pastfunctioning[0]}>
+        <ToolbarPlugin defaultFontSize="10px">
+          <FontFamilyDropdown />
+          <FontSizeDropdown />
+          <Divider />
+          <BoldButton />
+          <ItalicButton />
+          <UnderlineButton />
+          <CodeFormatButton />
+          <InsertLinkButton />
+          {/* <TextColorPicker />
+          <BackgroundColorPicker /> */}
+          <TextFormatDropdown />
+          <Divider />
+          <InsertDropdown enablePoll={true} />
+          <Divider />
+          <AlignDropdown />
+        </ToolbarPlugin>
+      </Editor>
+    </EditorComposer>
         </Box>
         <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
             Reasons
           </Typography>
-          <List dense={dense}>
+          {/* <List dense={dense}>
             {formData.CounsellingReasons.map((item) => {
               <ListItem>
                 <ListItemIcon>
@@ -180,7 +228,7 @@ const Explore = ({ onButtonClick }) => {
                 />
               </ListItem>;
             })}
-          </List>
+          </List> */}
         </Box>
       </div>
 

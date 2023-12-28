@@ -13,103 +13,62 @@ import {
 } from "@mui/material";
 import DownloadTwoToneIcon from "@mui/icons-material/DownloadTwoTone";
 import SignatureTextField from "../../components/signature";
-
+import SaveIcon from "@mui/icons-material/Save";
+import SafetyFormApi from "../../api/forms/safetyform";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const SafetyContractForm = () => {
-  const [capturedSignature, setCapturedSignature] = useState("");
-
   const [signature, setSignature] = useState("");
-  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [selfCare, setSelfCare] = useState("");
-  const [fullNames1, setFullNames1] = useState("");
-  const [contact1, setContact1] = useState("");
-  const [relation1, setRelation1] = useState("");
-  const [fullNames2, setFullNames2] = useState("");
-  const [contact2, setContact2] = useState("");
-  const [relation2, setRelation2] = useState("");
-  const [placeName, setPlaceName] = useState("");
-  const [placeContact, setPlaceContact] = useState("");
-  const [emergencyContact1Name, setEmergencyContact1Name] = useState("");
-  const [emergencyContact1Contact, setEmergencyContact1Contact] = useState("");
-  const [emergencyContact2Name, setEmergencyContact2Name] = useState("");
-  const [emergencyContact2Contact, setEmergencyContact2Contact] = useState("");
-  const [crisisHotline, setCrisisHotline] = useState("");
-  const [contractAccepted, setContractAccepted] = useState(false);
-  const [witness, setWitness] = useState("");
-  const [currentDate, setCurrentDate] = useState("");
-  useEffect(() => {
-    const currentDate = new Date().toLocaleDateString(); // Get the current date
-    setCurrentDate(currentDate); // Update the state with the current date
-  }, []);
-  const handleInputChange = (e, fieldName) => {
-    const value = e.target.value;
-  
-    // Update the corresponding state variable based on the fieldName
-    switch (fieldName) {
-      case "startDate":
-        setStartDate(value);
-        break;
-      case "endDate":
-        setEndDate(value);
-        break;
-      case "selfCare":
-        setSelfCare(value);
-        break;
-      case "fullNames1":
-        setFullNames1(value);
-        break;
-      case "contact1":
-        setContact1(value);
-        break;
-      case "relation1":
-        setRelation1(value);
-        break;
-      case "fullNames2":
-        setFullNames2(value);
-        break;
-      case "contact2":
-        setContact2(value);
-        break;
-      case "relation2":
-        setRelation2(value);
-        break;
-      case "placeName":
-        setPlaceName(value);
-        break;
-      case "placeContact":
-        setPlaceContact(value);
-        break;
-      case "emergencyContact1Name":
-        setEmergencyContact1Name(value);
-        break;
-      case "emergencyContact1Contact":
-        setEmergencyContact1Contact(value);
-        break;
-      case "emergencyContact2Name":
-        setEmergencyContact2Name(value);
-        break;
-      case "emergencyContact2Contact":
-        setEmergencyContact2Contact(value);
-        break;
-      case "crisisHotline":
-        setCrisisHotline(value);
-        break;
-      case "contractAccepted":
-        setContractAccepted(!contractAccepted); // Toggle between true and false
-        break;
-      case "witness":
-        setWitness(value);
-        break;
-      case "currentDate":
-        setCurrentDate(value);
-        break;
-      default:
-        break;
+  const initialFormState = {
+    name: "",
+    startDate: "",
+    endDate: "",
+    selfCare: "",
+    fullNames1: "",
+    contact1: "",
+    relation1: "",
+    fullNames2: "",
+    contact2: "",
+    relation2: "",
+    placeName: "",
+    placeContact: "",
+    emergencyContact1Name: "",
+    emergencyContact1Contact: "",
+    emergencyContact2Name: "",
+    emergencyContact2Contact: "",
+    crisisHotline: "",
+    contractAccepted: false,
+    witness: "",
+    currentDate: new Date().toLocaleDateString(),
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleFormSubmit = async () => {
+    try {
+      const response = await SafetyFormApi.create(formData);
+      console.log("response", response);
+      toast.success("Form submitted successfully!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(
+        "Failed to submit safety contract. Please contact IT support"
+      );
     }
   };
-  
+
   const [signatureDialogOpen, setSignatureDialogOpen] = useState(false);
 
   const openSignatureDialog = () => {
@@ -148,25 +107,25 @@ const SafetyContractForm = () => {
           <Typography variant="body1">
             I{" "}
             <TextField
-              name="Name"
+              name="name"
               variant="standard"
-              value={name}
+              value={formData.name}
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
               onChange={(e) => handleInputChange(e, "name")}
-              />
+            />
             , agree to NOT harm myself in any way,
             <br /> attempt to kill myself, or kill myself during the period from{" "}
             <TextField
-              name="StartDate"
+              name="startDate"
               variant="standard"
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={startDate}
+              value={formData.startDate}
               onChange={(e) => handleInputChange(e, "startDate")}
-              />
+            />
             to <br />{" "}
             <TextField
               name="EndDate"
@@ -174,7 +133,7 @@ const SafetyContractForm = () => {
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={endDate}
+              value={formData.endDate}
               onChange={(e) => handleInputChange(e, "endDate")}
             />{" "}
             (the time of my next appointment).
@@ -188,12 +147,12 @@ const SafetyContractForm = () => {
             counselor. In this time of period, I <br />
             agree to care for myself, to <br />
             <TextField
-              name="SelfCare"
+              name="selfCare"
               variant="standard"
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={selfCare}
+              value={formData.selfCare}
               onChange={(e) => handleInputChange(e, "selfCare")}
             />{" "}
             (e.g. eat well, get enough sleep each night, etc).
@@ -217,9 +176,9 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={fullNames1}
+                  value={formData.fullNames1}
                   onChange={(e) => handleInputChange(e, "fullNames1")}
-                  />
+                />
               </div>
               <div style={{ marginRight: "20px" }}>
                 <InputLabel htmlFor="input-with-icon-adornment">
@@ -231,7 +190,7 @@ const SafetyContractForm = () => {
                     style: { marginTop: "-11px" },
                   }}
                   variant="standard"
-                  value={contact1}
+                  value={formData.contact1}
                   onChange={(e) => handleInputChange(e, "contact1")}
                 />
               </div>
@@ -246,7 +205,7 @@ const SafetyContractForm = () => {
                   }}
                   name="Relation"
                   variant="standard"
-                  value={relation1}
+                  value={formData.relation1}
                   onChange={(e) => handleInputChange(e, "relation1")}
                 />
               </div>
@@ -262,7 +221,7 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={fullNames2}
+                  value={formData.fullNames2}
                   onChange={(e) => handleInputChange(e, "fullNames2")}
                 />
               </div>
@@ -276,7 +235,7 @@ const SafetyContractForm = () => {
                     style: { marginTop: "-11px" },
                   }}
                   variant="standard"
-                  value={contact2}
+                  value={formData.contact2}
                   onChange={(e) => handleInputChange(e, "contact2")}
                 />
               </div>
@@ -291,7 +250,7 @@ const SafetyContractForm = () => {
                   }}
                   name="Relation"
                   variant="standard"
-                  value={relation2}
+                  value={formData.relation2}
                   onChange={(e) => handleInputChange(e, "relation2")}
                 />
               </div>
@@ -313,9 +272,9 @@ const SafetyContractForm = () => {
                 inputProps={{
                   style: { marginTop: "-11px" },
                 }}
-                value={placeName}
+                value={formData.placeName}
                 onChange={(e) => handleInputChange(e, "placeName")}
-                />
+              />
             </div>
             <div style={{ marginRight: "20px" }}>
               <InputLabel htmlFor="input-with-icon-adornment">
@@ -327,7 +286,7 @@ const SafetyContractForm = () => {
                   style: { marginTop: "-11px" },
                 }}
                 variant="standard"
-                value={placeContact}
+                value={formData.placeContact}
                 onChange={(e) => handleInputChange(e, "placeContact")}
               />
             </div>
@@ -354,9 +313,11 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={emergencyContact1Name}
-                  onChange={(e) => handleInputChange(e, "emergencyContact1Name")}
-                  />
+                  value={formData.emergencyContact1Name}
+                  onChange={(e) =>
+                    handleInputChange(e, "emergencyContact1Name")
+                  }
+                />
               </div>
               <div style={{ marginRight: "20px" }}>
                 {"at #"}
@@ -368,8 +329,10 @@ const SafetyContractForm = () => {
                     style: { marginTop: "-11px" },
                   }}
                   variant="standard"
-                  value={emergencyContact1Contact} 
-                  onChange={(e) => handleInputChange(e, "emergencyContact1Contact")}
+                  value={formData.emergencyContact1Contact}
+                  onChange={(e) =>
+                    handleInputChange(e, "emergencyContact1Contact")
+                  }
                 />
               </div>
             </Box>
@@ -385,8 +348,10 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  value={emergencyContact2Name}
-                  onChange={(e) => handleInputChange(e, "emergencyContact2Name")}
+                  value={formData.emergencyContact2Name}
+                  onChange={(e) =>
+                    handleInputChange(e, "emergencyContact2Name")
+                  }
                 />
               </div>
               <div style={{ marginRight: "20px" }}>
@@ -398,9 +363,11 @@ const SafetyContractForm = () => {
                   inputProps={{
                     style: { marginTop: "-11px" },
                   }}
-                  variant="standard" 
-                  value={emergencyContact2Contact}
-                  onChange={(e) => handleInputChange(e, "emergencyContact2Contact")}
+                  variant="standard"
+                  value={formData.emergencyContact2Contact}
+                  onChange={(e) =>
+                    handleInputChange(e, "emergencyContact2Contact")
+                  }
                 />
               </div>
             </Box>
@@ -421,9 +388,9 @@ const SafetyContractForm = () => {
               inputProps={{
                 style: { marginTop: "-11px" },
               }}
-              value={crisisHotline}
+              value={formData.crisisHotline}
               onChange={(e) => handleInputChange(e, "crisisHotline")}
-              />{" "}
+            />{" "}
             or nearby emergency center.
             <br />
           </Typography>
@@ -441,29 +408,27 @@ const SafetyContractForm = () => {
               display: "flex",
             }}
           >
-          
-        {/* Signature Capture */}
-        <SignatureTextField
-          open={signatureDialogOpen}
-          onClose={closeSignatureDialog}
-          onSaveSignature={handleSignatureCapture}
-        />
+            {/* Signature Capture */}
+            <SignatureTextField
+              open={signatureDialogOpen}
+              onClose={closeSignatureDialog}
+              onSaveSignature={handleSignatureCapture}
+            />
             <Typography variant="body4" gutterBottom>
-               Signature:
+              Signature:
             </Typography>
-        {/* Display Captured Signature */}
-        {signature && (
-          <Box
-            sx={{
-              // marginTop: "40px",
-              justifyContent: "center",
-              display: "flex",
-            }}
-          >
-
-            <img src={signature} alt="Captured Signature" />
-          </Box>
-        )}
+            {/* Display Captured Signature */}
+            {signature && (
+              <Box
+                sx={{
+                  // marginTop: "40px",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <img src={signature} alt="Captured Signature" />
+              </Box>
+            )}
 
             {/* <TextField
               label="Signature"
@@ -483,9 +448,9 @@ const SafetyContractForm = () => {
             /> */}
             <TextField
               label="Date"
-              name="Date"
+              name="currentDate"
               variant="standard"
-              value={currentDate}
+              value={formData.currentDate}
               inputProps={{
                 style: { height: "auto" },
               }}
@@ -508,9 +473,9 @@ const SafetyContractForm = () => {
           >
             <TextField
               label="Witnessed By"
-              name="Name"
+              name="witness"
               variant="standard"
-              value={witness}
+              value={formData.witness}
               inputProps={{
                 style: { height: "auto" },
               }}
@@ -524,9 +489,9 @@ const SafetyContractForm = () => {
             />
             <TextField
               label="Date"
-              name="Date"
+              name="currentDate"
               variant="standard"
-              value={currentDate}
+              value={formData.currentDate}
               inputProps={{
                 style: { height: "auto" },
               }}
@@ -539,6 +504,16 @@ const SafetyContractForm = () => {
               }}
             />
           </Box>
+          <Typography
+            variant="body4"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "10px",
+            }}
+          >
+            *this contract is renewable after expiry of specified period*
+          </Typography>
 
           <Tooltip
             placement="top"
@@ -552,21 +527,24 @@ const SafetyContractForm = () => {
               mt={4}
             >
               <Button
-                disabled
                 variant="contained"
                 sx={{
                   mx: 2,
                 }}
-                startIcon={<DownloadTwoToneIcon />}
+                onClick={handleFormSubmit}
+                startIcon={<SaveIcon />}
               >
                 Save Form
               </Button>
-              <Button  variant="contained"   sx={{
+              <Button
+                variant="contained"
+                sx={{
                   mx: 2,
-                }} onClick={openSignatureDialog}>
-            Sign 
-          </Button>
-          *this contract is renewable after expiry of specified period*
+                }}
+                onClick={openSignatureDialog}
+              >
+                Sign
+              </Button>
             </Box>
           </Tooltip>
         </div>

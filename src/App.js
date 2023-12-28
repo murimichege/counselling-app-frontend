@@ -43,7 +43,7 @@ function App() {
           {isPrivate ? (
             <Fragment>
               <Routes>
-                <Route path="/Login" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/IntakeForm" element={<IntakeForm />} />
                 <Route
                   path="/StudentBookingForm"
@@ -52,7 +52,7 @@ function App() {
                 <Route path="/Termination" element={<Termination />} />
                 <Route path="/ConsentForm" element={<ConsentForm />} />
                 <Route
-                  path="/CounsellingRecord"
+                  path="/counsellingRecord"
                   element={<CounselingRecord />}
                 />
                 <Route path="/ongoingrecord" element={<OnGoingCounseling />} />

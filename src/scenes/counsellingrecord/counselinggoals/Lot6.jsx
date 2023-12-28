@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,9 +13,19 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
-const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+const Lot6 = ({
+  title,
+  items,
+  accordionState,
+  handleAccordionChange,
+  checked,
+  handleToggle,
+  commentInputOpen,
+  toggleCommentInput,
+  comments,
+  handleCommentChange,
+}) => {
   return (
     <Accordion expanded={accordionState} onChange={handleAccordionChange}>
       <AccordionSummary
@@ -24,7 +34,10 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
         <ListItemText primary={title} />
       </AccordionSummary>
       <AccordionDetails>
-        <List dense sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}>
+        <List
+          dense
+          sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}
+        >
           {items.map((item, index) => (
             <ListItem key={index}>
               <ListItemButton>
@@ -61,35 +74,27 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const BeliefSystemExploration = () => {
   const [accordionStates, setAccordionStates] = useState({
-    LowerAcademicAchievement: true,
+    BeliefSystem: true,
   });
 
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      majorIssues: newChecked,
-    }));
-
     setChecked(newChecked);
   };
-  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
@@ -106,23 +111,28 @@ const AcademicIssues = () => {
     const { value } = event.target;
     setComments(value);
   };
-
-  const LowerAcademicAchievementItems = [
-    "Academic Warning",
-    "Academic Probation",
-    "Academic Dismissal",
-    "Course Registration Difficulties",
+  const Lot6Items = [
+    "identify their belief system",
+    "evaluate the consequences of the beliefs",
+    "Explore the self-defeating beliefs -work on/change irrational beliefs.",
+    "Replace irrational with rational. Logical, coherent beliefs.",
+    "deal with tensions between different explanatory frameworks be it cultural, traditional or modern religion or therapies.",
+    "Practice effective ways of thinking.",
+    "Manage distractors or blocks to their success",
   ];
 
   return (
-    <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems</h2>
+    <main
+      className="pt5 black-80"
+      style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
+    >
+      <h2>Lot 6</h2>
 
-      <AcademicIssuesAccordion
-        title="Lower Academic Achievement"
-        items={LowerAcademicAchievementItems}
-        accordionState={accordionStates.LowerAcademicAchievement}
-        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+      <Lot6
+        title="Belief System Exploration"
+        items={Lot6Items}
+        accordionState={accordionStates.BeliefSystem}
+        handleAccordionChange={handleAccordionChange("BeliefSystem")}
         checked={checked}
         handleToggle={handleToggle}
         commentInputOpen={commentInputOpen}
@@ -134,4 +144,4 @@ const AcademicIssues = () => {
   );
 };
 
-export default AcademicIssues;
+export default BeliefSystemExploration;

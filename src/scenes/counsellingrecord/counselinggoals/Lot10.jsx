@@ -1,4 +1,6 @@
-import React, { useState, useContext } from "react";
+
+
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,9 +15,8 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
-const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
+const Lot10 = ({ title, items, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
   return (
     <Accordion expanded={accordionState} onChange={handleAccordionChange}>
       <AccordionSummary
@@ -61,35 +62,27 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const EmotionRegulation = () => {
   const [accordionStates, setAccordionStates] = useState({
-    LowerAcademicAchievement: true,
+    Regulation: true,
   });
 
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
-    setFormData((prevData) => ({
-      ...prevData,
-      majorIssues: newChecked,
-    }));
-
     setChecked(newChecked);
   };
-  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
@@ -106,23 +99,36 @@ const AcademicIssues = () => {
     const { value } = event.target;
     setComments(value);
   };
+  const EmotionRegulation = [
+    "Identify, recognize, regulate emotions- emotional regulation",
+    "Psycho-educate on the interconnection between thoughts, emotions and behavior",
+    "Learn to relax (muscle relaxation, deep breathing, yoga, meditation)",
+    "Replace overwhelm with calm, confidence and Stabilization",
+    "Reduce and be able to cope with the intense emotions, phobia or anxiety.",
+    "Learn ways to boost their energy and strength",
+    "Manage intense feelings of powerlessness, heightened feeling of vulnerability",
+    "Empower the client to feel in control of their life",
+    "Change negative feelings into positive ones.",
+    "Take a different perspective of what they are experiencing",
+    "Enhance the belief in their ability to manage events",
+    "Enhance self-management",
+    "Enhance self-awareness",
+    "Focus on the positives in the present moment.",
+    "Know they have the liberty to select their own path",
+    "enhance their belief in themselves and choose a better life.",
+    "Stop using unconscious biases and practice Mindfulness"
+];
 
-  const LowerAcademicAchievementItems = [
-    "Academic Warning",
-    "Academic Probation",
-    "Academic Dismissal",
-    "Course Registration Difficulties",
-  ];
 
   return (
     <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}>
-      <h2>Academic or Educational Problems</h2>
+      <h2>Lot 10</h2>
 
-      <AcademicIssuesAccordion
-        title="Lower Academic Achievement"
-        items={LowerAcademicAchievementItems}
-        accordionState={accordionStates.LowerAcademicAchievement}
-        handleAccordionChange={handleAccordionChange("LowerAcademicAchievement")}
+      <Lot10
+        title="Emotion Regulation"
+        items={EmotionRegulation}
+        accordionState={accordionStates.Regulation}
+        handleAccordionChange={handleAccordionChange("Regulation")}
         checked={checked}
         handleToggle={handleToggle}
         commentInputOpen={commentInputOpen}
@@ -134,4 +140,5 @@ const AcademicIssues = () => {
   );
 };
 
-export default AcademicIssues;
+export default EmotionRegulation;
+

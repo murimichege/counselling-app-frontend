@@ -1,21 +1,13 @@
 import React, { useState, useContext } from "react";
 import "./index.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import {
-  Box,
-  TextField,
-  MenuItem,
-  Button,
-  List,
-  Demo,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 import { CounsellingRecordContext } from "./CounselingRecord";
 
 const ClientDetails = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
+  const { ClientCode, ClientInitials, currentDate } = formData;
+  console.log(formData)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -23,14 +15,6 @@ const ClientDetails = ({ onButtonClick }) => {
   };
 
   console.log("formdata", formData);
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
 
   return (
     <main
@@ -55,7 +39,7 @@ const ClientDetails = ({ onButtonClick }) => {
             id="outlined-select-currency"
             label="Client Code"
             name="ClientCode"
-            value={formData.ClientCode}
+            value={ClientCode}
             inputProps={{
               style: { height: "auto" },
             }}
@@ -70,7 +54,7 @@ const ClientDetails = ({ onButtonClick }) => {
           <TextField
             label="Client Initials"
             name="ClientInitials"
-            value={formData.ClientInitials}
+            value={ClientInitials}
             inputProps={{
               style: { height: "auto" },
             }}
@@ -84,11 +68,12 @@ const ClientDetails = ({ onButtonClick }) => {
           />
           <TextField
             label="Date"
-            name="Date"
-            value={formData.Date}
+            name="currentDate"
+            value={currentDate}
             inputProps={{
               style: { height: "auto" },
             }}
+            disabled
             onChange={handleInputChange}
             sx={{
               marginRight: "20px",
