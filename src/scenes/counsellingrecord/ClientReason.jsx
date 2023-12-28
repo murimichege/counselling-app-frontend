@@ -45,6 +45,11 @@ const ClientReason = ({ onButtonClick }) => {
   }, [ReasonsforCounseling]);
   return (
   <Container sx={{mt:4}}>
+<h3>
+Client’s presenting problem(s) -  Why client is seeking counseling?
+
+</h3>
+
    <EditorComposer>
       <Editor hashtagsEnabled={true} onChange={handleContentChange} defaultValue={ReasonsforCounseling[0]}>
         <ToolbarPlugin defaultFontSize="10px">

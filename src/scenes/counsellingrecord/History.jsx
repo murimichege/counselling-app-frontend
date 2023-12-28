@@ -18,7 +18,8 @@ import {
   Divider,
 } from "verbum";
 import { CounsellingRecordContext } from "./CounselingRecord";
-
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 const History = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
 
@@ -101,17 +102,20 @@ const History = ({ onButtonClick }) => {
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagefive")}
+          onClick={() => onButtonClick("pagethree")}
         >
-          Cancel
+          <KeyboardArrowLeftIcon/>
+          Back
         </Button>
         <Button
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"
           variant="contained"
-          onClick={() => onButtonClick("pagesix")}
+          onClick={() => onButtonClick("pagefive")}
         >
           Save Client History.
+          <KeyboardArrowRightIcon/>
+
         </Button>
       </Box>
       </div>  

@@ -36,43 +36,49 @@ import AbuseandNeglect from "./MajorIssues/AbuseandNeglect";
 import DissociativeDisorders from "./MajorIssues/DissociativeDisorders";
 import SomaticDisorders from "./MajorIssues/SomaticDisorders";
 import FactitiousDisorders from "./MajorIssues/FactitiousDisorders";
-const AssessmentOptions = ({ onButtonClick }) => {
-  // const { formData, setFormData } = useContext(CounsellingRecordContext);
 
-  
+const AssessmentOptions = ({ onButtonClick }) => {
+  const { formData, setFormData } = useContext(CounsellingRecordContext);
+
   return (
     <>
-      <AcademicIssues />
-      <LearningProblems />
-      <SocialEnvironment />
-      <LifeSkills />
-      <NegativeEmotions />
-      <AnxietyDisorders />
-      <InterpersonalDetachmentissues />
-      <PersonalProblems />
-      <SuicidalBehaviorDisorder />
-      <CommunicationDisorders />
-      <AttentionDeficit />
-      <MoodDisorders />
-      <BiPolar11 />
-      <DepressiveDisorder />
-      <PsychoticDisorders />
-      <PersonalityDisorder />
-      <ObsessiveDisorders />
-      <TraumaDisorders />
-      <StressDisorders />
-      <RelationalProblems />
-      <Bereavement />
-      <EatingDisorders />
-      <EliminationDisorders />
-      <SleepWakedisorders />
-      <PornAddiction />
-      <ParaphilicSexualDisorders />
-      <GenderRelatedIssues />
-      <AbuseandNeglect />
-      <DissociativeDisorders />
-      <SomaticDisorders />
-      <FactitiousDisorders />
+      <AcademicIssues formData={formData} setFormData={setFormData} />
+      <LearningProblems formData={formData} setFormData={setFormData} />
+      <SocialEnvironment formData={formData} setFormData={setFormData} />
+      <LifeSkills formData={formData} setFormData={setFormData} />
+      <NegativeEmotions formData={formData} setFormData={setFormData} />
+      <AnxietyDisorders formData={formData} setFormData={setFormData} />
+      <InterpersonalDetachmentissues
+        formData={formData}
+        setFormData={setFormData}
+      />
+      <PersonalProblems formData={formData} setFormData={setFormData} />
+      <SuicidalBehaviorDisorder formData={formData} setFormData={setFormData} />
+      <CommunicationDisorders formData={formData} setFormData={setFormData} />
+      <AttentionDeficit formData={formData} setFormData={setFormData} />
+      <MoodDisorders formData={formData} setFormData={setFormData} />
+      <BiPolar11 formData={formData} setFormData={setFormData} />
+      <DepressiveDisorder formData={formData} setFormData={setFormData} />
+      <PsychoticDisorders formData={formData} setFormData={setFormData} />
+      <PersonalityDisorder formData={formData} setFormData={setFormData} />
+      <ObsessiveDisorders formData={formData} setFormData={setFormData} />
+      <TraumaDisorders formData={formData} setFormData={setFormData} />
+      <StressDisorders formData={formData} setFormData={setFormData} />
+      <RelationalProblems formData={formData} setFormData={setFormData} />
+      <Bereavement formData={formData} setFormData={setFormData} />
+      <EatingDisorders formData={formData} setFormData={setFormData} />
+      <EliminationDisorders formData={formData} setFormData={setFormData} />
+      <SleepWakedisorders formData={formData} setFormData={setFormData} />
+      <PornAddiction formData={formData} setFormData={setFormData} />
+      <ParaphilicSexualDisorders
+        formData={formData}
+        setFormData={setFormData}
+      />
+      <GenderRelatedIssues formData={formData} setFormData={setFormData} />
+      <AbuseandNeglect formData={formData} setFormData={setFormData} />
+      <DissociativeDisorders formData={formData} setFormData={setFormData} />
+      <SomaticDisorders formData={formData} setFormData={setFormData} />
+      <FactitiousDisorders formData={formData} setFormData={setFormData} />
       <Box
         sx={{
           marginTop: "40px",

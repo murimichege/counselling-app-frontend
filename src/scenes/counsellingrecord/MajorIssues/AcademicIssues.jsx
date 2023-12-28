@@ -61,7 +61,7 @@ const AcademicIssuesAccordion = ({ title, items, accordionState, handleAccordion
   );
 };
 
-const AcademicIssues = () => {
+const AcademicIssues = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
     LowerAcademicAchievement: true,
   });
@@ -69,7 +69,8 @@ const AcademicIssues = () => {
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
+  // const { formData, setFormData } = useContext(CounsellingRecordContext);
+  const {majorIssues} = formData
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -82,6 +83,7 @@ const AcademicIssues = () => {
       newChecked.splice(currentIndex, 1);
     }
 
+    // Update majorIssues in the form data based on newChecked array
     setFormData((prevData) => ({
       ...prevData,
       majorIssues: newChecked,

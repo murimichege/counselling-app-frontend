@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState} from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,7 +13,6 @@ import {
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
-import CounsellingRecordContext from "../CounselingRecord"
 
 const AbuseAccordion = ({ title, options, accordionState, handleAccordionChange, checked, handleToggle, commentInputOpen, toggleCommentInput, comments, handleCommentChange }) => {
     return (
@@ -67,7 +66,7 @@ const AbuseAccordion = ({ title, options, accordionState, handleAccordionChange,
       </Accordion>
     );
   };
-const AbuseandNeglect = () => {
+const AbuseandNeglect = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
     MaltreatmentandNeglectproblem: true,
     PhysicalAbuse: true,
@@ -81,7 +80,6 @@ const AbuseandNeglect = () => {
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -96,7 +94,7 @@ const AbuseandNeglect = () => {
 
     setFormData((prevData) => ({
       ...prevData,
-      majorIssues: newChecked,
+      majorIssues: [...prevData.majorIssues, ...newChecked],
     }));
 
     setChecked(newChecked);
