@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import {
-  Box,
-  Button,
   ListItem,
   Checkbox,
   List,
@@ -9,36 +7,16 @@ import {
   ListItemText,
   Accordion,
   AccordionSummary,
-  AccordionDetails,
   TextField,
+  AccordionDetails,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CommentIcon from "@mui/icons-material/Comment";
 import { CounsellingRecordContext } from "../CounselingRecord";
+import CommentIcon from "@mui/icons-material/Comment";
 
-const InterpersonalDetachmentissues = () => {
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
-  const [accordionStates, setAccordionStates] = useState({
-    Detachmentinavoidanceofsocioemotionalexperience: true,
-    Dependence: true,
-    Withdrawalfrompeople: true
-  });
-  const [checked, setChecked] = useState([1]);
-  const [commentInputOpen, setCommentInputOpen] = useState({
-    Detachmentinavoidanceofsocioemotionalexperience: true,
-    Dependence: true,
-    Withdrawalfrompeople: true
-    
-
-  });
-  const [comments, setComments] = useState({
-    Detachmentinavoidanceofsocioemotionalexperience: "",
-    Dependence: "",
-    Withdrawalfrompeople: ""
-    
-  
-  });
+const InterpersonalDetachmentissues = ({ formData, setFormData }) => {
+  const [checked, setChecked] = useState([0]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -52,31 +30,135 @@ const InterpersonalDetachmentissues = () => {
 
     setChecked(newChecked);
   };
+  const [accordionStates, setAccordionStates] = useState({
+    Detachmentinavoidanceofsocioemotionalexperience: true,
+    Dependence: true,
+    Withdrawalfrompeople: true,
+  });
 
-  const handleAccordionChange = (section) => () => {
+  const [commentInputOpen, setCommentInputOpen] = useState({
+    Detachmentinavoidanceofsocioemotionalexperience: true,
+    Dependence: true,
+    Withdrawalfrompeople: true,
+  });
+
+  const [comments, setComments] = useState({
+    Detachmentinavoidanceofsocioemotionalexperience: "",
+    Dependence: "",
+    Withdrawalfrompeople: "",
+  });
+
+  const handleToggleAccordion = (section) => {
     setAccordionStates((prevState) => ({
       ...prevState,
       [section]: !prevState[section],
     }));
   };
 
-  const toggleCommentInput = (section) => () => {
+  const toggleCommentInput = (section) => {
     setCommentInputOpen((prevState) => ({
       ...prevState,
       [section]: !prevState[section],
     }));
   };
 
-  const handleCommentChange = (section) => (event) => {
+  const handleCommentChange = (section, event) => {
     const { value } = event.target;
     setComments((prevState) => ({
       ...prevState,
       [section]: value,
     }));
   };
-  const DetachmentinavoidanceofsocioemotionalexperienceItems = ["Symptom"];
-  const DependenceItems = ["Symptom"];
-  const WithdrawalfrompeopleItems = ["Symptom"];
+
+  const renderAccordionSection = (sectionKey, sectionTitle) => {
+    return (
+      <Accordion
+        expanded={accordionStates[sectionKey]}
+        onChange={() => handleToggleAccordion(sectionKey)}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates[sectionKey] ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
+        >
+          <ListItemText primary={sectionTitle} />
+        </AccordionSummary>
+        <AccordionDetails>
+          <List
+            dense
+            sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}
+          >
+            <ListItem
+              secondaryAction={
+                <Checkbox
+                  edge="end"
+                  onChange={handleToggle()}
+                  checked={checked}
+                />
+              }
+              disablePadding
+            >
+              <ListItemButton>
+                <ListItemText primary={`Mild`} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem
+              secondaryAction={
+                <Checkbox
+                  edge="end"
+                  onChange={handleToggle()}
+                  checked={checked}
+                />
+              }
+              disablePadding
+            >
+              <ListItemButton>
+                <ListItemText primary={`Moderate`} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem
+              secondaryAction={
+                <Checkbox
+                  edge="end"
+                  onChange={handleToggle()}
+                  checked={checked}
+                />
+              }
+              disablePadding
+            >
+              <ListItemButton>
+                <ListItemText primary={`Severe`} />
+              </ListItemButton>
+            </ListItem>
+            {commentInputOpen[sectionKey] && (
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <TextField
+                    fullWidth
+                    label="Add a comment"
+                    variant="outlined"
+                    value={comments[sectionKey]}
+                    onChange={(e) => handleCommentChange(sectionKey, e)}
+                  />
+                </ListItemButton>
+              </ListItem>
+            )}
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => toggleCommentInput(sectionKey)}>
+                <CommentIcon
+                  color={commentInputOpen[sectionKey] ? "primary" : "inherit"}
+                />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </AccordionDetails>
+      </Accordion>
+    );
+  };
 
   return (
     <main
@@ -85,396 +167,12 @@ const InterpersonalDetachmentissues = () => {
     >
       <h3>Interpersonal Detachment issues</h3>
 
-      <Accordion
-        expanded={accordionStates.Detachmentinavoidanceofsocioemotionalexperience}
-        onChange={handleAccordionChange("Detachmentinavoidanceofsocioemotionalexperience")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Detachmentinavoidanceofsocioemotionalexperience ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Detachment in avoidance of socio-emotional experience" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {DetachmentinavoidanceofsocioemotionalexperienceItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`Detachmentinavoidanceofsocioemotionalexperience${index}`]}
-              onChange={handleAccordionChange(`Detachmentinavoidanceofsocioemotionalexperience${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                // expandIcon={
-                //   accordionStates[`LowerAcademicAchievementItemsOpen${index}`] ? (
-                //     <ExpandLessIcon />
-                //   ) : (
-                //     <ExpandMoreIcon />
-                //   )
-                // }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                  {commentInputOpen[`Detachmentinavoidanceofsocioemotionalexperience${index}`] && (
-                    <ListItem disablePadding>
-                      <ListItemButton>
-                        <TextField
-                          fullWidth
-                          label="Add a comment"
-                          variant="outlined"
-                          value={comments[`Detachmentinavoidanceofsocioemotionalexperience${index}`]}
-                          onChange={handleCommentChange(`Detachmentinavoidanceofsocioemotionalexperience${index}`)}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  )}
-                  <ListItem disablePadding>
-                    <ListItemButton
-                      onClick={toggleCommentInput(`Detachmentinavoidanceofsocioemotionalexperience${index}`)}
-                    >
-                      <CommentIcon
-                        color={
-                          commentInputOpen[`Detachmentinavoidanceofsocioemotionalexperience${index}`]
-                            ? "primary"
-                            : "inherit"
-                        }
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={accordionStates.Dependence}
-        onChange={handleAccordionChange("Dependence")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Dependence ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Dependence" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {DependenceItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`Dependence${index}`]}
-              onChange={handleAccordionChange(`Dependence${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`Dependence${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-              <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                  {commentInputOpen[`Dependence${index}`] && (
-                    <ListItem disablePadding>
-                      <ListItemButton>
-                        <TextField
-                          fullWidth
-                          label="Add a comment"
-                          variant="outlined"
-                          value={comments[`Dependence${index}`]}
-                          onChange={handleCommentChange(`Dependence${index}`)}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  )}
-                  <ListItem disablePadding>
-                    <ListItemButton
-                      onClick={toggleCommentInput(`Dependence${index}`)}
-                    >
-                      <CommentIcon
-                        color={
-                          commentInputOpen[`Dependence${index}`]
-                            ? "primary"
-                            : "inherit"
-                        }
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={accordionStates.Withdrawalfrompeople}
-        onChange={handleAccordionChange("Withdrawalfrompeople")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Withdrawalfrompeople ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Withdrawal from people" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {WithdrawalfrompeopleItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`Withdrawalfrompeople${index}`]}
-              onChange={handleAccordionChange(`Withdrawalfrompeople${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`Withdrawalfrompeople${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-              <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                  {commentInputOpen[`Withdrawalfrompeople${index}`] && (
-                    <ListItem disablePadding>
-                      <ListItemButton>
-                        <TextField
-                          fullWidth
-                          label="Add a comment"
-                          variant="outlined"
-                          value={comments[`Withdrawalfrompeople${index}`]}
-                          onChange={handleCommentChange(`Withdrawalfrompeople${index}`)}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  )}
-                  <ListItem disablePadding>
-                    <ListItemButton
-                      onClick={toggleCommentInput(`Withdrawalfrompeople${index}`)}
-                    >
-                      <CommentIcon
-                        color={
-                          commentInputOpen[`Withdrawalfrompeople${index}`]
-                            ? "primary"
-                            : "inherit"
-                        }
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-
-
-      
+      {renderAccordionSection(
+        "Detachmentinavoidanceofsocioemotionalexperience",
+        "Detachment in avoidance of socio-emotional experience"
+      )}
+      {renderAccordionSection("Dependence", "Dependence")}
+      {renderAccordionSection("Withdrawalfrompeople", "Withdrawal from people")}
     </main>
   );
 };

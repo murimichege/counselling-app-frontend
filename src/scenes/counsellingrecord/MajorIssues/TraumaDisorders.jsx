@@ -16,16 +16,13 @@ import { CounsellingRecordContext } from "../CounselingRecord";
 const TraumaDisorders = () => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [accordionStates, setAccordionStates] = useState({
-    ReactiveAttachmentDisorder : true,
-    DisinhibitedSocialEngagementDisorder  : true,
-    Withdelayedexpression  : true,
-    Withdissociativesymptoms : true,
-    Traumaandstressrelateddisorder : true
-    
-
+    ReactiveAttachmentDisorder: true,
+    DisinhibitedSocialEngagementDisorder: true,
+    Withdelayedexpression: true,
+    Withdissociativesymptoms: true,
+    Traumaandstressrelateddisorder: true,
   });
-  const [checked, setChecked] = useState([1]);
-
+  const [checked, setChecked] = useState([]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -33,11 +30,23 @@ const TraumaDisorders = () => {
 
     if (currentIndex === -1) {
       newChecked.push(value);
+      updateMajorIssues(value, true);
     } else {
       newChecked.splice(currentIndex, 1);
+      updateMajorIssues(value, false);
     }
 
     setChecked(newChecked);
+  };
+
+  const updateMajorIssues = (value, isChecked) => {
+    setFormData((prevData) => {
+      const updatedMajorIssues = isChecked
+        ? [...prevData.majorIssues, value]
+        : prevData.majorIssues.filter((item) => item !== value);
+
+      return { ...prevData, majorIssues: updatedMajorIssues };
+    });
   };
 
   const handleAccordionChange = (section) => () => {
@@ -47,486 +56,75 @@ const TraumaDisorders = () => {
     }));
   };
 
+  const renderAccordion = (title, section) => (
+    <Accordion
+      expanded={accordionStates[section]}
+      onChange={handleAccordionChange(section)}
+    >
+      <AccordionSummary
+        expandIcon={
+          accordionStates[section] ? <ExpandLessIcon /> : <ExpandMoreIcon />
+        }
+      >
+        <ListItemText primary={title} />
+      </AccordionSummary>
+      <AccordionDetails>
+        <Accordion
+          expanded={accordionStates[section]}
+          onChange={handleAccordionChange(section)}
+        >
+          <AccordionDetails>
+            <List
+              dense
+              sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}
+            >
+              {["Mild", "Moderate", "Severe"].map((severity, index) => (
+                <ListItem
+                  key={index}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      onChange={handleToggle(severity)}
+                      checked={checked.includes(severity)}
+                    />
+                  }
+                  disablePadding
+                >
+                  <ListItemButton>
+                    <ListItemText primary={severity} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+      </AccordionDetails>
+    </Accordion>
+  );
+
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
       <h3>Trauma Disorders</h3>
-
-      <Accordion
-        expanded={accordionStates.ReactiveAttachmentDisorder}
-        onChange={handleAccordionChange("ReactiveAttachmentDisorder")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.ReactiveAttachmentDisorder ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Reactive Attachment Disorder" />
-        </AccordionSummary>
-        <AccordionDetails>
-   
-
-            <Accordion
-              expanded={accordionStates[`ReactiveAttachmentDisorder`]}
-              onChange={handleAccordionChange(`ReactiveAttachmentDisorder`)}
-            >
-             
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-    
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={accordionStates.DisinhibitedSocialEngagementDisorder}
-        onChange={handleAccordionChange("DisinhibitedSocialEngagementDisorder")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.DisinhibitedSocialEngagementDisorder ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Disinhibited Social Engagement Disorder" />
-        </AccordionSummary>
-        <AccordionDetails>
-   
-
-            <Accordion
-              expanded={accordionStates[`DisinhibitedSocialEngagementDisorder`]}
-              onChange={handleAccordionChange(`DisinhibitedSocialEngagementDisorder`)}
-            >
-            
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-    
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={accordionStates.Withdelayedexpression}
-        onChange={handleAccordionChange("Withdelayedexpression")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Withdelayedexpression ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Post-Traumatic Stress Disorder With delayed expression" />
-        </AccordionSummary>
-        <AccordionDetails>
-            <Accordion
-              expanded={accordionStates[`Withdelayedexpression`]}
-              onChange={handleAccordionChange(`Withdelayedexpression`)}
-            >
-             
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-    
-        </AccordionDetails>
-      </Accordion>
-
-
-      <Accordion
-        expanded={accordionStates.Withdissociativesymptoms}
-        onChange={handleAccordionChange("Withdissociativesymptoms")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Withdissociativesymptoms ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Post-Traumatic Stress Disorder With dissociative symptoms " />
-        </AccordionSummary>
-        <AccordionDetails>
-   
-
-            <Accordion
-              expanded={accordionStates[`Withdissociativesymptoms`]}
-              onChange={handleAccordionChange(`Withdissociativesymptoms`)}
-            >
-             
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-    
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={accordionStates.Traumaandstressrelateddisorder}
-        onChange={handleAccordionChange("Traumaandstressrelateddisorder")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Traumaandstressrelateddisorder ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Trauma and stress related disorder " />
-        </AccordionSummary>
-        <AccordionDetails>
-   
-
-            <Accordion
-              expanded={accordionStates[`Traumaandstressrelateddisorder`]}
-              onChange={handleAccordionChange(`Traumaandstressrelateddisorder`)}
-            >
-             
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-    
-        </AccordionDetails>
-      </Accordion>
-
+      {renderAccordion("Reactive Attachment Disorder", "ReactiveAttachmentDisorder")}
+      {renderAccordion(
+        "Disinhibited Social Engagement Disorder",
+        "DisinhibitedSocialEngagementDisorder"
+      )}
+      {renderAccordion(
+        "Post-Traumatic Stress Disorder With delayed expression",
+        "Withdelayedexpression"
+      )}
+      {renderAccordion(
+        "Post-Traumatic Stress Disorder With dissociative symptoms",
+        "Withdissociativesymptoms"
+      )}
+      {renderAccordion(
+        "Trauma and stress related disorder",
+        "Traumaandstressrelateddisorder"
+      )}
     </main>
   );
 };

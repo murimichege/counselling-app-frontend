@@ -33,22 +33,28 @@ const Goals = ({ onButtonClick }) => {
       <h2 style={{ display: "flex", justifyContent: "center" }}>
         Counseling Goals
       </h2>
-      <ThoughtsManagement />
-      <BehaviorChange />
-      <GrievingLosses />
-      <PersonalDevelopmentAndGrief />
-      <TraumaMemoryManagement />
-      <BeliefSystemExploration />
-      <GriefManagement />
-      <SelfImprovement />
-      <TraumaHealing />
-      <EmotionRegulation />
-      <RelationshipImprovement />
-      <FamilyAndRelationshipEnhancement />
-      <PersonalEmpowerment />
-      <TraumaManagement />
-      <TraumaRecovery />
-      <Personality />
+      <ThoughtsManagement formData={formData} setFormData={setFormData} />
+      <BehaviorChange formData={formData} setFormData={setFormData} />
+      <GrievingLosses formData={formData} setFormData={setFormData} />
+      <PersonalDevelopmentAndGrief
+        formData={formData}
+        setFormData={setFormData}
+      />
+      <TraumaMemoryManagement formData={formData} setFormData={setFormData} />
+      <BeliefSystemExploration formData={formData} setFormData={setFormData} />
+      <GriefManagement formData={formData} setFormData={setFormData} />
+      <SelfImprovement formData={formData} setFormData={setFormData} />
+      <TraumaHealing formData={formData} setFormData={setFormData} />
+      <EmotionRegulation formData={formData} setFormData={setFormData} />
+      <RelationshipImprovement formData={formData} setFormData={setFormData} />
+      <FamilyAndRelationshipEnhancement
+        formData={formData}
+        setFormData={setFormData}
+      />
+      <PersonalEmpowerment formData={formData} setFormData={setFormData} />
+      <TraumaManagement formData={formData} setFormData={setFormData} />
+      <TraumaRecovery formData={formData} setFormData={setFormData} />
+      <Personality formData={formData} setFormData={setFormData} />
 
       {/* Buttons */}
       <Box

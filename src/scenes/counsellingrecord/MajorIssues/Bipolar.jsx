@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import {
-  Box,
-  Button,
   ListItem,
   Checkbox,
   List,
@@ -9,266 +7,112 @@ import {
   ListItemText,
   Accordion,
   AccordionSummary,
-  AccordionDetails,
   TextField,
+  AccordionDetails,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CommentIcon from "@mui/icons-material/Comment";
 import { CounsellingRecordContext } from "../CounselingRecord";
+import CommentIcon from "@mui/icons-material/Comment";
 
-const BiPolar11 = () => {
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
+const BiPolar11 = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
-    CyclothymicDisorder   : true,
-    MedicationinducedBipolar : true
-
+    CyclothymicDisorder: true,
+    MedicationinducedBipolar: true,
   });
-  const [checked, setChecked] = useState([0]);
- 
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  const [commentInputOpen, setCommentInputOpen] = useState({
+    CyclothymicDisorder: true,
+    MedicationinducedBipolar: true,
+  });
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+  const [comments, setComments] = useState({
+    CyclothymicDisorder: "",
+    MedicationinducedBipolar: "",
+  });
 
-    setChecked(newChecked);
-  };
-
-  const handleAccordionChange = (section) => () => {
+  const handleToggleAccordion = (section) => {
     setAccordionStates((prevState) => ({
       ...prevState,
       [section]: !prevState[section],
     }));
   };
 
+  const toggleCommentInput = (section) => {
+    setCommentInputOpen((prevState) => ({
+      ...prevState,
+      [section]: !prevState[section],
+    }));
+  };
 
-  const CyclothymicDisorderItems = ["Symptom"];
-  const MedicationinducedBipolarItems = ["Symptom"];
+  const handleCommentChange = (section, event) => {
+    const { value } = event.target;
+    setComments((prevState) => ({
+      ...prevState,
+      [section]: value,
+    }));
+  };
 
+  const renderAccordionSection = (sectionKey, sectionTitle) => {
+    return (
+      <Accordion
+        expanded={accordionStates[sectionKey]}
+        onChange={() => handleToggleAccordion(sectionKey)}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates[sectionKey] ? (
+              <ExpandLessIcon />
+            ) : (
+              <ExpandMoreIcon />
+            )
+          }
+        >
+          <ListItemText primary={sectionTitle} />
+        </AccordionSummary>
+        <AccordionDetails>
+          <List
+            dense
+            sx={{ width: "100%", minWidth: 400, bgcolor: "background.paper" }}
+          >
+            {commentInputOpen[sectionKey] && (
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <TextField
+                    fullWidth
+                    label="Add a comment"
+                    variant="outlined"
+                    value={comments[sectionKey]}
+                    onChange={(e) => handleCommentChange(sectionKey, e)}
+                  />
+                </ListItemButton>
+              </ListItem>
+            )}
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => toggleCommentInput(sectionKey)}>
+                <CommentIcon
+                  color={commentInputOpen[sectionKey] ? "primary" : "inherit"}
+                />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </AccordionDetails>
+      </Accordion>
+    );
+  };
 
   return (
     <main
       className="pt5 black-80"
       style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
     >
-      <h3>Bipolar Type 11</h3>
+      <h3>BiPolar 11</h3>
 
-      <Accordion
-        expanded={accordionStates.CyclothymicDisorder}
-        onChange={handleAccordionChange("CyclothymicDisorder")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.CyclothymicDisorder ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Cyclothymic Disorder" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {CyclothymicDisorderItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`CyclothymicDisorder${index}`]}
-              onChange={handleAccordionChange(`CyclothymicDisorder${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                // expandIcon={
-                //   accordionStates[`LowerAcademicAchievementItemsOpen${index}`] ? (
-                //     <ExpandLessIcon />
-                //   ) : (
-                //     <ExpandMoreIcon />
-                //   )
-                // }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-   
-      <Accordion
-        expanded={accordionStates.MedicationinducedBipolar}
-        onChange={handleAccordionChange("MedicationinducedBipolar")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.MedicationinducedBipolar ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Medication induced Bipolar" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {MedicationinducedBipolarItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`MedicationinducedBipolar${index}`]}
-              onChange={handleAccordionChange(`MedicationinducedBipolar${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                // expandIcon={
-                //   accordionStates[`LowerAcademicAchievementItemsOpen${index}`] ? (
-                //     <ExpandLessIcon />
-                //   ) : (
-                //     <ExpandMoreIcon />
-                //   )
-                // }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-
+      {renderAccordionSection("CyclothymicDisorder", "Cyclo-thymic Disorder")}
+      {renderAccordionSection(
+        "MedicationinducedBipolar",
+        "Medication induced Bipolar"
+      )}
     </main>
   );
 };

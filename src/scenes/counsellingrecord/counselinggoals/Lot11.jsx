@@ -63,7 +63,7 @@ const Lot10 = ({ title, items, accordionState, handleAccordionChange, checked, h
   );
 };
 
-const RelationshipImprovement = () => {
+const RelationshipImprovement = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
     RelationshipImprovementState: true,
   });
@@ -76,15 +76,21 @@ const RelationshipImprovement = () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
+    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
+    // Update majorIssues in the form data based on newChecked array
+    setFormData((prevData) => ({
+      ...prevData,
+      counselingGoals: newChecked,
+    }));
+
     setChecked(newChecked);
   };
-
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
       ...prevState,

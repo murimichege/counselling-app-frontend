@@ -74,7 +74,7 @@ const Lot14 = ({
   );
 };
 
-const Personality = () => {
+const Personality = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
     Personalitystate: true,
   });
@@ -87,15 +87,21 @@ const Personality = () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
+    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
+    // Update majorIssues in the form data based on newChecked array
+    setFormData((prevData) => ({
+      ...prevData,
+      counselingGoals: newChecked,
+    }));
+
     setChecked(newChecked);
   };
-
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
       ...prevState,
@@ -110,13 +116,13 @@ const Personality = () => {
   const handleCommentChange = (event) => {
     const { value } = event.target;
     setComments(value);
-  }
-  
+  };
+
   const personalityTasks = [
     "Develop inner aspects of their personality",
-    "Enhance Ego strength (check from what level they are operating from - id, ego, super-ego)"
+    "Enhance Ego strength (check from what level they are operating from - id, ego, super-ego)",
   ];
-  
+
   return (
     <main
       className="pt5 black-80"

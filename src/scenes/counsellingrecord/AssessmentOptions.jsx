@@ -61,7 +61,7 @@ const AssessmentOptions = ({ onButtonClick }) => {
       <DepressiveDisorder formData={formData} setFormData={setFormData} />
       <PsychoticDisorders formData={formData} setFormData={setFormData} />
       <PersonalityDisorder formData={formData} setFormData={setFormData} />
-      <ObsessiveDisorders formData={formData} setFormData={setFormData} />
+      {/* <ObsessiveDisorders formData={formData} setFormData={setFormData} /> */}
       <TraumaDisorders formData={formData} setFormData={setFormData} />
       <StressDisorders formData={formData} setFormData={setFormData} />
       <RelationalProblems formData={formData} setFormData={setFormData} />

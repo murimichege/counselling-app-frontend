@@ -63,7 +63,7 @@ const Lot13 = ({ title, items, accordionState, handleAccordionChange, checked, h
   );
 };
 
-const PersonalEmpowerment = () => {
+const PersonalEmpowerment = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
     Empowerment: true,
   });
@@ -76,15 +76,21 @@ const PersonalEmpowerment = () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
+    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
+    // Update majorIssues in the form data based on newChecked array
+    setFormData((prevData) => ({
+      ...prevData,
+      counselingGoals: newChecked,
+    }));
+
     setChecked(newChecked);
   };
-
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
       ...prevState,

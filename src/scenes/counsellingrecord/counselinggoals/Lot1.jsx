@@ -60,7 +60,7 @@ const Lot1 = ({ title, items, accordionState, handleAccordionChange, checked, ha
   );
 };
 
-const ThoughtsManagement = () => {
+const ThoughtsManagement = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
     Thoughts: true,
   });
@@ -68,19 +68,26 @@ const ThoughtsManagement = () => {
   const [checked, setChecked] = useState([]);
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const [comments, setComments] = useState("");
-
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
+    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
+    // Update majorIssues in the form data based on newChecked array
+    setFormData((prevData) => ({
+      ...prevData,
+      counselingGoals: newChecked,
+    }));
+
     setChecked(newChecked);
   };
+  console.log(formData)
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({

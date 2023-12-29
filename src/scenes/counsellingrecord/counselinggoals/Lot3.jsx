@@ -60,7 +60,7 @@ const Lot3 = ({ title, items, accordionState, handleAccordionChange, checked, ha
   );
 };
 
-const GrievingLosses = () => {
+const GrievingLosses = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
     losses: true,
   });
@@ -73,11 +73,18 @@ const GrievingLosses = () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
+    // Add or remove the item from the checked array
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
+
+    // Update majorIssues in the form data based on newChecked array
+    setFormData((prevData) => ({
+      ...prevData,
+      counselingGoals: newChecked,
+    }));
 
     setChecked(newChecked);
   };

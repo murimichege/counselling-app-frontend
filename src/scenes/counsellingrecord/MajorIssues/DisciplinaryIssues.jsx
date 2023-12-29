@@ -15,8 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CounsellingRecordContext } from "../CounselingRecord";
 import CommentIcon from "@mui/icons-material/Comment";
 
-const DisciplinaryIssues = () => {
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
+const DisciplinaryIssues = ({ formData, setFormData } ) => {
   const [accordionStates, setAccordionStates] = useState({
     Impulsivedisruptivebehavior : true,
     OppositionalDefiantDisorder : true,

@@ -1,46 +1,39 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
-  Box,
-  Button,
-  ListItem,
-  Checkbox,
-  List,
-  ListItemButton,
-  ListItemText,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  TextField,
+  Checkbox,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  List,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CommentIcon from "@mui/icons-material/Comment";
-import { CounsellingRecordContext } from "../CounselingRecord";
 
-const SuicidalBehaviorDisorder = () => {
-  const { formData, setFormData } = useContext(CounsellingRecordContext);
+const SuicidalBehaviorDisorder = ({ formData, setFormData }) => {
   const [accordionStates, setAccordionStates] = useState({
-    NonSuicidalSelfinjuryorharm  : true,
+    NonSuicidalSelfinjuryorharm: true,
     SuicidalIdeations: true,
     strugglewiththeanguish: true,
-    Suicidalattempt:true,
+    Suicidalattempt: true,
   });
-  const [checked, setChecked] = useState([1]);
-  const [commentInputOpen, setCommentInputOpen] = useState({
-    NonSuicidalSelfinjuryorharm  : true,
-    SuicidalIdeations: true,
-    strugglewiththeanguish: true,
-    Suicidalattempt:true
-
-  });
+  const [checked, setChecked] = useState([]);
   const [comments, setComments] = useState({
-    NonSuicidalSelfinjuryorharm  : "",
-    SuicidalIdeations:  "",
-    strugglewiththeanguish:  "",
-    Suicidalattempt: ""
-    
-  
+    NonSuicidalSelfinjuryorharm: "",
+    SuicidalIdeations: "",
+    strugglewiththeanguish: "",
+    Suicidalattempt: "",
   });
+
+  // Function to update majorIssues array in formData context
+  const updateMajorIssues = (checkedItems) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      majorIssues: [...prevData.majorIssues, ...checkedItems],
+    }));
+  };
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -53,17 +46,11 @@ const SuicidalBehaviorDisorder = () => {
     }
 
     setChecked(newChecked);
+    updateMajorIssues([value]); // Update majorIssues with the checked item
   };
 
   const handleAccordionChange = (section) => () => {
     setAccordionStates((prevState) => ({
-      ...prevState,
-      [section]: !prevState[section],
-    }));
-  };
-
-  const toggleCommentInput = (section) => () => {
-    setCommentInputOpen((prevState) => ({
       ...prevState,
       [section]: !prevState[section],
     }));
@@ -76,11 +63,59 @@ const SuicidalBehaviorDisorder = () => {
       [section]: value,
     }));
   };
-  const NonSuicidalSelfinjuryorharmItems = ["Symptom"];
-  const SuicidalIdeationsItems = ["Symptom"];
-  const strugglewiththeanguishItems = ["Symptom"];
-  const SuicidalattemptItems = ["Symptom"];
 
+  const renderAccordionItems = (title, items) => {
+    return (
+      <Accordion
+        expanded={accordionStates[title]}
+        onChange={handleAccordionChange(title)}
+        key={title}
+      >
+        <AccordionSummary
+          expandIcon={
+            accordionStates[title] ? <ExpandLessIcon /> : <ExpandMoreIcon />
+          }
+        >
+          <ListItemText primary={title} />
+        </AccordionSummary>
+        <AccordionDetails>
+          <List
+            dense
+            sx={{
+              width: "100%",
+              minWidth: 400,
+              bgcolor: "background.paper",
+            }}
+          >
+            {items.map((item, index) => (
+              <ListItem
+                key={index}
+                secondaryAction={
+                  <Checkbox
+                    edge="end"
+                    onChange={handleToggle(item)}
+                    checked={checked.indexOf(item) !== -1}
+                  />
+                }
+                disablePadding
+              >
+                <ListItemButton>
+                  <ListItemText primary={item} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </AccordionDetails>
+      </Accordion>
+    );
+  };
+
+  const sections = {
+    NonSuicidalSelfinjuryorharm: ["Symptom"],
+    SuicidalIdeations: ["Symptom"],
+    strugglewiththeanguish: ["Symptom"],
+    Suicidalattempt: ["Symptom"],
+  };
 
   return (
     <main
@@ -89,424 +124,9 @@ const SuicidalBehaviorDisorder = () => {
     >
       <h3>Suicidal Behavior Disorder</h3>
 
-      <Accordion
-        expanded={accordionStates.NonSuicidalSelfinjuryorharmItems}
-        onChange={handleAccordionChange("NonSuicidalSelfinjuryorharmItems")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.NonSuicidalSelfinjuryorharmItems ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Non-Suicidal Self injury or harm" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {NonSuicidalSelfinjuryorharmItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`NonSuicidalSelfinjuryorharm${index}`]}
-              onChange={handleAccordionChange(`NonSuicidalSelfinjuryorharm${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                // expandIcon={
-                //   accordionStates[`LowerAcademicAchievementItemsOpen${index}`] ? (
-                //     <ExpandLessIcon />
-                //   ) : (
-                //     <ExpandMoreIcon />
-                //   )
-                // }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-                <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-        
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={accordionStates.SuicidalIdeationsItems}
-        onChange={handleAccordionChange("SuicidalIdeationsItems")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.SuicidalIdeationsItems ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Dependence" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {SuicidalIdeationsItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`SuicidalIdeations${index}`]}
-              onChange={handleAccordionChange(`SuicidalIdeations${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`SuicidalIdeations${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-              <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={accordionStates.strugglewiththeanguishItems}
-        onChange={handleAccordionChange("strugglewiththeanguishItems")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Withdrawalfrompeople ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Struggle with the anguish Items" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {strugglewiththeanguishItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`strugglewiththeanguish${index}`]}
-              onChange={handleAccordionChange(`strugglewiththeanguish${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`strugglewiththeanguish${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-              <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-           
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion
-        expanded={accordionStates.SuicidalattemptItems}
-        onChange={handleAccordionChange("SuicidalattemptItems")}
-      >
-        <AccordionSummary
-          expandIcon={
-            accordionStates.Suicidalattempt ? (
-              <ExpandLessIcon />
-            ) : (
-              <ExpandMoreIcon />
-            )
-          }
-        >
-          <ListItemText primary="Suicidal attempt" />
-        </AccordionSummary>
-        <AccordionDetails>
-          {SuicidalattemptItems.map((item, index) => (
-            <Accordion
-              expanded={accordionStates[`SuicidalattemptItems${index}`]}
-              onChange={handleAccordionChange(`SuicidalattemptItems${index}`)}
-              key={index}
-            >
-              <AccordionSummary
-                expandIcon={
-                  accordionStates[`SuicidalattemptItems${index}`] ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )
-                }
-              >
-                <ListItemText primary={item} />
-              </AccordionSummary>
-              <AccordionDetails>
-              <List
-                  dense
-                  sx={{
-                    width: "100%",
-                    minWidth: 400,
-                    bgcolor: "background.paper",
-                  }}
-                >
-                  
-                  <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Mild`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                   <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Moderate`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-                    <ListItem
-                     
-                     secondaryAction={
-                       <Checkbox
-                         edge="end"
-                         onChange={handleToggle()}
-                         checked={checked}
-                       />
-                     }
-                     disablePadding
-                   >
-                   
-                     <ListItemButton>
-                       <ListItemText primary={`Severe`} />
-
-                     </ListItemButton>
-                     
-                   </ListItem>
-           
-                </List>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </AccordionDetails>
-      </Accordion>
-      
+      {Object.entries(sections).map(([title, items]) =>
+        renderAccordionItems(title, items)
+      )}
     </main>
   );
 };
