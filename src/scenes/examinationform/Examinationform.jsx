@@ -3,8 +3,6 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree"
 import StepFour from "./StepFour";
-import StepFive from "./StepFive";
-// import FinalStep from "./FinalStep";
 import MultiStepProgressBar from "./Multistepbar/MultiStepProgressBar";
 
 export const ExaminationFormContext = createContext();
@@ -13,8 +11,10 @@ function ExaminationForm() {
     ClientCode: "",
     ClientInitials: "",
     Date: "",
-    CounsellingReasons: [],
-  });
+    examination: {
+      checked: [],
+      comments: {},
+    },  });
 
   console.log("formdata", formData);
 
@@ -57,7 +57,6 @@ function ExaminationForm() {
             pagetwo: <StepTwo onButtonClick={nextPage} />,
             pagethree: <StepThree onButtonClick={nextPage} />,
             pagefour: <StepFour onButtonClick={nextPage} />,
-            pagefive: <StepFive onButtonClick={nextPage} />,
         
           }[page]
         }

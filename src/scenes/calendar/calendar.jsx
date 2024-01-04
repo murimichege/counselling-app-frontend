@@ -119,17 +119,17 @@ const Calendar = () => {
 
     }
   };
-
-
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (event && event.target && event.target.name) {
+      const { name, value } = event.target;
+  
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
- 
+  
   return (
     <Box m="20px">
       <Header title="Calendar" subtitle="Schedule Counseling Sessions" />
