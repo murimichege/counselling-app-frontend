@@ -1,14 +1,11 @@
-import axiosClient from "../axiosClient"
-const authEndpoint = `/v1/api`
+import axiosClient from "../axiosClient";
+const authEndpoint = `/auth`;
 
 const authApi = {
-    login: (params) => axiosClient.post(`${authEndpoint}/authenticatewithldap`,params),
-    signin:(params) => axiosClient.post('/v1/user/signin',params),
+  login: (params) =>
+    axiosClient.post(`${authEndpoint}/authenticatewithldap`, params),
+    checkToken: () => axiosClient.post(`/${authEndpoint}/counselor/check-token`),
+//   receptionistToken: () => axiosClient.post(`/${authEndpoint}/receptionist/check-token`),
+};
 
-    checkToken: () => axiosClient.post('/v1/admin/check-token'),
-   verifyToken: () => axiosClient.post('/v1/admin/check-token'),
-
-
-}
-
-export default authApi
+export default authApi;

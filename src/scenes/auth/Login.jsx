@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -13,111 +13,113 @@ import toast, { Toaster } from "react-hot-toast";
 import authApi from '../../api/users/auth'
 import { Eye, EyeSlash } from "phosphor-react";
 import logo from "../../assets/logo.png";
+import { isAuthenticated } from "../../handlers/authHandler";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [loginErr, setLoginErr] = useState();
+  const [loginErr, setLoginErr] = useState("");
   const [authValues, setAuthValues] = useState({
-    email:"",
-    password:""
-  })
-  const [email, setEmail] = useState("");
-  const [userErr, setUserErr] = useState(false);
-  const [password, setPassword] = useState("");
-  const [passwordErr, setPasswordErr] = useState(false);
-  const [onSubmit, setOnSubmit] = useState(false);
+    email: "",
+    password: ""
+  });
   const [showPassword, setShowPassword] = useState(false);
 
-
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = async () => {
     try {
-      // Assuming 'userApi.create()' method exists and sends data to the server
-    const response =   await authApi.login(authValues)
-    console.log("response",response)
-      toast.success("user authenticated successfully!");
+      const response = await authApi.login(authValues);
+      console.log("response", response);
+      toast.success("User authenticated successfully!");
       navigate("/");
     } catch (error) {
-      // Handle error appropriately
       console.error("Error:", error);
-      toast.error("Failed to authenticate");
+      toast.error("Failed to login. Please contact IT");
     }
   };
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const res = await isAuthenticated();
+      if (res) return navigate('/');
+    };
+    checkToken();
+  }, []);
+
   return (
-    <Box
-      sx={{
-        height: "62vh",
-        display: "flex",
-        flexDirection: "column",
-        margin:"auto",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "1rem",
-      }}
-    >
-      <img
-        src={logo}
-        alt="Logo"
-        style={{
-          width: "20%",
-          height: "auto",
-        }}
-      />
-      <Typography
-        variant="h3"
-        textAlign="center"
-        mb="1rem"
-        fontWeight="700"
-        // sx={{ fontSize: "1.5rem" }} // Adjust font size for mobile
-      >
-        Welcome to the Counseling Center
-      </Typography>
-      <TextField
-        sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}
-        label="Email"
-        variant="outlined"
-        value={authValues.email}
-        onChange={(e) =>setAuthValues(e.target.value)}
-        error={userErr}
-      />
-      <TextField
-        sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}
-        label="Password"
-        variant="outlined"
-        value={authValues.password}
-        type={showPassword ? "text" : "password"}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={() => setShowPassword(!showPassword)}
-                edge="end"
-              >
-                {showPassword ? <Eye /> : <EyeSlash />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        onChange={(e) => setPassword(e.target.value)}
-        error={passwordErr}
-      />
-      {loginErr && (
-        <FormControl>
-          <Typography color="error">{loginErr}</Typography>
-        </FormControl>
-      )}
-      <LoadingButton
-        variant="outlined"
-        size="large"
+    <>
+      <Toaster/>
+      <Box
         sx={{
-          width: "80%",
-          maxWidth: "300px",
-          backgroundColor: "rgba(43,57,144, 0.7)",
+          height: "62vh",
+          display: "flex",
+          flexDirection: "column",
+          margin:"auto",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "1rem",
         }}
-        onClick={handleFormSubmit}
       >
-        Sign in
-      </LoadingButton>
-    </Box>
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            width: "20%",
+            height: "auto",
+          }}
+        />
+        <Typography
+          variant="h3"
+          textAlign="center"
+          mb="1rem"
+          fontWeight="700"
+        >
+          Welcome to the Counseling Center
+        </Typography>
+        <TextField
+          sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}
+          label="Email"
+          variant="outlined"
+          value={authValues.email}
+          onChange={(e) => setAuthValues({ ...authValues, email: e.target.value })}
+        />
+        <TextField
+          sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}
+          label="Password"
+          variant="outlined"
+          value={authValues.password}
+          type={showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
+                >
+                  {showPassword ? <Eye /> : <EyeSlash />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          onChange={(e) => setAuthValues({ ...authValues, password: e.target.value })}
+        />
+        {loginErr && (
+          <FormControl>
+            <Typography color="error">{loginErr}</Typography>
+          </FormControl>
+        )}
+        <LoadingButton
+          variant="outlined"
+          size="large"
+          sx={{
+            width: "80%",
+            maxWidth: "300px",
+            backgroundColor: "rgba(43,57,144, 0.7)",
+          }}
+          onClick={handleFormSubmit}
+        >
+          Sign in
+        </LoadingButton>
+      </Box>
+    </>
   );
 };
 
