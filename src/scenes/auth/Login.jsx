@@ -19,7 +19,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [loginErr, setLoginErr] = useState("");
   const [authValues, setAuthValues] = useState({
-    email: "",
+    username: "",
     password: ""
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -78,8 +78,8 @@ const Login = () => {
           sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}
           label="Email"
           variant="outlined"
-          value={authValues.email}
-          onChange={(e) => setAuthValues({ ...authValues, email: e.target.value })}
+          value={authValues.username}
+          onChange={(e) => setAuthValues({ ...authValues, username: e.target.value })}
         />
         <TextField
           sx={{ width: "80%", maxWidth: "300px", marginBottom: "1rem" }}

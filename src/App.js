@@ -17,7 +17,6 @@ import Sessions from "./scenes/sessionmanagement/Sessions";
 import SessionItem from "./scenes/sessionmanagement/SessionItem";
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./scenes/auth/Login";
-import IntroPage from "./scenes/auth/intro";
 import IntakeForm from "./scenes/client/ReceptionForm";
 import ClientIntakeForm from "./scenes/client/clientIntakeForm";
 import StudentBookingForm from "./scenes/student/index";
