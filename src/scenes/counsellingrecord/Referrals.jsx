@@ -107,7 +107,7 @@ const Referrals = ({ onButtonClick }) => {
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
             Referrals
           </Typography>
-          <List dense={dense}>
+          {/* <List dense={dense}>
             {formData.CounsellingReasons.map((item) => {
               <ListItem>
                 <ListItemIcon>
@@ -119,7 +119,7 @@ const Referrals = ({ onButtonClick }) => {
                 />
               </ListItem>;
             })}
-          </List>
+          </List> */}
         </Box>
       </div>
 

@@ -5,16 +5,24 @@ import Paper from "@mui/material/Paper";
 import {
   Box,
   Button,
-  ListItem,
-  Checkbox,
-  List,
   Typography,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
 } from "@mui/material";
-import FolderIcon from "@mui/icons-material/Folder";
-
+import {
+  EditorComposer,
+  Editor,
+  ToolbarPlugin,
+  FontFamilyDropdown,
+  FontSizeDropdown,
+  BoldButton,
+  ItalicButton,
+  UnderlineButton,
+  CodeFormatButton,
+  InsertLinkButton,
+  TextFormatDropdown,
+  InsertDropdown,
+  AlignDropdown,
+  Divider,
+} from "verbum";
 import CheckIcon from "@mui/icons-material/Check";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -22,121 +30,57 @@ import { CounsellingRecordContext } from "./CounselingRecord";
 
 const TreatmentPlan = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
-  const [secondary, setSecondary] = React.useState(false);
+  const [editorContent, setEditorContent] = useState([]);
 
-  const [editorContent, setEditorContent] = useState([]); // State to store editor content
-  const [dense, setDense] = React.useState(false);
-
-  // Handler to update the state when editor content changes
-  const handleEditorChange = (content) => {
-    setEditorContent(content);
+  const handleInputChange = (content, field) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [field]: [content],
+    }));
   };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  const EditorWrapper = styled(Box)(
-    ({ theme }) => `
-  
-      .ql-editor {
-        min-height: 100px;
-        width: 86vh;
-      }
-  
-      .ql-toolbar.ql-snow {
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-      }
-  
-      .ql-toolbar.ql-snow,
-      .ql-container.ql-snow {
-        border-color: gray;
-      }
-  
-      .ql-container.ql-snow {
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-      }
-  
-      &:hover {
-        .ql-toolbar.ql-snow,
-        .ql-container.ql-snow {
-          border-color: gray;
-        }
-      }
-  `
+  const renderEditor = (defaultValue = [], field) => (
+    <Box sx={{ item: true, xs: 12, sm: 8, md: 9 }}>
+      <EditorComposer>
+        <Editor
+          hashtagsEnabled={true}
+          onChange={(content) => handleInputChange(content, field)}
+          defaultValue={defaultValue[0]}
+        >
+          <ToolbarPlugin defaultFontSize="20px">
+            <FontFamilyDropdown />
+            <FontSizeDropdown />
+            <Divider />
+            <BoldButton />
+            <ItalicButton />
+            <UnderlineButton />
+            <CodeFormatButton />
+            <InsertLinkButton />
+            <TextFormatDropdown />
+            <Divider />
+            <InsertDropdown enablePoll={true} />
+            <Divider />
+            <AlignDropdown />
+          </ToolbarPlugin>
+        </Editor>
+      </EditorComposer>
+    </Box>
   );
-  function generate(element) {
-    return [0, 1, 2].map((value) =>
-      React.cloneElement(element, {
-        key: value,
-      })
-    );
-  }
 
   return (
-    <main
-      className="pt5 black-80"
-      style={{ maxWidth: "50%", maxHeight: "25%", margin: "auto" }}
-    >
+    <main className="pt5 black-80" style={{ maxWidth: "50%", maxHeight: "50%", margin: "auto" }}>
       <h2>Treatment plan - Counseling intervention used / Action taken</h2>
       <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div">
-        Determined by theoretical orientation because it helps one to
-        conceptualize the client’s presenting concerns and to pick on the
-        helpful intervention
+        Determined by theoretical orientation because it helps one to conceptualize the client’s presenting concerns and to pick on the helpful intervention
       </Typography>
-      <div
-        className="center ph4 selectionDiv"
-        style={{ height: "46%", display: "inline-block" }}
-      >
-        <Box
-          sx={
-            {
-              // mb: `${theme.spacing(3)}`
-            }
-          }
-          item
-          xs={12}
-          sm={8}
-          md={9}
-        >
-          <EditorWrapper>
-            <ReactQuill value={editorContent} onChange={handleEditorChange} />
-          </EditorWrapper>
-        </Box>
 
-        <Box>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Assessment
-          </Typography>
-          <List dense={dense}>
-            {formData.CounsellingReasons.map((item) => {
-              <ListItem>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-              </ListItem>;
-            })}
-          </List>
-        </Box>
+      <div className="center ph4 selectionDiv">
+        {renderEditor(formData)}
+       
       </div>
 
       {/* Buttons */}
-      <Box
-        sx={{
-          marginTop: "40px",
-          justifyContent: "space-between",
-          display: "flex",
-        }}
-      >
+      <Box sx={{ marginTop: "40px", justifyContent: "space-between", display: "flex" }}>
         <Button
           className="f6 grow br2 ph3 pv2 mb2 dib white"
           type="submit"

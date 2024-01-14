@@ -70,7 +70,6 @@ function OnGoingCounseling() {
             pagethree: <Goals onButtonClick={nextPage} />,
             pagefour: <Progress onButtonClick={nextPage} />,
             pagefive: <SessionIntervention onButtonClick={nextPage} />,
-
             pagesix: <Assignment onButtonClick={nextPage} />,
             pageseven: <Outcome onButtonClick={nextPage} />,
             pageeight: <Prognosis onButtonClick={nextPage} />,

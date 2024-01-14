@@ -27,7 +27,7 @@ import OnGoingCounseling from "./scenes/ongoingcounselling/OngoingCounselingReco
 import ExaminationForm from "./scenes/examinationform/Examinationform";
 import ClientItem from "./scenes/clientmanagement/ClientItem";
 import ReportTabs from "./scenes/reports/tabs";
-import ReportBuilder from "./scenes/reports/reportBuilder";
+// import ReportBuilder from "./scenes/reports/reportBuilder";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -43,27 +43,26 @@ function App() {
             <Fragment>
               <Routes>
                 <Route path="/login" element={<Login />} />
+                //ReceptionForm
                 <Route path="/IntakeForm" element={<IntakeForm />} />
-                <Route
-                  path="/StudentBookingForm"
-                  element={<StudentBookingForm />}
-                />
-                <Route path="/Termination" element={<Termination />} />
+                // CounselingRecord
                 <Route path="/ConsentForm" element={<ConsentForm />} />
-                <Route
-                  path="/counsellingRecord"
-                  element={<CounselingRecord />}
-                />
-                <Route path="/ongoingrecord" element={<OnGoingCounseling />} />
                 <Route
                   path="/clientintakeForm"
                   element={<ClientIntakeForm />}
                 />
                 <Route
+                  path="/counsellingRecord"
+                  element={<CounselingRecord />}
+                />
+                <Route path="/ongoingrecord" element={<OnGoingCounseling />} />
+                <Route path="/examinationform" element={<ExaminationForm />} />
+                <Route
                   path="/safetycontract"
                   element={<SafetyContractForm />}
                 />
-                <Route path="/examinationform" element={<ExaminationForm />} />
+                <Route path="/Termination" element={<Termination />} />
+                {/* <Route path="/StudentBookingForm" element={<StudentBookingForm />}/> */}
               </Routes>
             </Fragment>
           ) : (
