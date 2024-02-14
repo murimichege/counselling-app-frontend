@@ -29,7 +29,7 @@ const Login = () => {
       const response = await authApi.login(authValues);
       console.log("response", response);
       toast.success("User authenticated successfully!");
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);
       toast.error("Failed to login. Please contact IT");

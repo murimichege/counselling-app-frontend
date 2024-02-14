@@ -1,5 +1,5 @@
 import axiosClient from "../axiosClient";
-const authEndpoint = `/auth`;
+const authEndpoint = `/v1/auth`;
 
 const authApi = {
   login: (params) =>

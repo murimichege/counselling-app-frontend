@@ -24,7 +24,7 @@ const SessionIntervention = ({ onButtonClick }) => {
   const { formData, setFormData } = useContext(CounsellingRecordContext);
   const [secondary, setSecondary] = React.useState(false);
 
-  const [editorContent, setEditorContent] = useState([]); // State to store editor content
+  const [editorContent, setEditorContent] = useState([]); 
   const [dense, setDense] = React.useState(false);
 
   // Handler to update the state when editor content changes

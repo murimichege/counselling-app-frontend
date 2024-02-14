@@ -13,33 +13,33 @@ import {
   Button,
   TextField,
   Typography,
-  Select, 
+  Select,
   InputLabel,
   MenuItem,
   useTheme,
 } from "@mui/material";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
-import SessionsApi from '../../api/session/session'
+import SessionsApi from "../../api/session/session";
 import toast, { Toaster } from "react-hot-toast";
-
 
 const Calendar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [formData, setFormData] = useState({
-    currentEvents:[],
-    clientName: "",
-    clientEmail:"",
-    counsellor:"",
-    selectedDate:"",
-    receptionist:"",
-    location:"",
-    meetingLink:"",
-    isOnline:false,
-  })
-  const [drawerOpen, setDrawerOpen] = useState(false);
 
+    
+    currentEvents: [],
+    clientName: "",
+    clientEmail: "",
+    counselorName: "",
+    selectedDate: "",
+    receptionist: "",
+    location: "",
+    meetingLink: "",
+    isOnline: false,
+  });
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -52,8 +52,8 @@ const Calendar = () => {
   const handleDateClick = (selected) => {
     setFormData((prevData) => ({
       ...prevData,
-      selectedDate: selected
-    }))
+      selectedDate: selected,
+    }));
 
     handleDrawerOpen();
   };
@@ -68,84 +68,83 @@ const Calendar = () => {
     }
   };
 
-  const handleFetchSessions  =async () => {
-
-
-  }
- const  createNewEvent = async () => {
-  try {
-  
-    const response =  await SessionsApi.create(formData);
-    console.log("response", response);
-    toast.success(`Session created successfully! <br> Both the counselor and the client have been alerted`);
-  } catch (error) {
-    console.error("Error:", error);
-    toast.error("Failed to create counseling session. Please contact IT support");
-  }
- }
+  const handleFetchSessions = async () => {};
+  const createNewEvent = async () => {
+    try {
+      const response = await SessionsApi.create(formData);
+      console.log("response", response);
+      toast.success(
+        `Session created successfully! <br> Both the counselor and the client have been alerted`
+      );
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(
+        "Failed to create counseling session. Please contact IT support"
+      );
+    }
+  };
   const handleAddEvent = () => {
     if (formData.selectedDate && formData.clientEmail && formData.counsellor) {
       const { startStr, endStr, allDay } = formData.selectedDate;
       const calendarApi = formData.selectedDate.view.calendar;
       calendarApi.unselect();
 
-     const newEvent = {
+      const newEvent = {
         id: `${startStr}-${formData.clientName}`,
         clientName: formData.clientName,
-        counsellor: formData.counsellor,
         clientEmail: formData.clientEmail,
-        receptionist:  formData.receptionist,
+        counselorName: formData.counselorName,
+        receptionist: formData.receptionist,
         location: formData.location,
         meetingLink: formData.meetingLink,
         start: startStr,
         end: endStr,
         allDay,
       };
-      calendarApi.addEvent(newEvent)
+ 
+      
+      calendarApi.addEvent(newEvent);
       setFormData({
-        ...formData, 
+        ...formData,
         clientName: "",
-        clientEmail:"",
-        counsellor:"",
-        selectedDate:"",
-        receptionist:"",
-        location:"",
-        meetingLink:"",
-        isOnline:false,
-
-      })
-      createNewEvent()
+        clientEmail: "",
+        counselorName: "",
+        selectedDate: "",
+        receptionist: "",
+        location: "",
+        meetingLink: "",
+        isOnline: false,
+      });
+      createNewEvent();
       handleDrawerClose();
-
     }
   };
   const handleInputChange = (event) => {
     if (event && event.target && event.target.name) {
       const { name, value } = event.target;
-  
+
       setFormData({
         ...formData,
         [name]: value,
       });
     }
   };
-  
+
   return (
     <Box m="20px">
+      <Toaster/>
       <Header title="Calendar" subtitle="Schedule Counseling Sessions" />
-        {/* Drawer for Event Input */}
-        <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
+      {/* Drawer for Event Input */}
+      <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
         <Box p="20px" width="300px">
           <Typography variant="h6">Create a New Session</Typography>
-          
-     
 
-       <InputLabel id="counsellor-label">Counselor</InputLabel>
+          <InputLabel id="counsellor-label">Counselor</InputLabel>
           <Select
             labelId="counsellor-label"
-            id="counsellor"
-            name="counsellor"
-            value={formData.counsellor}
+            id="counselorName"
+            name="counselorName"
+            value={formData.counselorName}
             onChange={handleInputChange}
             fullWidth
             required
@@ -159,68 +158,71 @@ const Calendar = () => {
           <TextField
             label="Client Name"
             value={formData.clientName}
-            onChange={handleInputChange}
+            name="clientName"
+            onChange={(e) => handleInputChange(e, "clientName")}
             fullWidth
             required
             margin="normal"
           />
-   <TextField
+          <TextField
             label="Client Email"
             name="clientEmail"
+            onChange={(e) => handleInputChange(e, "clientEmail")}
             value={formData.clientEmail}
-            onChange={handleInputChange}
-            fullWidth
-            required
-            margin="normal"
-          />      
-              <TextField
-            label="Receptionist"
-            name="receptionist"
-            value={formData.receptionist}
-            onChange={handleInputChange}
             fullWidth
             required
             margin="normal"
           />
-          
-<InputLabel id="location-label">Location</InputLabel>
+          <TextField
+            label="Receptionist"
+            name="receptionist"
+            onChange={(e) => handleInputChange(e, "receptionist")}
+            value={formData.receptionist}
+            fullWidth
+            required
+            margin="normal"
+          />
+
+          <InputLabel id="location-label">Location</InputLabel>
           <Select
             labelId="location-label"
             name="location"
             value={formData.location}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e, "location")}
             fullWidth
             margin="normal"
           >
-            <MenuItem aria-required value="Counseling Center">Counseling Center</MenuItem>
-            <MenuItem aria-required value="Online">Online</MenuItem>
+            <MenuItem aria-required value="Counseling Center">
+              Counseling Center
+            </MenuItem>
+            <MenuItem aria-required value="Online">
+              Online
+            </MenuItem>
           </Select>
 
-          {
-            formData.isOnline ? (
-              <TextField
+          {formData.isOnline ? (
+            <TextField
               label="Meeting Link"
               name="meetingLink"
               value={formData.meetingLink}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e, "meetingLink")}
               fullWidth
               required
               margin="normal"
             />
-            ) : (
-              <TextField
+          ) : (
+            <TextField
               label="Meeting Link"
               name="meetingLink"
               value={formData.meetingLink}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e, "meetingLink")}
               fullWidth
               disabled
               required
               margin="normal"
             />
-            )
-          }
-         
+          )}
+
           <Button variant="contained" color="primary" onClick={handleAddEvent}>
             Schedule Session
           </Button>
@@ -235,7 +237,6 @@ const Calendar = () => {
           p="15px"
           borderRadius="4px"
         >
-          
           <Typography variant="h5">Counseling Sessions </Typography>
           <List>
             {formData.currentEvents.map((event) => (
