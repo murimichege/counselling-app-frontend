@@ -69,41 +69,49 @@ const Calendar = () => {
   };
 
   const handleFetchSessions = async () => {};
-  const createNewEvent = async () => {
-    try {
-      const response = await SessionsApi.create(formData);
-      console.log("response", response);
-      toast.success(
-        `Session created successfully! <br> Both the counselor and the client have been alerted`
-      );
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error(
-        "Failed to create counseling session. Please contact IT support"
-      );
-    }
-  };
-  const handleAddEvent = () => {
-    if (formData.selectedDate && formData.clientEmail && formData.counsellor) {
+
+
+/**
+ *  clientName,
+      clientEmail,
+      counselorName,
+      StartDate,
+      EndDate,
+      receptionist,
+      location,
+      zoomlink,
+ */
+  const handleAddEvent = async() => {
       const { startStr, endStr, allDay } = formData.selectedDate;
       const calendarApi = formData.selectedDate.view.calendar;
       calendarApi.unselect();
 
       const newEvent = {
-        id: `${startStr}-${formData.clientName}`,
+        // id: `${startStr}-${formData.clientName}`,
         clientName: formData.clientName,
         clientEmail: formData.clientEmail,
         counselorName: formData.counselorName,
+        start: startStr,
+        end: endStr,
         receptionist: formData.receptionist,
         location: formData.location,
         meetingLink: formData.meetingLink,
-        start: startStr,
-        end: endStr,
-        allDay,
       };
  
       
-      calendarApi.addEvent(newEvent);
+      // calendarApi.addEvent(newEvent);
+      try {
+        const response = await SessionsApi.create(newEvent);
+        console.log("response", response);
+        toast.success(
+          `Session created successfully! \n Both the counselor and the client have been alerted`
+        );
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error(
+          "Failed to create counseling session. Please contact IT support"
+        );
+      }
       setFormData({
         ...formData,
         clientName: "",
@@ -115,9 +123,8 @@ const Calendar = () => {
         meetingLink: "",
         isOnline: false,
       });
-      createNewEvent();
       handleDrawerClose();
-    }
+    
   };
   const handleInputChange = (event) => {
     if (event && event.target && event.target.name) {
@@ -150,10 +157,10 @@ const Calendar = () => {
             required
             margin="normal"
           >
-            <MenuItem value="Lucy">Lucy Kung'u</MenuItem>
-            <MenuItem value="Lydia">Lydia Winda</MenuItem>
-            <MenuItem value="Patrick">Patrick Obel</MenuItem>
-            <MenuItem value="Adolphine">Adolphine Nyandoro</MenuItem>
+            <MenuItem value="Lucy Kung'u">Lucy Kung'u</MenuItem>
+            <MenuItem value="Lydia Winda">Lydia Winda</MenuItem>
+            <MenuItem value="Patrick Obel">Patrick Obel</MenuItem>
+            <MenuItem value="Adolphine Nyandoro">Adolphine Nyandoro</MenuItem>
           </Select>
           <TextField
             label="Client Name"
